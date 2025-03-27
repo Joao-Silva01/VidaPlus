@@ -1,4 +1,4 @@
-package Entities.Enums;
+package com.RobDev.VidaPlus.Entities.Enums;
 
 public enum UserRole {
     PATIENT(1),

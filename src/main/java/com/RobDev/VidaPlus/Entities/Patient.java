@@ -1,7 +1,7 @@
-package Entities;
+package com.RobDev.VidaPlus.Entities;
 
-import Entities.Enums.Sex;
-import Entities.Enums.UserRole;
+import com.RobDev.VidaPlus.Entities.Enums.Sex;
+import com.RobDev.VidaPlus.Entities.Enums.UserRole;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

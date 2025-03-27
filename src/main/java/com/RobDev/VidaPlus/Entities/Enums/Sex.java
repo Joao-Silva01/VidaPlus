@@ -1,8 +1,8 @@
-package Entities.Enums;
+package com.RobDev.VidaPlus.Entities.Enums;
 
 public enum Sex {
-    FEMININE(1),
-    MASCULINE(2),
+    FEMALE(1),
+    MALE(2),
     OTHERS(3);
 
     final int code;
