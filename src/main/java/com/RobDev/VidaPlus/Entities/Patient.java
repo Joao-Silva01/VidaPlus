@@ -2,11 +2,10 @@ package com.RobDev.VidaPlus.Entities;
 
 import com.RobDev.VidaPlus.Entities.Enums.Sex;
 import com.RobDev.VidaPlus.Entities.Enums.UserRole;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Date;
 import java.util.Objects;
 
@@ -16,22 +15,30 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Date birthDate;
-    private Sex sex;
-    private String password;
-    private String email;
+    private Timestamp birth_date;
     private String phone;
+    private String password;
+
+    @Enumerated(value = EnumType.STRING)
+    private Sex sex;
+
+    @Column(unique = true)
+    private String email;
+
+    @Column(unique = true)
     private String cpf;
+
+    @Enumerated(value = EnumType.STRING)
     private UserRole role;
 
     public Patient() {
     }
 
-    public Patient(Long id, String name, Date birthDate, Sex sex, String password, String email,
+    public Patient(Long id, String name, Timestamp birthDate, Sex sex, String password, String email,
                    String phone, String cpf, UserRole role) {
         this.id = id;
         this.name = name;
-        this.birthDate = birthDate;
+        this.birth_date = birthDate;
         this.sex = sex;
         this.password = password;
         this.email = email;
@@ -56,12 +63,12 @@ public class Patient {
         this.name = name;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
+    public Timestamp getBirth_date() {
+        return birth_date;
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setBirth_date(Timestamp birth_date) {
+        this.birth_date = birth_date;
     }
 
     public Sex getSex() {
