@@ -25,6 +25,10 @@ public class Consultation {
     @Enumerated(value = EnumType.STRING)
     private Status status;
 
+    @ManyToOne
+    @JoinColumn(name = "patient")
+    private Patient patient;
+
 
     public Consultation(){}
 

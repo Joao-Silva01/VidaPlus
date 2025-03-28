@@ -5,6 +5,8 @@ import com.RobDev.VidaPlus.Entities.Enums.UserRole;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -28,6 +30,9 @@ public class Patient {
 
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
+
+    @OneToMany(mappedBy = "patient")
+    private List<Consultation> consultations = new ArrayList<>();
 
     public Patient() {
     }
@@ -115,6 +120,14 @@ public class Patient {
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+
+    public List<Consultation> getConsultations() {
+        return consultations;
+    }
+
+    public void setConsultations(List<Consultation> consultations) {
+        this.consultations = consultations;
     }
 
     @Override
