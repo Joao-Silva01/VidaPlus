@@ -5,8 +5,6 @@ import com.RobDev.VidaPlus.Entities.Enums.UserRole;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
-import java.time.Instant;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -26,7 +24,7 @@ public class Patient {
     private String email;
 
     @Column(unique = true)
-    private String cpf;
+    private String document;
 
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
@@ -35,7 +33,7 @@ public class Patient {
     }
 
     public Patient(Long id, String name, Timestamp birthDate, Sex sex, String password, String email,
-                   String phone, String cpf, UserRole role) {
+                   String phone, String document, UserRole role) {
         this.id = id;
         this.name = name;
         this.birth_date = birthDate;
@@ -43,7 +41,7 @@ public class Patient {
         this.password = password;
         this.email = email;
         this.phone = phone;
-        this.cpf = cpf;
+        this.document = document;
         this.role = role;
     }
 
@@ -103,12 +101,12 @@ public class Patient {
         this.phone = phone;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getDocument() {
+        return document;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setDocument(String document) {
+        this.document = document;
     }
 
     public UserRole getRole() {

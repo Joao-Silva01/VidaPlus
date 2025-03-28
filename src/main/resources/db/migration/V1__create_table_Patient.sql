@@ -6,6 +6,6 @@ CREATE TABLE Patient(
     password VARCHAR(30) NOT NULL,
     email VARCHAR(100) UNIQUE,
     phone VARCHAR(11),
-    cpf VARCHAR(14) UNIQUE,
+    document VARCHAR(14) UNIQUE,
     role VARCHAR(13)
 )
