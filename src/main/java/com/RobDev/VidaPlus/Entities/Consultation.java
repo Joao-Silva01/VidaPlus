@@ -32,16 +32,17 @@ public class Consultation {
 
     public Consultation(){}
 
-    public Consultation(Long id, Date consultationMoment, String diagnostic, String symptoms,
-                        BigDecimal consultationFee, Modality type, Status status, String consultationLink) {
+    public Consultation(Long id, Date consultationMoment, String diagnostic, String symptoms, BigDecimal consultationFee,
+                        String consultationLink, Modality type, Status status, Patient patient) {
         this.id = id;
         this.consultationMoment = consultationMoment;
         this.diagnostic = diagnostic;
         this.symptoms = symptoms;
         ConsultationFee = consultationFee;
+        this.consultationLink = consultationLink;
         this.type = type;
         this.status = status;
-        this.consultationLink = consultationLink;
+        this.patient = patient;
     }
 
     public Long getId() {
@@ -106,6 +107,14 @@ public class Consultation {
 
     public void setConsultationLink(String consultationLink) {
         this.consultationLink = consultationLink;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     @Override
