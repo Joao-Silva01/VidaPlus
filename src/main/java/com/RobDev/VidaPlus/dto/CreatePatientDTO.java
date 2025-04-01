@@ -17,7 +17,6 @@ public class CreatePatientDTO implements Serializable {
     private Sex sex;
     private String email;
     private String document;
-    private UserRole role;
 
     public CreatePatientDTO(){
 
@@ -82,13 +81,5 @@ public class CreatePatientDTO implements Serializable {
 
     public void setDocument(String document) {
         this.document = document;
-    }
-
-    public UserRole getRole() {
-        return role;
-    }
-
-    public void setRole(UserRole role) {
-        this.role = role;
     }
 }
