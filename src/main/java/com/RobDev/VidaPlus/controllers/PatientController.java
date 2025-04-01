@@ -1,7 +1,8 @@
 package com.RobDev.VidaPlus.controllers;
 
 
-import com.RobDev.VidaPlus.dto.CreatePatientDTO;
+import com.RobDev.VidaPlus.dto.CreatePatientRequest;
+import com.RobDev.VidaPlus.dto.PatientResponse;
 import com.RobDev.VidaPlus.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +16,7 @@ public class PatientController {
     private PatientService patientService;
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody CreatePatientDTO request){
-        patientService.createPatient(request);
-        return  ResponseEntity.ok().build();
+    public ResponseEntity<PatientResponse> create(@RequestBody CreatePatientRequest request){
+        return  ResponseEntity.ok().body(patientService.createPatient(request));
     };
 }

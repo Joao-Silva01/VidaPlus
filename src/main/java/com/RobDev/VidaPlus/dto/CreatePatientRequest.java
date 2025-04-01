@@ -1,14 +1,13 @@
 package com.RobDev.VidaPlus.dto;
 
 import com.RobDev.VidaPlus.Entities.Enums.Sex;
-import com.RobDev.VidaPlus.Entities.Enums.UserRole;
 import com.RobDev.VidaPlus.Entities.Patient;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class CreatePatientDTO implements Serializable {
+public class CreatePatientRequest implements Serializable {
 
     private String name;
     private Timestamp birth_date;
@@ -18,11 +17,11 @@ public class CreatePatientDTO implements Serializable {
     private String email;
     private String document;
 
-    public CreatePatientDTO(){
+    public CreatePatientRequest(){
 
     }
 
-    public CreatePatientDTO(Patient patient) {
+    public CreatePatientRequest(Patient patient) {
         BeanUtils.copyProperties(patient, this);
 
     }
