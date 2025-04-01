@@ -21,6 +21,12 @@ public class PatientController {
     public ResponseEntity<List<PatientResponse>> listAll (){
         return ResponseEntity.ok().body(patientService.allPatients());
     }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<PatientResponse> findById(@PathVariable long id){
+        return ResponseEntity.ok().body(patientService.byId(id));
+    }
+
     @PostMapping
     public ResponseEntity<PatientResponse> create(@RequestBody CreatePatientRequest request){
         return  ResponseEntity.ok().body(patientService.createPatient(request));

@@ -19,6 +19,9 @@ public class PatientService {
     @Autowired
     private PatientMapper patientMapper;
 
+    public PatientResponse byId(long id){
+        return patientMapper.toResponseDTO(patientRepository.findById(id).orElseThrow());
+    }
     public List<PatientResponse> allPatients(){
         return patientMapper.toList(patientRepository.findAll());
     }
