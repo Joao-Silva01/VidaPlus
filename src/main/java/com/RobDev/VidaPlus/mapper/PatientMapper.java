@@ -8,6 +8,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
+import java.util.List;
+
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface PatientMapper {
 
@@ -16,4 +18,6 @@ public interface PatientMapper {
     Patient toEntity (CreatePatientRequest dto);
 
     PatientResponse toResponseDTO(Patient entity);
+
+    List<PatientResponse> toList(List<Patient> list);
 }

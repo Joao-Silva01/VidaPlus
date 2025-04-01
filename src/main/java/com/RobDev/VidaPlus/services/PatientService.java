@@ -8,6 +8,8 @@ import com.RobDev.VidaPlus.mapper.PatientMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PatientService {
 
@@ -16,6 +18,10 @@ public class PatientService {
 
     @Autowired
     private PatientMapper patientMapper;
+
+    public List<PatientResponse> allPatients(){
+        return patientMapper.toList(patientRepository.findAll());
+    }
 
     public PatientResponse createPatient(CreatePatientRequest request){
         var newPatient = patientMapper.toEntity(request);
