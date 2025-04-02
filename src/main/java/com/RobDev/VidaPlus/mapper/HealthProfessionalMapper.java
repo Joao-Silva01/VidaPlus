@@ -7,6 +7,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
+import java.util.List;
+
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface HealthProfessionalMapper {
 
@@ -15,4 +17,6 @@ public interface HealthProfessionalMapper {
     HealthProfessional toCreateEntity(CreateHpRequest request);
 
     HpResponse toResponse(HealthProfessional entity);
+
+    List<HpResponse> toList(List<HealthProfessional> entityList);
 }

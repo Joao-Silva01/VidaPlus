@@ -8,6 +8,8 @@ import com.RobDev.VidaPlus.mapper.HealthProfessionalMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class HealthProfessionalService {
 
@@ -16,6 +18,10 @@ public class HealthProfessionalService {
 
     @Autowired
     private HealthProfessionalMapper hpMapper;
+
+    public List<HpResponse> allProfessionals(){
+        return hpMapper.toList(hpRepository.findAll());
+    }
 
     public HpResponse createProfessional(CreateHpRequest request){
         var newProfessional = hpMapper.toCreateEntity(request);
