@@ -23,6 +23,11 @@ public class HealthProfessionalService {
         return hpMapper.toList(hpRepository.findAll());
     }
 
+    public HpResponse byId(long id){
+        var professional = hpRepository.findById(id).orElseThrow();
+        return hpMapper.toResponse(professional);
+    }
+
     public HpResponse createProfessional(CreateHpRequest request){
         var newProfessional = hpMapper.toCreateEntity(request);
         newProfessional.setRole(UserRole.PROFESSIONAL);

@@ -21,6 +21,11 @@ public class HealthProfessionalController {
         return ResponseEntity.ok().body(hpService.allProfessionals());
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<HpResponse> findById(@PathVariable long id){
+        return ResponseEntity.ok().body(hpService.byId(id));
+    }
+
     @PostMapping
     public ResponseEntity<HpResponse> create(@RequestBody CreateHpRequest request){
         return ResponseEntity.ok().body(hpService.createProfessional(request));

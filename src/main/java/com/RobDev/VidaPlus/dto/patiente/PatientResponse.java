@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 
 public class PatientResponse implements Serializable {
 
+    private long id;
     private String name;
     private Timestamp birth_date;
     private String phone;
@@ -23,6 +24,14 @@ public class PatientResponse implements Serializable {
     public PatientResponse(Patient patient) {
         BeanUtils.copyProperties(patient, this);
 
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
