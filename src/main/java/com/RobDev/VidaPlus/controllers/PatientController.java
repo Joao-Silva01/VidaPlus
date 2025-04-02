@@ -3,6 +3,7 @@ package com.RobDev.VidaPlus.controllers;
 
 import com.RobDev.VidaPlus.dto.CreatePatientRequest;
 import com.RobDev.VidaPlus.dto.PatientResponse;
+import com.RobDev.VidaPlus.dto.UpdatePatientRequest;
 import com.RobDev.VidaPlus.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,5 +31,11 @@ public class PatientController {
     @PostMapping
     public ResponseEntity<PatientResponse> create(@RequestBody CreatePatientRequest request){
         return  ResponseEntity.ok().body(patientService.createPatient(request));
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> update(@PathVariable long id, @RequestBody UpdatePatientRequest request){
+        patientService.updatePatient(id,request);
+        return ResponseEntity.ok().build();
     }
 }
