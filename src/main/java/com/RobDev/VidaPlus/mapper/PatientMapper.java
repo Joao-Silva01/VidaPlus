@@ -2,9 +2,8 @@ package com.RobDev.VidaPlus.mapper;
 
 
 import com.RobDev.VidaPlus.Entities.Patient;
-import com.RobDev.VidaPlus.dto.CreatePatientRequest;
-import com.RobDev.VidaPlus.dto.PatientResponse;
-import com.RobDev.VidaPlus.dto.UpdatePatientRequest;
+import com.RobDev.VidaPlus.dto.patiente.CreatePatientRequest;
+import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;

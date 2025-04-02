@@ -2,12 +2,11 @@ package com.RobDev.VidaPlus.services;
 
 import com.RobDev.VidaPlus.Entities.Enums.UserRole;
 import com.RobDev.VidaPlus.Repositories.PatientRepository;
-import com.RobDev.VidaPlus.dto.CreatePatientRequest;
-import com.RobDev.VidaPlus.dto.PatientResponse;
-import com.RobDev.VidaPlus.dto.UpdatePatientRequest;
+import com.RobDev.VidaPlus.dto.patiente.CreatePatientRequest;
+import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
+import com.RobDev.VidaPlus.dto.patiente.UpdatePatientRequest;
 import com.RobDev.VidaPlus.mapper.PatientMapper;
 import com.RobDev.VidaPlus.mapper.PatientUpdate;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +23,6 @@ public class PatientService {
 
     @Autowired
     private PatientUpdate patientUpdate;
-
-
 
     public PatientResponse byId(long id){
         return patientMapper.toResponseDTO(patientRepository.findById(id).orElseThrow());

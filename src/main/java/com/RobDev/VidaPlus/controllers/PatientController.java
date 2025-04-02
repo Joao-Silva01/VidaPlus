@@ -1,9 +1,9 @@
 package com.RobDev.VidaPlus.controllers;
 
 
-import com.RobDev.VidaPlus.dto.CreatePatientRequest;
-import com.RobDev.VidaPlus.dto.PatientResponse;
-import com.RobDev.VidaPlus.dto.UpdatePatientRequest;
+import com.RobDev.VidaPlus.dto.patiente.CreatePatientRequest;
+import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
+import com.RobDev.VidaPlus.dto.patiente.UpdatePatientRequest;
 import com.RobDev.VidaPlus.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
