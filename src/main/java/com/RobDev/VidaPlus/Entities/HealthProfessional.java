@@ -4,6 +4,8 @@ import com.RobDev.VidaPlus.Entities.Enums.HealthProfession;
 import com.RobDev.VidaPlus.Entities.Enums.UserRole;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -34,10 +36,14 @@ public class HealthProfessional {
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
 
+    @OneToMany(mappedBy = "professional")
+    private List<Consultation> consultations = new ArrayList<>();
+
     public HealthProfessional() {
     }
 
-    public HealthProfessional(Long id, String name, String email, String phone, String password, HealthProfession profession, String specialty, UserRole role) {
+    public HealthProfessional(Long id, String name, String email, String phone, String password, HealthProfession profession,
+                              String specialty, UserRole role) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -110,6 +116,14 @@ public class HealthProfessional {
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+
+    public List<Consultation> getConsultations() {
+        return consultations;
+    }
+
+    public void setConsultations(List<Consultation> consultations) {
+        this.consultations = consultations;
     }
 
     @Override

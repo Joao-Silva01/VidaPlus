@@ -29,11 +29,15 @@ public class Consultation {
     @JoinColumn(name = "patient")
     private Patient patient;
 
+    @ManyToOne
+    @JoinColumn(name = "professional")
+    private HealthProfessional professional;
+
 
     public Consultation(){}
 
     public Consultation(Long id, Date consultationMoment, String diagnostic, String symptoms, BigDecimal consultationFee,
-                        String consultationLink, Modality type, Status status, Patient patient) {
+                        String consultationLink, Modality type, Status status, Patient patient, HealthProfessional professional) {
         this.id = id;
         this.consultationMoment = consultationMoment;
         this.diagnostic = diagnostic;
@@ -43,6 +47,7 @@ public class Consultation {
         this.type = type;
         this.status = status;
         this.patient = patient;
+        this.professional = professional;
     }
 
     public Long getId() {
@@ -115,6 +120,14 @@ public class Consultation {
 
     public void setPatient(Patient patient) {
         this.patient = patient;
+    }
+
+    public HealthProfessional getProfessional() {
+        return professional;
+    }
+
+    public void setProfessional(HealthProfessional professional) {
+        this.professional = professional;
     }
 
     @Override
