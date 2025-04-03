@@ -26,7 +26,7 @@ public class Prescription {
     private String digitalSignature;
 
     @OneToOne
-    @JoinColumn(name = "consultation")
+    @JoinColumn(name = "consultation", nullable = false)
     private Consultation consultation;
 
     public Prescription(){
