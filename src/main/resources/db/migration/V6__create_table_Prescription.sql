@@ -1,0 +1,7 @@
+CREATE TABLE PRESCRIPTION(
+    id BIGTINT AUTO_INCREMENT PRIMARY KEY,
+    description VARCHAR(350) NOT NULL,
+    prescription_Date DATE NOT NUll,
+    type VARCHAR(9) NOT NULL,
+    Digital_Signature VARCHAR(100) NOT NULL,
+)
