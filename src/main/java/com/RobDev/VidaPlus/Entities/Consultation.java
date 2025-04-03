@@ -33,11 +33,15 @@ public class Consultation {
     @JoinColumn(name = "professional")
     private HealthProfessional professional;
 
+    @OneToOne(mappedBy = "consultation", cascade = CascadeType.ALL)
+    private Prescription prescription;
+
 
     public Consultation(){}
 
     public Consultation(Long id, Date consultationMoment, String diagnostic, String symptoms, BigDecimal consultationFee,
-                        String consultationLink, Modality type, Status status, Patient patient, HealthProfessional professional) {
+                        String consultationLink, Modality type, Status status, Patient patient, HealthProfessional professional,
+                        Prescription prescription) {
         this.id = id;
         this.consultationMoment = consultationMoment;
         this.diagnostic = diagnostic;
@@ -48,6 +52,7 @@ public class Consultation {
         this.status = status;
         this.patient = patient;
         this.professional = professional;
+        this.prescription = prescription;
     }
 
     public Long getId() {
@@ -128,6 +133,14 @@ public class Consultation {
 
     public void setProfessional(HealthProfessional professional) {
         this.professional = professional;
+    }
+
+    public Prescription getPrescription() {
+        return prescription;
+    }
+
+    public void setPrescription(Prescription prescription) {
+        this.prescription = prescription;
     }
 
     @Override

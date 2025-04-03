@@ -19,21 +19,28 @@ public class Prescription {
     private Timestamp prescriptionDate;
 
     @Column(nullable = false, length = 9)
+    @Enumerated(value = EnumType.STRING)
     private Modality type;
 
     @Column(nullable = false, length = 100)
     private String digitalSignature;
 
+    @OneToOne
+    @JoinColumn(name = "consultation")
+    private Consultation consultation;
+
     public Prescription(){
 
     }
 
-    public Prescription(long id, String description, Timestamp prescriptionDate, Modality type, String digitalSignature) {
+    public Prescription(long id, String description, Timestamp prescriptionDate, Modality type, String digitalSignature,
+                        Consultation consultation) {
         this.id = id;
         this.description = description;
         this.prescriptionDate = prescriptionDate;
         this.type = type;
         this.digitalSignature = digitalSignature;
+        this.consultation = consultation;
     }
 
     public long getId() {
@@ -74,6 +81,14 @@ public class Prescription {
 
     public void setDigitalSignature(String digitalSignature) {
         this.digitalSignature = digitalSignature;
+    }
+
+    public Consultation getConsultation() {
+        return consultation;
+    }
+
+    public void setConsultation(Consultation consultation) {
+        this.consultation = consultation;
     }
 
     @Override
