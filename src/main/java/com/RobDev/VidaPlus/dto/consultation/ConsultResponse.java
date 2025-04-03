@@ -4,12 +4,16 @@ import com.RobDev.VidaPlus.Entities.Enums.Modality;
 import com.RobDev.VidaPlus.Entities.Enums.Status;
 import com.RobDev.VidaPlus.Entities.Prescription;
 import com.RobDev.VidaPlus.dto.healthprofessional.HpResponse;
+import com.RobDev.VidaPlus.dto.medicalExamination.CreateExamRequest;
+import com.RobDev.VidaPlus.dto.medicalExamination.ExamResponse;
 import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
 import com.RobDev.VidaPlus.dto.prescription.PrescriptionResponse;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ConsultResponse implements Serializable {
 
@@ -24,6 +28,7 @@ public class ConsultResponse implements Serializable {
     private PatientResponse patient;
     private HpResponse professional;
     private PrescriptionResponse prescription;
+    private List<ExamResponse> requestedExams = new ArrayList<>();
 
     public ConsultResponse() {
     }
@@ -129,5 +134,13 @@ public class ConsultResponse implements Serializable {
 
     public void setPrescription(PrescriptionResponse prescription) {
         this.prescription = prescription;
+    }
+
+    public List<ExamResponse> getRequestedExams() {
+        return requestedExams;
+    }
+
+    public void setRequestedExams(List<ExamResponse> requestedExams) {
+        this.requestedExams = requestedExams;
     }
 }

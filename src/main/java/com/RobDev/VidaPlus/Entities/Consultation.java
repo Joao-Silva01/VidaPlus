@@ -41,7 +41,6 @@ public class Consultation {
     @OneToMany(mappedBy = "consultation")
     private List<MedicalExamination> requestedExams = new ArrayList<>();
 
-
     public Consultation(){}
 
     public Consultation(Long id, Date consultationMoment, String diagnostic, String symptoms, BigDecimal consultationFee,

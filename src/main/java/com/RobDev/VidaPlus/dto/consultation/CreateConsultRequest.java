@@ -3,14 +3,18 @@ package com.RobDev.VidaPlus.dto.consultation;
 import com.RobDev.VidaPlus.Entities.Enums.Modality;
 import com.RobDev.VidaPlus.Entities.Enums.Status;
 import com.RobDev.VidaPlus.Entities.HealthProfessional;
+import com.RobDev.VidaPlus.Entities.MedicalExamination;
 import com.RobDev.VidaPlus.Entities.Patient;
 import com.RobDev.VidaPlus.Entities.Prescription;
+import com.RobDev.VidaPlus.dto.medicalExamination.CreateExamRequest;
 import com.RobDev.VidaPlus.dto.prescription.PrescriptionRequest;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class CreateConsultRequest implements Serializable {
 
@@ -23,6 +27,7 @@ public class CreateConsultRequest implements Serializable {
     private Status status;
     private long patient_id;
     private PrescriptionRequest prescription;
+    private List<CreateExamRequest> requestedExams = new ArrayList<>();
 
     public CreateConsultRequest() {
     }
@@ -109,5 +114,13 @@ public class CreateConsultRequest implements Serializable {
 
     public void setPrescription(PrescriptionRequest prescription) {
         this.prescription = prescription;
+    }
+
+    public List<CreateExamRequest> getRequestedExams() {
+        return requestedExams;
+    }
+
+    public void setRequestedExams(List<CreateExamRequest> requestedExams) {
+        this.requestedExams = requestedExams;
     }
 }
