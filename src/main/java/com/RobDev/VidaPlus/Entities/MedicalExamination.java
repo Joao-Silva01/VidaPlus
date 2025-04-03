@@ -23,15 +23,20 @@ public class MedicalExamination {
     private Status status;
     private String result;
 
+    @ManyToOne
+    @JoinColumn(name = "consultation")
+    private Consultation consultation;
+
     public MedicalExamination(){}
 
-    public MedicalExamination(long id, String description, Timestamp examDate, Exam type, Status status, String result) {
+    public MedicalExamination(long id, String description, Timestamp examDate, Exam type, Status status, String result, Consultation consultation) {
         this.id = id;
         this.description = description;
         this.examDate = examDate;
         this.type = type;
         this.status = status;
         this.result = result;
+        this.consultation = consultation;
     }
 
     public long getId() {
@@ -80,6 +85,14 @@ public class MedicalExamination {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public Consultation getConsultation() {
+        return consultation;
+    }
+
+    public void setConsultation(Consultation consultation) {
+        this.consultation = consultation;
     }
 
     @Override

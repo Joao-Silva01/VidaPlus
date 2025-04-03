@@ -5,7 +5,9 @@ import com.RobDev.VidaPlus.Entities.Enums.Status;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -35,6 +37,9 @@ public class Consultation {
 
     @OneToOne(mappedBy = "consultation", cascade = CascadeType.ALL, orphanRemoval = true)
     private Prescription prescription;
+
+    @OneToMany(mappedBy = "consultation")
+    private List<MedicalExamination> requestedExams = new ArrayList<>();
 
 
     public Consultation(){}
@@ -141,6 +146,14 @@ public class Consultation {
 
     public void setPrescription(Prescription prescription) {
         this.prescription = prescription;
+    }
+
+    public List<MedicalExamination> getRequestedExams() {
+        return requestedExams;
+    }
+
+    public void setRequestedExams(List<MedicalExamination> requestedExams) {
+        this.requestedExams = requestedExams;
     }
 
     @Override
