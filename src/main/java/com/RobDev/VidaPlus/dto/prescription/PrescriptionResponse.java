@@ -1,22 +1,35 @@
 package com.RobDev.VidaPlus.dto.prescription;
 
 import com.RobDev.VidaPlus.Entities.Enums.Modality;
-import com.RobDev.VidaPlus.Entities.Prescription;
-import org.springframework.beans.BeanUtils;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class PrescriptionRequest {
+public class PrescriptionResponse implements Serializable {
 
+    private long id;
     private String description;
     private Timestamp prescriptionDate;
     private Modality type;
     private String digitalSignature;
 
-    public PrescriptionRequest(){}
+    public PrescriptionResponse() {
+    }
 
-    public PrescriptionRequest(Prescription entity) {
-        BeanUtils.copyProperties(entity, this);
+    public PrescriptionResponse(long id, String description, Timestamp prescriptionDate, Modality type, String digitalSignature) {
+        this.id = id;
+        this.description = description;
+        this.prescriptionDate = prescriptionDate;
+        this.type = type;
+        this.digitalSignature = digitalSignature;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getDescription() {

@@ -5,6 +5,7 @@ import com.RobDev.VidaPlus.Entities.Enums.Status;
 import com.RobDev.VidaPlus.Entities.HealthProfessional;
 import com.RobDev.VidaPlus.Entities.Patient;
 import com.RobDev.VidaPlus.Entities.Prescription;
+import com.RobDev.VidaPlus.dto.prescription.PrescriptionRequest;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -21,12 +22,12 @@ public class CreateConsultRequest implements Serializable {
     private Modality type;
     private Status status;
     private long patient_id;
-    private Prescription prescription;
+    private PrescriptionRequest prescription;
 
     public CreateConsultRequest() {
     }
 
-    public CreateConsultRequest(Date consultationMoment, String diagnostic, String symptoms, BigDecimal consultationFee, String consultationLink, Modality type, Status status, long patient_id, Prescription prescription) {
+    public CreateConsultRequest(Date consultationMoment, String diagnostic, String symptoms, BigDecimal consultationFee, String consultationLink, Modality type, Status status, long patient_id, PrescriptionRequest prescription) {
         this.consultationMoment = consultationMoment;
         this.diagnostic = diagnostic;
         this.symptoms = symptoms;
@@ -102,11 +103,11 @@ public class CreateConsultRequest implements Serializable {
         this.patient_id = patient_id;
     }
 
-    public Prescription getPrescription() {
+    public PrescriptionRequest getPrescription() {
         return prescription;
     }
 
-    public void setPrescription(Prescription prescription) {
+    public void setPrescription(PrescriptionRequest prescription) {
         this.prescription = prescription;
     }
 }

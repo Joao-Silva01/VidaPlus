@@ -2,9 +2,10 @@ package com.RobDev.VidaPlus.dto.consultation;
 
 import com.RobDev.VidaPlus.Entities.Enums.Modality;
 import com.RobDev.VidaPlus.Entities.Enums.Status;
-import com.RobDev.VidaPlus.Entities.HealthProfessional;
-import com.RobDev.VidaPlus.Entities.Patient;
 import com.RobDev.VidaPlus.Entities.Prescription;
+import com.RobDev.VidaPlus.dto.healthprofessional.HpResponse;
+import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
+import com.RobDev.VidaPlus.dto.prescription.PrescriptionResponse;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -20,14 +21,15 @@ public class ConsultResponse implements Serializable {
     private String consultationLink;
     private Modality type;
     private Status status;
-    private Patient patient;
-    private HealthProfessional professional;
-    private Prescription prescription;
+    private PatientResponse patient;
+    private HpResponse professional;
+    private PrescriptionResponse prescription;
 
     public ConsultResponse() {
     }
 
-    public ConsultResponse(long id, Date consultationMoment, String diagnostic, String symptoms, BigDecimal consultationFee, String consultationLink, Modality type, Status status, Patient patient, HealthProfessional professional, Prescription prescription) {
+    public ConsultResponse(long id, Date consultationMoment, String diagnostic, String symptoms, BigDecimal consultationFee,
+                           String consultationLink, Modality type, Status status, PatientResponse patient, HpResponse professional, PrescriptionResponse prescription) {
         this.id = id;
         this.consultationMoment = consultationMoment;
         this.diagnostic = diagnostic;
@@ -105,27 +107,27 @@ public class ConsultResponse implements Serializable {
         this.status = status;
     }
 
-    public Patient getPatient() {
+    public PatientResponse getPatient() {
         return patient;
     }
 
-    public void setPatient(Patient patient) {
+    public void setPatient(PatientResponse patient) {
         this.patient = patient;
     }
 
-    public HealthProfessional getProfessional() {
+    public HpResponse getProfessional() {
         return professional;
     }
 
-    public void setProfessional(HealthProfessional professional) {
+    public void setProfessional(HpResponse professional) {
         this.professional = professional;
     }
 
-    public Prescription getPrescription() {
+    public PrescriptionResponse getPrescription() {
         return prescription;
     }
 
-    public void setPrescription(Prescription prescription) {
+    public void setPrescription(PrescriptionResponse prescription) {
         this.prescription = prescription;
     }
 }

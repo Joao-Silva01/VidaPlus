@@ -33,7 +33,7 @@ public class Consultation {
     @JoinColumn(name = "professional")
     private HealthProfessional professional;
 
-    @OneToOne(mappedBy = "consultation", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "consultation", cascade = CascadeType.ALL, orphanRemoval = true)
     private Prescription prescription;
 
 

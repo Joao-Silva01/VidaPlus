@@ -1,5 +1,6 @@
 package com.RobDev.VidaPlus.controllers;
 
+import com.RobDev.VidaPlus.dto.consultation.ConsultResponse;
 import com.RobDev.VidaPlus.dto.consultation.CreateConsultRequest;
 import com.RobDev.VidaPlus.services.ConsultationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,8 @@ public class ConsultationController {
     private ConsultationService consultationService;
 
     @PostMapping(value = "/{professional_id}/create")
-    public ResponseEntity<?> create(@PathVariable long professional_id, @RequestBody CreateConsultRequest request){
-        consultationService.createConsult(professional_id, request);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<ConsultResponse> create(@PathVariable long professional_id, @RequestBody CreateConsultRequest request){
+
+        return ResponseEntity.ok().body(consultationService.createConsult(professional_id, request));
     }
 }
