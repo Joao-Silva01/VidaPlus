@@ -41,11 +41,10 @@ public class ConsultationService {
         newConsult.setPatient(patient);
         newConsult.setProfessional(professional);
 
-        if (request != null) {
-            var prescription = prescriptionMapper.toCreatePrescription(request.getPrescription());
+        var prescription = prescriptionMapper.toCreatePrescription(request.getPrescription());
+        if (prescription != null) {
             newConsult.setPrescription(prescription);
             prescription.setConsultation(newConsult);
-            //prescriptionRepository.save(prescription);
         }
 
         return consultMapper.toResponse(consultationRepository.save(newConsult));
