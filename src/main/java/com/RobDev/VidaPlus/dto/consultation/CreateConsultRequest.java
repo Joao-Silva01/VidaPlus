@@ -2,13 +2,8 @@ package com.RobDev.VidaPlus.dto.consultation;
 
 import com.RobDev.VidaPlus.Entities.Enums.Modality;
 import com.RobDev.VidaPlus.Entities.Enums.Status;
-import com.RobDev.VidaPlus.Entities.HealthProfessional;
-import com.RobDev.VidaPlus.Entities.MedicalExamination;
-import com.RobDev.VidaPlus.Entities.Patient;
-import com.RobDev.VidaPlus.Entities.Prescription;
 import com.RobDev.VidaPlus.dto.medicalExamination.CreateExamRequest;
 import com.RobDev.VidaPlus.dto.prescription.PrescriptionRequest;
-import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

@@ -38,7 +38,7 @@ public class Consultation {
     @OneToOne(mappedBy = "consultation", cascade = CascadeType.ALL, orphanRemoval = true)
     private Prescription prescription;
 
-    @OneToMany(mappedBy = "consultation")
+    @OneToMany(mappedBy = "consultation", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MedicalExamination> requestedExams = new ArrayList<>();
 
     public Consultation(){}

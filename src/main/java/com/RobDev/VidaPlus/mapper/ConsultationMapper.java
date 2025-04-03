@@ -18,5 +18,4 @@ public interface ConsultationMapper {
     Consultation toCreateConsult(CreateConsultRequest request);
 
     ConsultResponse toResponse (Consultation entity);
-
 }
