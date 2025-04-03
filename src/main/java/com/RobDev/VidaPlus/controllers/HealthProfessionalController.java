@@ -2,6 +2,7 @@ package com.RobDev.VidaPlus.controllers;
 
 import com.RobDev.VidaPlus.dto.healthprofessional.CreateHpRequest;
 import com.RobDev.VidaPlus.dto.healthprofessional.HpResponse;
+import com.RobDev.VidaPlus.dto.healthprofessional.UpdateHpRequest;
 import com.RobDev.VidaPlus.services.HealthProfessionalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,5 +30,11 @@ public class HealthProfessionalController {
     @PostMapping
     public ResponseEntity<HpResponse> create(@RequestBody CreateHpRequest request){
         return ResponseEntity.ok().body(hpService.createProfessional(request));
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> update(@PathVariable long id, @RequestBody UpdateHpRequest request){
+        hpService.updateProfessional(id,request);
+        return ResponseEntity.ok().build();
     }
 }
