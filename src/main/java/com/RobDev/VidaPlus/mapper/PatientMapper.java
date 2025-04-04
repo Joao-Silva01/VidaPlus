@@ -2,6 +2,7 @@ package com.RobDev.VidaPlus.mapper;
 
 
 import com.RobDev.VidaPlus.Entities.Patient;
+import com.RobDev.VidaPlus.dto.patiente.AllConsultationsPatientResponse;
 import com.RobDev.VidaPlus.dto.patiente.CreatePatientRequest;
 import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
 import org.mapstruct.Mapper;
@@ -20,4 +21,6 @@ public interface PatientMapper{
     PatientResponse toResponseDTO(Patient entity);
 
     List<PatientResponse> toList(List<Patient> list);
+
+    AllConsultationsPatientResponse toAllConsultationsResponse(Patient entity);
 }

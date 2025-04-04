@@ -14,6 +14,16 @@ public class ConsultationController {
     @Autowired
     private ConsultationService consultationService;
 
+    @GetMapping(value = "/{consult_id}")
+    public ResponseEntity<ConsultResponse> getById(@PathVariable long consult_id){
+        return ResponseEntity.ok().body(consultationService.getConsult(consult_id));
+    }
+
+    @GetMapping(value = "patient/{id}")
+    public ResponseEntity<?> patientAllConsults(@PathVariable long id){
+        return ResponseEntity.ok().body(consultationService.getAllMedicalAppointmentsPatient(id));
+    }
+
     @PostMapping(value = "/{professional_id}/create")
     public ResponseEntity<ConsultResponse> create(@PathVariable long professional_id, @RequestBody CreateConsultRequest request){
 
