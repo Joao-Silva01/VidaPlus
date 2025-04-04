@@ -41,11 +41,14 @@ public class Consultation {
     @OneToMany(mappedBy = "consultation", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MedicalExamination> requestedExams = new ArrayList<>();
 
+    @OneToOne(mappedBy = "consultation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private HospitalAdmission hospitalization;
+
     public Consultation(){}
 
     public Consultation(Long id, Date consultationMoment, String diagnostic, String symptoms, BigDecimal consultationFee,
                         String consultationLink, Modality type, Status status, Patient patient, HealthProfessional professional,
-                        Prescription prescription) {
+                        Prescription prescription, HospitalAdmission hospitalization) {
         this.id = id;
         this.consultationMoment = consultationMoment;
         this.diagnostic = diagnostic;
@@ -57,6 +60,7 @@ public class Consultation {
         this.patient = patient;
         this.professional = professional;
         this.prescription = prescription;
+        this.hospitalization = hospitalization;
     }
 
     public Long getId() {
@@ -153,6 +157,14 @@ public class Consultation {
 
     public void setRequestedExams(List<MedicalExamination> requestedExams) {
         this.requestedExams = requestedExams;
+    }
+
+    public HospitalAdmission getHospitalization() {
+        return hospitalization;
+    }
+
+    public void setHospitalization(HospitalAdmission hospitalization) {
+        this.hospitalization = hospitalization;
     }
 
     @Override

@@ -20,11 +20,14 @@ public class HospitalAdmission {
     private Situation situation;
     private String observation;
 
+    @OneToOne
+    @JoinColumn(name = "consultation", unique = true)
+    private Consultation consultation;
+
     public HospitalAdmission(){}
 
     public HospitalAdmission(long id, Timestamp hospitalizationDate, Timestamp dischargeDate, String reason,
-                             int patientRoom, Situation situation, String observation) {
-
+                             int patientRoom, Situation situation, String observation, Consultation consultation) {
         this.id = id;
         this.hospitalizationDate = hospitalizationDate;
         this.dischargeDate = dischargeDate;
@@ -32,6 +35,7 @@ public class HospitalAdmission {
         this.patientRoom = patientRoom;
         this.situation = situation;
         this.observation = observation;
+        this.consultation = consultation;
     }
 
     public long getId() {
@@ -88,6 +92,14 @@ public class HospitalAdmission {
 
     public void setObservation(String observation) {
         this.observation = observation;
+    }
+
+    public Consultation getConsultation() {
+        return consultation;
+    }
+
+    public void setConsultation(Consultation consultation) {
+        this.consultation = consultation;
     }
 
     @Override
