@@ -4,6 +4,7 @@ import com.RobDev.VidaPlus.Entities.Enums.Modality;
 import com.RobDev.VidaPlus.Entities.Enums.Status;
 import com.RobDev.VidaPlus.Entities.Prescription;
 import com.RobDev.VidaPlus.dto.healthprofessional.HpResponse;
+import com.RobDev.VidaPlus.dto.hospitalAdmission.HospitalAdmissionResponse;
 import com.RobDev.VidaPlus.dto.medicalExamination.CreateExamRequest;
 import com.RobDev.VidaPlus.dto.medicalExamination.ExamResponse;
 import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
@@ -29,12 +30,12 @@ public class ConsultResponse implements Serializable {
     private HpResponse professional;
     private PrescriptionResponse prescription;
     private List<ExamResponse> requestedExams = new ArrayList<>();
+    private HospitalAdmissionResponse hospitalization;
 
     public ConsultResponse() {
     }
 
-    public ConsultResponse(long id, Date consultationMoment, String diagnostic, String symptoms, BigDecimal consultationFee,
-                           String consultationLink, Modality type, Status status, PatientResponse patient, HpResponse professional, PrescriptionResponse prescription) {
+    public ConsultResponse(long id, Date consultationMoment, String diagnostic, String symptoms, BigDecimal consultationFee, String consultationLink, Modality type, Status status, PatientResponse patient, HpResponse professional, PrescriptionResponse prescription, HospitalAdmissionResponse hospitalization) {
         this.id = id;
         this.consultationMoment = consultationMoment;
         this.diagnostic = diagnostic;
@@ -46,6 +47,7 @@ public class ConsultResponse implements Serializable {
         this.patient = patient;
         this.professional = professional;
         this.prescription = prescription;
+        this.hospitalization = hospitalization;
     }
 
     public long getId() {
@@ -142,5 +144,13 @@ public class ConsultResponse implements Serializable {
 
     public void setRequestedExams(List<ExamResponse> requestedExams) {
         this.requestedExams = requestedExams;
+    }
+
+    public HospitalAdmissionResponse getHospitalization() {
+        return hospitalization;
+    }
+
+    public void setHospitalization(HospitalAdmissionResponse hospitalization) {
+        this.hospitalization = hospitalization;
     }
 }

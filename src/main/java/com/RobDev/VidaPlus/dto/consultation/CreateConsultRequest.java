@@ -2,6 +2,7 @@ package com.RobDev.VidaPlus.dto.consultation;
 
 import com.RobDev.VidaPlus.Entities.Enums.Modality;
 import com.RobDev.VidaPlus.Entities.Enums.Status;
+import com.RobDev.VidaPlus.dto.hospitalAdmission.HospitalAdmissionRequest;
 import com.RobDev.VidaPlus.dto.medicalExamination.CreateExamRequest;
 import com.RobDev.VidaPlus.dto.prescription.PrescriptionRequest;
 
@@ -16,27 +17,30 @@ public class CreateConsultRequest implements Serializable {
     private Date consultationMoment;
     private String diagnostic;
     private String symptoms;
-    private BigDecimal ConsultationFee;
+    private BigDecimal consultationFee;
     private String consultationLink;
     private Modality type;
     private Status status;
     private long patient_id;
     private PrescriptionRequest prescription;
     private List<CreateExamRequest> requestedExams = new ArrayList<>();
+    private HospitalAdmissionRequest hospitalization;
 
     public CreateConsultRequest() {
     }
 
-    public CreateConsultRequest(Date consultationMoment, String diagnostic, String symptoms, BigDecimal consultationFee, String consultationLink, Modality type, Status status, long patient_id, PrescriptionRequest prescription) {
+    public CreateConsultRequest(Date consultationMoment, String diagnostic, String symptoms, BigDecimal consultationFee,
+                                String consultationLink, Modality type, Status status, long patient_id, PrescriptionRequest prescription, HospitalAdmissionRequest hospitalization) {
         this.consultationMoment = consultationMoment;
         this.diagnostic = diagnostic;
         this.symptoms = symptoms;
-        ConsultationFee = consultationFee;
+        this.consultationFee = consultationFee;
         this.consultationLink = consultationLink;
         this.type = type;
         this.status = status;
         this.patient_id = patient_id;
         this.prescription = prescription;
+        this.hospitalization = hospitalization;
     }
 
     public Date getConsultationMoment() {
@@ -64,11 +68,11 @@ public class CreateConsultRequest implements Serializable {
     }
 
     public BigDecimal getConsultationFee() {
-        return ConsultationFee;
+        return consultationFee;
     }
 
     public void setConsultationFee(BigDecimal consultationFee) {
-        ConsultationFee = consultationFee;
+        this.consultationFee = consultationFee;
     }
 
     public String getConsultationLink() {
@@ -117,5 +121,13 @@ public class CreateConsultRequest implements Serializable {
 
     public void setRequestedExams(List<CreateExamRequest> requestedExams) {
         this.requestedExams = requestedExams;
+    }
+
+    public HospitalAdmissionRequest getHospitalization() {
+        return hospitalization;
+    }
+
+    public void setHospitalization(HospitalAdmissionRequest hospitalization) {
+        this.hospitalization = hospitalization;
     }
 }
