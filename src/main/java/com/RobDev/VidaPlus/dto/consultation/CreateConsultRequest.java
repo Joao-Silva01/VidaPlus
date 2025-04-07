@@ -1,8 +1,8 @@
 package com.RobDev.VidaPlus.dto.consultation;
 
+import com.RobDev.VidaPlus.dto.hospitalAdmission.CreateHospitalAdmissionRequest;
 import com.RobDev.VidaPlus.entities.enums.Modality;
 import com.RobDev.VidaPlus.entities.enums.Status;
-import com.RobDev.VidaPlus.dto.hospitalAdmission.HospitalAdmissionRequest;
 import com.RobDev.VidaPlus.dto.medicalExamination.CreateExamRequest;
 import com.RobDev.VidaPlus.dto.prescription.PrescriptionRequest;
 
@@ -25,7 +25,7 @@ public class CreateConsultRequest implements Serializable {
     private long professional_id;
     private PrescriptionRequest prescription;
     private List<CreateExamRequest> requestedExams = new ArrayList<>();
-    private HospitalAdmissionRequest hospitalization;
+    private CreateHospitalAdmissionRequest hospitalization;
 
     public CreateConsultRequest() {
     }
@@ -33,7 +33,7 @@ public class CreateConsultRequest implements Serializable {
     public CreateConsultRequest(Date consultationMoment, String diagnostic, String symptoms,
                                 BigDecimal consultationFee, String consultationLink, Modality type,
                                 Status status, long patient_id, long professional_id,
-                                PrescriptionRequest prescription, HospitalAdmissionRequest hospitalization) {
+                                PrescriptionRequest prescription, CreateHospitalAdmissionRequest hospitalization) {
         this.consultationMoment = consultationMoment;
         this.diagnostic = diagnostic;
         this.symptoms = symptoms;
@@ -135,11 +135,11 @@ public class CreateConsultRequest implements Serializable {
         this.requestedExams = requestedExams;
     }
 
-    public HospitalAdmissionRequest getHospitalization() {
+    public CreateHospitalAdmissionRequest getHospitalization() {
         return hospitalization;
     }
 
-    public void setHospitalization(HospitalAdmissionRequest hospitalization) {
+    public void setHospitalization(CreateHospitalAdmissionRequest hospitalization) {
         this.hospitalization = hospitalization;
     }
 }

@@ -3,8 +3,10 @@ package com.RobDev.VidaPlus.controllers;
 import com.RobDev.VidaPlus.dto.consultation.ConsultResponse;
 import com.RobDev.VidaPlus.dto.consultation.UpdateConsultRequest;
 import com.RobDev.VidaPlus.dto.consultation.CreateConsultRequest;
+import com.RobDev.VidaPlus.dto.hospitalAdmission.UpdateHospitalAdmissionRequest;
 import com.RobDev.VidaPlus.dto.prescription.UpdatePrescriptionRequest;
 import com.RobDev.VidaPlus.services.ConsultationService;
+import com.RobDev.VidaPlus.services.HospitalAdmissionService;
 import com.RobDev.VidaPlus.services.PrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,9 @@ public class ConsultationController {
 
     @Autowired
     private PrescriptionService prescriptionService;
+
+    @Autowired
+    private HospitalAdmissionService hospitalAdmissionService;
 
     @GetMapping(value = "/{consult_id}")
     public ResponseEntity<ConsultResponse> getById(@PathVariable long consult_id) {
@@ -46,6 +51,14 @@ public class ConsultationController {
     public ResponseEntity<?> updatePrescription(@PathVariable long consultId,
                                                 @RequestBody UpdatePrescriptionRequest request) {
         prescriptionService.prescriptionUpdate(consultId, request);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping(value = "/{consultId}/hospitalization")
+    public ResponseEntity<?> updateHospitalization(@PathVariable long consultId,
+                                                   @RequestBody UpdateHospitalAdmissionRequest request){
+        hospitalAdmissionService.HospitalizationUpdate(consultId, request);
+
         return ResponseEntity.ok().build();
     }
 }

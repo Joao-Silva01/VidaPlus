@@ -1,38 +1,28 @@
 package com.RobDev.VidaPlus.dto.hospitalAdmission;
 
+
 import com.RobDev.VidaPlus.entities.enums.Situation;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 
+public class UpdateHospitalAdmissionRequest {
 
-public class HospitalAdmissionRequest implements Serializable {
-
-    private Timestamp hospitalizationDate;
     private Timestamp dischargeDate;
     private String reason;
     private int patientRoom;
     private Situation situation;
     private String observation;
 
-    public HospitalAdmissionRequest() {
+    public UpdateHospitalAdmissionRequest(){
+
     }
 
-    public HospitalAdmissionRequest(Timestamp hospitalizationDate, Timestamp dischargeDate, String reason, int patientRoom, Situation situation, String observation) {
-        this.hospitalizationDate = hospitalizationDate;
+    public UpdateHospitalAdmissionRequest(Timestamp dischargeDate, String reason, int patientRoom, Situation situation, String observation) {
         this.dischargeDate = dischargeDate;
         this.reason = reason;
         this.patientRoom = patientRoom;
         this.situation = situation;
         this.observation = observation;
-    }
-
-    public Timestamp getHospitalizationDate() {
-        return hospitalizationDate;
-    }
-
-    public void setHospitalizationDate(Timestamp hospitalizationDate) {
-        this.hospitalizationDate = hospitalizationDate;
     }
 
     public Timestamp getDischargeDate() {
