@@ -1,0 +1,6 @@
+CREATE TABLE MEDICAL_RECORD(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    date_record TIMESTAMP,
+    diagnostic VARCHAR(300),
+    patient_Observation VARCHAR(350)
+)
