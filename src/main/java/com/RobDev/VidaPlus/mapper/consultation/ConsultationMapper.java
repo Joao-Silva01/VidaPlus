@@ -1,5 +1,6 @@
 package com.RobDev.VidaPlus.mapper.consultation;
 
+import com.RobDev.VidaPlus.dto.consultation.UpdateConsultResponse;
 import com.RobDev.VidaPlus.entities.Consultation;
 import com.RobDev.VidaPlus.dto.consultation.ConsultResponse;
 import com.RobDev.VidaPlus.dto.consultation.CreateConsultRequest;
@@ -16,4 +17,6 @@ public interface ConsultationMapper {
     Consultation toCreateConsult(CreateConsultRequest request);
 
     ConsultResponse toResponse (Consultation entity);
+
+    UpdateConsultResponse toUpdateResponse(Consultation entity);
 }
