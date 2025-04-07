@@ -1,7 +1,7 @@
 package com.RobDev.VidaPlus.dto.consultation;
 
-import com.RobDev.VidaPlus.Entities.Enums.Modality;
-import com.RobDev.VidaPlus.Entities.Enums.Status;
+import com.RobDev.VidaPlus.entities.enums.Modality;
+import com.RobDev.VidaPlus.entities.enums.Status;
 import com.RobDev.VidaPlus.dto.hospitalAdmission.HospitalAdmissionRequest;
 import com.RobDev.VidaPlus.dto.medicalExamination.CreateExamRequest;
 import com.RobDev.VidaPlus.dto.prescription.PrescriptionRequest;

@@ -1,12 +1,12 @@
 package com.RobDev.VidaPlus.services;
 
-import com.RobDev.VidaPlus.Entities.Enums.UserRole;
-import com.RobDev.VidaPlus.Repositories.PatientRepository;
+import com.RobDev.VidaPlus.entities.enums.UserRole;
+import com.RobDev.VidaPlus.repositories.PatientRepository;
 import com.RobDev.VidaPlus.dto.patiente.CreatePatientRequest;
 import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
 import com.RobDev.VidaPlus.dto.patiente.UpdatePatientRequest;
-import com.RobDev.VidaPlus.mapper.PatientMapper;
-import com.RobDev.VidaPlus.mapper.PatientUpdate;
+import com.RobDev.VidaPlus.mapper.patient.PatientMapper;
+import com.RobDev.VidaPlus.mapper.patient.PatientUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
 package com.RobDev.VidaPlus.dto.medicalExamination;
 
-import com.RobDev.VidaPlus.Entities.Enums.Exam;
-import com.RobDev.VidaPlus.Entities.Enums.Status;
+import com.RobDev.VidaPlus.entities.enums.Exam;
+import com.RobDev.VidaPlus.entities.enums.Status;
 
 import java.sql.Timestamp;
 

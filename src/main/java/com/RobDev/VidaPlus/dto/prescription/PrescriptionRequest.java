@@ -1,7 +1,7 @@
 package com.RobDev.VidaPlus.dto.prescription;
 
-import com.RobDev.VidaPlus.Entities.Enums.Modality;
-import com.RobDev.VidaPlus.Entities.Prescription;
+import com.RobDev.VidaPlus.entities.enums.Modality;
+import com.RobDev.VidaPlus.entities.Prescription;
 import org.springframework.beans.BeanUtils;
 
 import java.sql.Timestamp;

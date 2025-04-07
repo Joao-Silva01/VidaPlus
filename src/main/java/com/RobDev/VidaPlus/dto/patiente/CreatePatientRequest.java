@@ -1,7 +1,7 @@
 package com.RobDev.VidaPlus.dto.patiente;
 
-import com.RobDev.VidaPlus.Entities.Enums.Sex;
-import com.RobDev.VidaPlus.Entities.Patient;
+import com.RobDev.VidaPlus.entities.enums.Sex;
+import com.RobDev.VidaPlus.entities.Patient;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;

@@ -1,6 +1,6 @@
 package com.RobDev.VidaPlus.dto.hospitalAdmission;
 
-import com.RobDev.VidaPlus.Entities.Enums.Situation;
+import com.RobDev.VidaPlus.entities.enums.Situation;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

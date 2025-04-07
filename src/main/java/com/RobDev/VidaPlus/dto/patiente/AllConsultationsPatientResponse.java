@@ -1,6 +1,6 @@
 package com.RobDev.VidaPlus.dto.patiente;
 
-import com.RobDev.VidaPlus.Entities.Enums.Sex;
+import com.RobDev.VidaPlus.entities.enums.Sex;
 import com.RobDev.VidaPlus.dto.consultation.ConsultationPatientResponse;
 
 import java.sql.Timestamp;
