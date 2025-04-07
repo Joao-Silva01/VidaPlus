@@ -4,9 +4,11 @@ import com.RobDev.VidaPlus.dto.consultation.ConsultResponse;
 import com.RobDev.VidaPlus.dto.consultation.UpdateConsultRequest;
 import com.RobDev.VidaPlus.dto.consultation.CreateConsultRequest;
 import com.RobDev.VidaPlus.dto.hospitalAdmission.UpdateHospitalAdmissionRequest;
+import com.RobDev.VidaPlus.dto.medicalExamination.UpdateExamRequest;
 import com.RobDev.VidaPlus.dto.prescription.UpdatePrescriptionRequest;
 import com.RobDev.VidaPlus.services.ConsultationService;
 import com.RobDev.VidaPlus.services.HospitalAdmissionService;
+import com.RobDev.VidaPlus.services.MedicalExaminationService;
 import com.RobDev.VidaPlus.services.PrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,9 @@ public class ConsultationController {
 
     @Autowired
     private HospitalAdmissionService hospitalAdmissionService;
+
+    @Autowired
+    private MedicalExaminationService medicalExaminationService;
 
     @GetMapping(value = "/{consult_id}")
     public ResponseEntity<ConsultResponse> getById(@PathVariable long consult_id) {
@@ -59,6 +64,13 @@ public class ConsultationController {
                                                    @RequestBody UpdateHospitalAdmissionRequest request){
         hospitalAdmissionService.HospitalizationUpdate(consultId, request);
 
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping(value = "/{consultId}/exam/{examId}")
+    public ResponseEntity<?> updateExam(@PathVariable long consultId, @PathVariable long examId,
+                                        @RequestBody UpdateExamRequest request){
+        medicalExaminationService.ExamUpdate(consultId,examId,request);
         return ResponseEntity.ok().build();
     }
 }
