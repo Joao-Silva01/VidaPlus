@@ -41,7 +41,7 @@ public class HealthProfessionalService {
 
     public void updateProfessional(long id, UpdateHpRequest request){
         var professional = hpRepository.findById(id).orElseThrow();
-        hpUpdate.update(request, professional);
+        hpUpdate.requestUpdate(request, professional);
         hpRepository.save(professional);
     }
 }

@@ -22,6 +22,7 @@ public class CreateConsultRequest implements Serializable {
     private Modality type;
     private Status status;
     private long patient_id;
+    private long professional_id;
     private PrescriptionRequest prescription;
     private List<CreateExamRequest> requestedExams = new ArrayList<>();
     private HospitalAdmissionRequest hospitalization;
@@ -29,8 +30,10 @@ public class CreateConsultRequest implements Serializable {
     public CreateConsultRequest() {
     }
 
-    public CreateConsultRequest(Date consultationMoment, String diagnostic, String symptoms, BigDecimal consultationFee,
-                                String consultationLink, Modality type, Status status, long patient_id, PrescriptionRequest prescription, HospitalAdmissionRequest hospitalization) {
+    public CreateConsultRequest(Date consultationMoment, String diagnostic, String symptoms,
+                                BigDecimal consultationFee, String consultationLink, Modality type,
+                                Status status, long patient_id, long professional_id,
+                                PrescriptionRequest prescription, HospitalAdmissionRequest hospitalization) {
         this.consultationMoment = consultationMoment;
         this.diagnostic = diagnostic;
         this.symptoms = symptoms;
@@ -39,6 +42,7 @@ public class CreateConsultRequest implements Serializable {
         this.type = type;
         this.status = status;
         this.patient_id = patient_id;
+        this.professional_id = professional_id;
         this.prescription = prescription;
         this.hospitalization = hospitalization;
     }
@@ -105,6 +109,14 @@ public class CreateConsultRequest implements Serializable {
 
     public void setPatient_id(long patient_id) {
         this.patient_id = patient_id;
+    }
+
+    public long getProfessional_id() {
+        return professional_id;
+    }
+
+    public void setProfessional_id(long professional_id) {
+        this.professional_id = professional_id;
     }
 
     public PrescriptionRequest getPrescription() {

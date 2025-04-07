@@ -1,6 +1,6 @@
 package com.RobDev.VidaPlus.services;
 
-import com.RobDev.VidaPlus.dto.consultation.ConsultUpdate;
+import com.RobDev.VidaPlus.dto.consultation.UpdateConsultRequest;
 import com.RobDev.VidaPlus.entities.*;
 import com.RobDev.VidaPlus.mapper.consultation.ConsultationUpdate;
 import com.RobDev.VidaPlus.repositories.ConsultationRepository;
@@ -61,8 +61,8 @@ public class ConsultationService {
         return consultMapper.toResponse(consult);
     }
 
-    public ConsultResponse createConsult(long professional_id, CreateConsultRequest request) {
-        HealthProfessional professional = hpRepository.findById(professional_id).orElseThrow();
+    public ConsultResponse createConsult(CreateConsultRequest request) {
+        HealthProfessional professional = hpRepository.findById(request.getProfessional_id()).orElseThrow();
         Patient patient = patientRepository.findById(request.getPatient_id()).orElseThrow();
 
         Consultation newConsult = consultMapper.toCreateConsult(request);
@@ -96,10 +96,10 @@ public class ConsultationService {
 
     }
 
-    public void updateConsult(long consult_id, ConsultUpdate request){
+    public void updateConsult(long consult_id, UpdateConsultRequest request){
         Consultation consult = consultationRepository.findById(consult_id).orElseThrow();
 
-        consultUpdate.ConsultUpdate(request, consult);
+        consultUpdate.requestUpdate(request, consult);
         consultationRepository.save(consult);
     }
 }

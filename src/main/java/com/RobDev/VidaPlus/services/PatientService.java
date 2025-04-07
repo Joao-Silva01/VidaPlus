@@ -39,7 +39,7 @@ public class PatientService {
 
     public void updatePatient(long id,UpdatePatientRequest request){
         var patient = patientRepository.findById(id).orElseThrow();
-        patientUpdate.update(request,patient);
+        patientUpdate.requestUpdate(request,patient);
         patientRepository.save(patient);
     }
 }

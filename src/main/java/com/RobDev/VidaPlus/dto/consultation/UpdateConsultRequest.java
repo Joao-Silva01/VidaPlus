@@ -3,13 +3,13 @@ package com.RobDev.VidaPlus.dto.consultation;
 import com.RobDev.VidaPlus.entities.enums.Status;
 
 
-public class ConsultUpdate {
+public class UpdateConsultRequest {
 
     private String diagnostic;
     private String symptoms;
     private Status status;
 
-    public ConsultUpdate(String diagnostic, String symptoms, Status status) {
+    public UpdateConsultRequest(String diagnostic, String symptoms, Status status) {
 
         this.diagnostic = diagnostic;
         this.symptoms = symptoms;

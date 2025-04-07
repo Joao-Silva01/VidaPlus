@@ -10,5 +10,5 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface HealthProfessionalUpdate {
 
-    void update(UpdateHpRequest request, @MappingTarget HealthProfessional entity);
+    void requestUpdate(UpdateHpRequest request, @MappingTarget HealthProfessional entity);
 }
