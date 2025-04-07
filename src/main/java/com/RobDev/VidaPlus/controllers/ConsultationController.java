@@ -1,6 +1,7 @@
 package com.RobDev.VidaPlus.controllers;
 
 import com.RobDev.VidaPlus.dto.consultation.ConsultResponse;
+import com.RobDev.VidaPlus.dto.consultation.ConsultUpdate;
 import com.RobDev.VidaPlus.dto.consultation.CreateConsultRequest;
 import com.RobDev.VidaPlus.services.ConsultationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,11 @@ public class ConsultationController {
     public ResponseEntity<ConsultResponse> create(@PathVariable long professional_id, @RequestBody CreateConsultRequest request){
 
         return ResponseEntity.ok().body(consultationService.createConsult(professional_id, request));
+    }
+
+    @PutMapping(value = "/{consult_id}")
+    public ResponseEntity<?> update(@PathVariable long consult_id, @RequestBody ConsultUpdate request){
+        consultationService.updateConsult(consult_id,request);
+        return ResponseEntity.ok().build();
     }
 }
