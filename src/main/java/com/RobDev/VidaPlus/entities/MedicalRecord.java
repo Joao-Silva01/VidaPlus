@@ -21,7 +21,7 @@ public class MedicalRecord {
     @JoinColumn(name = "patient", unique = true)
     private Patient patient;
 
-    @OneToMany(mappedBy = "prId.medicalRecord")
+    @OneToMany(mappedBy = "medicalRecord", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<UpdateLog> professionals = new ArrayList<>();
 
     public MedicalRecord(){}
@@ -77,8 +77,8 @@ public class MedicalRecord {
         return professionals;
     }
 
-    public void setProfessionals(List<UpdateLog> professionals) {
-        this.professionals = professionals;
+    public void setProfessionals(UpdateLog professional) {
+        this.professionals.add(professional);
     }
 
     @Override

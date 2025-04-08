@@ -1,36 +1,61 @@
 package com.RobDev.VidaPlus.entities;
 
-import com.RobDev.VidaPlus.entities.compositePK.ProfessionalAndRecordPK;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 public class UpdateLog {
 
-    @EmbeddedId
-    private ProfessionalAndRecordPK prId = new ProfessionalAndRecordPK();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String updateDescription;
     private Timestamp updateDate;
 
-    public UpdateLog(){
+    @ManyToOne
+    @JoinColumn(name = "medicalRecord")
+    private MedicalRecord medicalRecord;
+
+    @ManyToOne
+    @JoinColumn(name = "professional")
+    private HealthProfessional professional;
+
+    public UpdateLog() {
 
     }
 
-    public UpdateLog(HealthProfessional hp, MedicalRecord mr, String updateDescription, Timestamp updateDate) {
-        prId.setProfessional(hp);
-        prId.setMedicalRecord(mr);
+    public UpdateLog(long id, String updateDescription, Timestamp updateDate, MedicalRecord medicalRecord, HealthProfessional professional) {
+        this.id = id;
         this.updateDescription = updateDescription;
         this.updateDate = updateDate;
+        this.medicalRecord = medicalRecord;
+        this.professional = professional;
     }
 
-    public ProfessionalAndRecordPK getPrId() {
-        return prId;
+    public long getId() {
+        return this.id;
     }
 
-    public void setPrId(ProfessionalAndRecordPK prId) {
-        this.prId = prId;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public MedicalRecord getMedicalRecord() {
+        return medicalRecord;
+    }
+
+    public void setMedicalRecord(MedicalRecord medicalRecord) {
+        this.medicalRecord = medicalRecord;
+    }
+
+    public HealthProfessional getProfessional() {
+        return professional;
+    }
+
+    public void setProfessional(HealthProfessional professional) {
+        this.professional = professional;
     }
 
     public String getUpdateDescription() {
@@ -47,5 +72,18 @@ public class UpdateLog {
 
     public void setUpdateDate(Timestamp updateDate) {
         this.updateDate = updateDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UpdateLog updateLog = (UpdateLog) o;
+        return id == updateLog.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

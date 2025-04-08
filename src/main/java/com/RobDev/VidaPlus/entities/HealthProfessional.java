@@ -39,7 +39,7 @@ public class HealthProfessional {
     @OneToMany(mappedBy = "professional")
     private List<Consultation> consultations = new ArrayList<>();
 
-    @OneToMany(mappedBy = "prId.professional")
+    @OneToMany(mappedBy = "professional")
     private List<UpdateLog> medicalRecords = new ArrayList<>();
 
     public HealthProfessional() {
