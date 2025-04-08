@@ -73,8 +73,14 @@ public class MedicalRecord {
         this.patient = patient;
     }
 
+
+
     public List<UpdateLog> getProfessionals() {
         return professionals;
+    }
+
+    public void setProfessionals(List<UpdateLog> professionals) {
+        this.professionals = professionals;
     }
 
     public void setProfessionals(UpdateLog professional) {

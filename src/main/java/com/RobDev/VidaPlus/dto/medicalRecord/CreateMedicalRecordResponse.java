@@ -1,28 +1,21 @@
 package com.RobDev.VidaPlus.dto.medicalRecord;
 
-
-import com.RobDev.VidaPlus.dto.healthProfessional.RecordProfessionalResponse;
 import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
-
-public class MedicalRecordResponse {
-
+public class CreateMedicalRecordResponse {
     private long id;
     private Timestamp dateRecord;
     private String diagnostic;
     private String patientObservation;
     private PatientResponse patient;
 
-    private List<RecordProfessionalResponse> professionals = new ArrayList<>();
+    public CreateMedicalRecordResponse(){
 
-    public MedicalRecordResponse(){}
+    }
 
-    public MedicalRecordResponse(long id, Timestamp dateRecord, String diagnostic, String patientObservation, PatientResponse patient) {
+    public CreateMedicalRecordResponse(long id, Timestamp dateRecord, String diagnostic, String patientObservation, PatientResponse patient) {
         this.id = id;
         this.dateRecord = dateRecord;
         this.diagnostic = diagnostic;
@@ -68,13 +61,5 @@ public class MedicalRecordResponse {
 
     public void setPatient(PatientResponse patient) {
         this.patient = patient;
-    }
-
-    public List<RecordProfessionalResponse> getProfessionals() {
-        return professionals;
-    }
-
-    public void setProfessionals(List<RecordProfessionalResponse> professionals) {
-        this.professionals = professionals;
     }
 }

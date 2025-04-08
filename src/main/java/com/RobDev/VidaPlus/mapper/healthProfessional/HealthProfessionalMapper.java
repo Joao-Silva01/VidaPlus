@@ -1,5 +1,6 @@
 package com.RobDev.VidaPlus.mapper.healthProfessional;
 
+import com.RobDev.VidaPlus.dto.healthProfessional.RecordProfessionalResponse;
 import com.RobDev.VidaPlus.entities.HealthProfessional;
 import com.RobDev.VidaPlus.dto.healthProfessional.CreateHpRequest;
 import com.RobDev.VidaPlus.dto.healthProfessional.HpResponse;
@@ -17,6 +18,8 @@ public interface HealthProfessionalMapper {
     HealthProfessional toCreateEntity(CreateHpRequest request);
 
     HpResponse toResponse(HealthProfessional entity);
+
+    RecordProfessionalResponse toMinResponse(HealthProfessional entity);
 
     List<HpResponse> toList(List<HealthProfessional> entityList);
 }
