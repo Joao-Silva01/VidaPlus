@@ -34,6 +34,9 @@ public class Patient {
     @OneToMany(mappedBy = "patient")
     private List<Consultation> consultations = new ArrayList<>();
 
+    @OneToOne(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    private MedicalRecord medicalRecord;
+
     public Patient() {
     }
 
@@ -124,6 +127,14 @@ public class Patient {
 
     public List<Consultation> getConsultations() {
         return consultations;
+    }
+
+    public MedicalRecord getMedicalRecord() {
+        return medicalRecord;
+    }
+
+    public void setMedicalRecord(MedicalRecord medicalRecord) {
+        this.medicalRecord = medicalRecord;
     }
 
     public void setConsultations(List<Consultation> consultations) {

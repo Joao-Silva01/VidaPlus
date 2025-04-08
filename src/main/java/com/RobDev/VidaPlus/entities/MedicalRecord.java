@@ -1,9 +1,6 @@
 package com.RobDev.VidaPlus.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -16,6 +13,10 @@ public class MedicalRecord {
     private Timestamp dateRecord;
     private String diagnostic;
     private String patientObservation;
+
+    @OneToOne
+    @JoinColumn(name = "patient", unique = true)
+    private Patient patient;
 
     public MedicalRecord(){}
 
@@ -56,6 +57,14 @@ public class MedicalRecord {
 
     public void setPatientObservation(String patientObservation) {
         this.patientObservation = patientObservation;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     @Override
