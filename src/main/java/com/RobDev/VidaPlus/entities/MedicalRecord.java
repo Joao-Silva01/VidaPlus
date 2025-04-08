@@ -3,10 +3,13 @@ package com.RobDev.VidaPlus.entities;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 public class MedicalRecord {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -17,6 +20,9 @@ public class MedicalRecord {
     @OneToOne
     @JoinColumn(name = "patient", unique = true)
     private Patient patient;
+
+    @OneToMany(mappedBy = "prId.medicalRecord")
+    private List<UpdateLog> professionals = new ArrayList<>();
 
     public MedicalRecord(){}
 
@@ -65,6 +71,14 @@ public class MedicalRecord {
 
     public void setPatient(Patient patient) {
         this.patient = patient;
+    }
+
+    public List<UpdateLog> getProfessionals() {
+        return professionals;
+    }
+
+    public void setProfessionals(List<UpdateLog> professionals) {
+        this.professionals = professionals;
     }
 
     @Override

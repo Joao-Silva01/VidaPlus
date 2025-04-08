@@ -39,6 +39,9 @@ public class HealthProfessional {
     @OneToMany(mappedBy = "professional")
     private List<Consultation> consultations = new ArrayList<>();
 
+    @OneToMany(mappedBy = "prId.professional")
+    private List<UpdateLog> medicalRecords = new ArrayList<>();
+
     public HealthProfessional() {
     }
 
@@ -124,6 +127,14 @@ public class HealthProfessional {
 
     public void setConsultations(List<Consultation> consultations) {
         this.consultations = consultations;
+    }
+
+    public List<UpdateLog> getMedicalRecords() {
+        return medicalRecords;
+    }
+
+    public void setMedicalRecords(List<UpdateLog> medicalRecords) {
+        this.medicalRecords = medicalRecords;
     }
 
     @Override
