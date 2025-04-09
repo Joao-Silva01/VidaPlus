@@ -161,6 +161,10 @@ public class Consultation {
         this.requestedExams = requestedExams;
     }
 
+    public void addRequestedExams(MedicalExamination requestedExam) {
+        this.requestedExams.add(requestedExam);
+    }
+
     public HospitalAdmission getHospitalization() {
         return hospitalization;
     }

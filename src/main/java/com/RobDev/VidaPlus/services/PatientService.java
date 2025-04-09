@@ -1,5 +1,6 @@
 package com.RobDev.VidaPlus.services;
 
+import com.RobDev.VidaPlus.dto.patiente.AllConsultationsPatientResponse;
 import com.RobDev.VidaPlus.entities.Patient;
 import com.RobDev.VidaPlus.entities.enums.UserRole;
 import com.RobDev.VidaPlus.exception.IdNotFoundException;
@@ -41,5 +42,12 @@ public class PatientService {
                 .orElseThrow(() -> new IdNotFoundException("Patient not found for update!"));
         patientMapper.requestUpdate(request,patient);
         patientRepository.save(patient);
+    }
+
+    public AllConsultationsPatientResponse getAllMedicalAppointmentsPatient(long patient_id){
+        var patient = patientRepository.findById(patient_id)
+                .orElseThrow(() -> new IdNotFoundException("Patient not found!"));
+
+        return patientMapper.toAllConsultationsResponse(patient);
     }
 }

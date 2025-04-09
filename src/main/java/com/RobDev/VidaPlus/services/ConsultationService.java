@@ -21,9 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -52,13 +49,6 @@ public class ConsultationService {
 
     @Autowired
     private PatientMapper patientMapper;
-
-    public AllConsultationsPatientResponse getAllMedicalAppointmentsPatient(long patient_id){
-        var patient = patientRepository.findById(patient_id)
-                .orElseThrow(() -> new IdNotFoundException("Patient not found!"));
-
-        return patientMapper.toAllConsultationsResponse(patient);
-    }
 
     public ConsultResponse getConsult(long consult_id){
         Consultation consult = consultationRepository.findById(consult_id)

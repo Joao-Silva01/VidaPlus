@@ -1,5 +1,6 @@
 package com.RobDev.VidaPlus.services;
 
+import com.RobDev.VidaPlus.dto.medicalExamination.CreateExamRequest;
 import com.RobDev.VidaPlus.dto.medicalExamination.ExamResponse;
 import com.RobDev.VidaPlus.dto.medicalExamination.UpdateExamRequest;
 import com.RobDev.VidaPlus.entities.Consultation;
@@ -25,7 +26,17 @@ public class MedicalExaminationService {
     @Autowired
     private MedicalExaminationMapper examinationMapper;
 
-    public ExamResponse ExamUpdate(long consultId, long examId, UpdateExamRequest request) {
+    public ExamResponse examCreate(long consultId, CreateExamRequest request){
+        Consultation consultation = consultationRepository.findById(consultId).orElseThrow();
+        
+        MedicalExamination exam = examinationMapper.toCreateExam(request);
+        exam.setConsultation(consultation);
+        consultation.addRequestedExams(exam);
+
+        return examinationMapper.toResponse(examinationRepository.save(exam));
+    }
+
+    public ExamResponse examUpdate(long consultId, long examId, UpdateExamRequest request) {
         Consultation consultation = consultationRepository.findById(consultId)
                 .orElseThrow(() -> new IdNotFoundException("Query not found for exam update!"));
 

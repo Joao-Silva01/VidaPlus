@@ -25,17 +25,9 @@ public class ConsultationController {
     @Autowired
     private ConsultationService consultationService;
 
-    @Autowired
-    private MedicalExaminationService medicalExaminationService;
-
     @GetMapping(value = "/{consult_id}")
     public ResponseEntity<ConsultResponse> getById(@PathVariable long consult_id) {
         return ResponseEntity.ok().body(consultationService.getConsult(consult_id));
-    }
-
-    @GetMapping(value = "patient/{id}")
-    public ResponseEntity<?> patientAllConsults(@PathVariable long id) {
-        return ResponseEntity.ok().body(consultationService.getAllMedicalAppointmentsPatient(id));
     }
 
     @PostMapping
@@ -48,12 +40,5 @@ public class ConsultationController {
                                                         @RequestBody UpdateConsultRequest request) {
 
         return ResponseEntity.ok().body(consultationService.updateConsult(consultId, request));
-    }
-
-    @PutMapping(value = "/{consultId}/exam/{examId}")
-    public ResponseEntity<ExamResponse> updateExam(@PathVariable long consultId, @PathVariable long examId,
-                                                   @RequestBody UpdateExamRequest request){
-
-        return ResponseEntity.ok().body(medicalExaminationService.ExamUpdate(consultId,examId,request));
     }
 }

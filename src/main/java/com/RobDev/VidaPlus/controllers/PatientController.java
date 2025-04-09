@@ -38,4 +38,9 @@ public class PatientController {
         patientService.updatePatient(id,request);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping(value = "consults/{id}")
+    public ResponseEntity<?> patientAllConsults(@PathVariable long id) {
+        return ResponseEntity.ok().body(patientService.getAllMedicalAppointmentsPatient(id));
+    }
 }
