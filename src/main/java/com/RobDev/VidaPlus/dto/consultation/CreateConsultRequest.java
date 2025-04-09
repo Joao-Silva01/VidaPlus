@@ -17,9 +17,7 @@ public class CreateConsultRequest implements Serializable {
     private Date consultationMoment;
     private String diagnostic;
     private String symptoms;
-    private String consultationLink;
     private Modality type;
-    private Status status;
     private long patient_id;
     private long professional_id;
     private PrescriptionRequest prescription;
@@ -30,15 +28,13 @@ public class CreateConsultRequest implements Serializable {
     }
 
     public CreateConsultRequest(Date consultationMoment, String diagnostic, String symptoms,
-                                String consultationLink, Modality type, Status status, long patient_id,
+                                Modality type, long patient_id,
                                 long professional_id, PrescriptionRequest prescription,
                                 CreateHospitalAdmissionRequest hospitalization) {
         this.consultationMoment = consultationMoment;
         this.diagnostic = diagnostic;
         this.symptoms = symptoms;
-        this.consultationLink = consultationLink;
         this.type = type;
-        this.status = status;
         this.patient_id = patient_id;
         this.professional_id = professional_id;
         this.prescription = prescription;
@@ -69,28 +65,12 @@ public class CreateConsultRequest implements Serializable {
         this.symptoms = symptoms;
     }
 
-    public String getConsultationLink() {
-        return consultationLink;
-    }
-
-    public void setConsultationLink(String consultationLink) {
-        this.consultationLink = consultationLink;
-    }
-
     public Modality getType() {
         return type;
     }
 
     public void setType(Modality type) {
         this.type = type;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
     }
 
     public long getPatient_id() {

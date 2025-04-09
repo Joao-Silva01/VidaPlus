@@ -8,6 +8,7 @@ import com.RobDev.VidaPlus.dto.medicalExamination.ExamResponse;
 import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
 import com.RobDev.VidaPlus.dto.prescription.PrescriptionResponse;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import org.springframework.format.annotation.NumberFormat;
@@ -27,13 +28,21 @@ public class ConsultResponse implements Serializable {
     private String diagnostic;
     private String symptoms;
     private BigDecimal ConsultationFee;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String consultationLink;
     private Modality type;
     private Status status;
     private PatientResponse patient;
     private HpResponse professional;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private PrescriptionResponse prescription;
+
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<ExamResponse> requestedExams = new ArrayList<>();
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private HospitalAdmissionResponse hospitalization;
 
     public ConsultResponse() {

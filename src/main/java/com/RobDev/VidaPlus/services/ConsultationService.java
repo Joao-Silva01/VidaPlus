@@ -3,6 +3,8 @@ package com.RobDev.VidaPlus.services;
 import com.RobDev.VidaPlus.dto.consultation.UpdateConsultRequest;
 import com.RobDev.VidaPlus.dto.consultation.UpdateConsultResponse;
 import com.RobDev.VidaPlus.entities.*;
+import com.RobDev.VidaPlus.entities.enums.Modality;
+import com.RobDev.VidaPlus.entities.enums.Status;
 import com.RobDev.VidaPlus.repositories.ConsultationRepository;
 import com.RobDev.VidaPlus.repositories.HealthProfessionalRepository;
 import com.RobDev.VidaPlus.repositories.PatientRepository;
@@ -68,6 +70,7 @@ public class ConsultationService {
 
         Consultation newConsult = consultMapper.toCreateConsult(request);
         newConsult.setConsultationFee(BigDecimal.valueOf(245.00));
+        newConsult.setStatus(Status.SCHEDULED);
 
         // Realiza o relacionamento entre Patient/Professional com Consultation
         newConsult.setPatient(patient);
@@ -94,6 +97,11 @@ public class ConsultationService {
         if (prescription != null) {
             newConsult.setPrescription(prescription);
             prescription.setConsultation(newConsult);
+            prescription.setType(newConsult.getType());
+        }
+
+        if(request.getType() == Modality.ONLINE){
+            newConsult.setConsultationLink("https://teleconsulta.example.com/consulta555");
         }
 
         return consultMapper.toResponse(consultationRepository.save(newConsult));

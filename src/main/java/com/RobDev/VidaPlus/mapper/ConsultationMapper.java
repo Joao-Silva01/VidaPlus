@@ -13,6 +13,7 @@ public interface ConsultationMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "patient", ignore = true)
     @Mapping(target = "consultationFee", ignore = true)
+    @Mapping(target = "consultationLink", ignore = true)
     Consultation toCreateConsult(CreateConsultRequest request);
 
     ConsultResponse toResponse (Consultation entity);
