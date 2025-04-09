@@ -1,6 +1,7 @@
 package com.RobDev.VidaPlus.dto.prescription;
 
 import com.RobDev.VidaPlus.entities.enums.Modality;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -9,6 +10,8 @@ public class PrescriptionResponse implements Serializable {
 
     private long id;
     private String description;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "America/Sao_Paulo")
     private Timestamp prescriptionDate;
     private Modality type;
     private String digitalSignature;

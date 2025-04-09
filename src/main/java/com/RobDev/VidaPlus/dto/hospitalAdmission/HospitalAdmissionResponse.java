@@ -1,13 +1,18 @@
 package com.RobDev.VidaPlus.dto.hospitalAdmission;
 
 import com.RobDev.VidaPlus.entities.enums.Situation;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.sql.Timestamp;
 
 public class HospitalAdmissionResponse {
 
     private long id;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "America/Sao_Paulo")
     private Timestamp hospitalizationDate;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "America/Sao_Paulo")
     private Timestamp dischargeDate;
     private String reason;
     private int patientRoom;

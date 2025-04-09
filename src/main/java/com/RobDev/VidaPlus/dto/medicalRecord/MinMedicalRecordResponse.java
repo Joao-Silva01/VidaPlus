@@ -1,11 +1,14 @@
 package com.RobDev.VidaPlus.dto.medicalRecord;
 
 import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.sql.Timestamp;
 
 public class MinMedicalRecordResponse {
     private long id;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "America/Sao_Paulo")
     private Timestamp dateRecord;
     private String diagnostic;
     private String patientObservation;

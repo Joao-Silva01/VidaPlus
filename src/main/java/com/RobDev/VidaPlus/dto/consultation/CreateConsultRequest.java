@@ -17,7 +17,6 @@ public class CreateConsultRequest implements Serializable {
     private Date consultationMoment;
     private String diagnostic;
     private String symptoms;
-    private BigDecimal consultationFee;
     private String consultationLink;
     private Modality type;
     private Status status;
@@ -31,13 +30,12 @@ public class CreateConsultRequest implements Serializable {
     }
 
     public CreateConsultRequest(Date consultationMoment, String diagnostic, String symptoms,
-                                BigDecimal consultationFee, String consultationLink, Modality type,
-                                Status status, long patient_id, long professional_id,
-                                PrescriptionRequest prescription, CreateHospitalAdmissionRequest hospitalization) {
+                                String consultationLink, Modality type, Status status, long patient_id,
+                                long professional_id, PrescriptionRequest prescription,
+                                CreateHospitalAdmissionRequest hospitalization) {
         this.consultationMoment = consultationMoment;
         this.diagnostic = diagnostic;
         this.symptoms = symptoms;
-        this.consultationFee = consultationFee;
         this.consultationLink = consultationLink;
         this.type = type;
         this.status = status;
@@ -69,14 +67,6 @@ public class CreateConsultRequest implements Serializable {
 
     public void setSymptoms(String symptoms) {
         this.symptoms = symptoms;
-    }
-
-    public BigDecimal getConsultationFee() {
-        return consultationFee;
-    }
-
-    public void setConsultationFee(BigDecimal consultationFee) {
-        this.consultationFee = consultationFee;
     }
 
     public String getConsultationLink() {

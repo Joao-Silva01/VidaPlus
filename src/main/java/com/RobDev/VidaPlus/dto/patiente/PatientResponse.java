@@ -2,6 +2,7 @@ package com.RobDev.VidaPlus.dto.patiente;
 
 import com.RobDev.VidaPlus.entities.enums.Sex;
 import com.RobDev.VidaPlus.entities.Patient;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
@@ -11,6 +12,8 @@ public class PatientResponse implements Serializable {
 
     private long id;
     private String name;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Sao_Paulo")
     private Timestamp birth_date;
     private String phone;
     private Sex sex;
@@ -51,7 +54,8 @@ public class PatientResponse implements Serializable {
     }
 
     public String getPhone() {
-        return phone;
+        // Retorna o número formatado com espaço
+        return phone.replaceFirst("(\\d{2})(\\d{9})", "$1 $2");
     }
 
     public void setPhone(String phone) {
@@ -75,7 +79,8 @@ public class PatientResponse implements Serializable {
     }
 
     public String getDocument() {
-        return document;
+        //retorna o cpf formatado '111.111.111-11'
+        return document.replaceFirst("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
     }
 
     public void setDocument(String document) {

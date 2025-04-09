@@ -7,6 +7,10 @@ import com.RobDev.VidaPlus.dto.hospitalAdmission.HospitalAdmissionResponse;
 import com.RobDev.VidaPlus.dto.medicalExamination.ExamResponse;
 import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
 import com.RobDev.VidaPlus.dto.prescription.PrescriptionResponse;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.annotation.Nullable;
+import jakarta.persistence.Column;
+import org.springframework.format.annotation.NumberFormat;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -17,6 +21,8 @@ import java.util.List;
 public class ConsultResponse implements Serializable {
 
     private long id;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "America/Sao_Paulo")
     private Date consultationMoment;
     private String diagnostic;
     private String symptoms;

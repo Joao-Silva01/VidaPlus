@@ -17,6 +17,10 @@ import com.RobDev.VidaPlus.mapper.PrescriptionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -63,6 +67,9 @@ public class ConsultationService {
         Patient patient = patientRepository.findById(request.getPatient_id()).orElseThrow();
 
         Consultation newConsult = consultMapper.toCreateConsult(request);
+        newConsult.setConsultationFee(BigDecimal.valueOf(245.00));
+
+        // Realiza o relacionamento entre Patient/Professional com Consultation
         newConsult.setPatient(patient);
         newConsult.setProfessional(professional);
 

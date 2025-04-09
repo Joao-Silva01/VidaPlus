@@ -18,6 +18,8 @@ public class Consultation {
     private Date consultationMoment;
     private String diagnostic;
     private String symptoms;
+
+    @Column(scale = 10, precision = 2)
     private BigDecimal ConsultationFee;
     private String consultationLink;
 

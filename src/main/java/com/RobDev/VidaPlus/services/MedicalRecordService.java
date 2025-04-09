@@ -56,6 +56,7 @@ public class MedicalRecordService {
         Patient patient = patientRepository.findById(request.getPatientId()).orElseThrow();
 
         MedicalRecord medicalRecord = recordMapper.toCreateEntity(request);
+        medicalRecord.setDateRecord(Timestamp.from(Instant.now()));
 
         // Instanciando o log de criação
         UpdateLog updateLog = new UpdateLog();

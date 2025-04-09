@@ -1,11 +1,9 @@
 package com.RobDev.VidaPlus.dto.medicalRecord;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 public class CreateMedicalRecordRequest implements Serializable {
 
-    private Timestamp dateRecord;
     private String diagnostic;
     private String patientObservation;
     private long patientId;
@@ -13,20 +11,12 @@ public class CreateMedicalRecordRequest implements Serializable {
 
     public CreateMedicalRecordRequest(){}
 
-    public CreateMedicalRecordRequest(Timestamp dateRecord, String diagnostic, String patientObservation, long patientId, long professionalId) {
-        this.dateRecord = dateRecord;
+    public CreateMedicalRecordRequest( String diagnostic, String patientObservation, long patientId, long professionalId) {
+
         this.diagnostic = diagnostic;
         this.patientObservation = patientObservation;
         this.patientId = patientId;
         this.professionalId = professionalId;
-    }
-
-    public Timestamp getDateRecord() {
-        return dateRecord;
-    }
-
-    public void setDateRecord(Timestamp dateRecord) {
-        this.dateRecord = dateRecord;
     }
 
     public String getDiagnostic() {

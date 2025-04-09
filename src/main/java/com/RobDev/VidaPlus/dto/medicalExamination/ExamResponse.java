@@ -2,6 +2,7 @@ package com.RobDev.VidaPlus.dto.medicalExamination;
 
 import com.RobDev.VidaPlus.entities.enums.Exam;
 import com.RobDev.VidaPlus.entities.enums.Status;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.sql.Timestamp;
 
@@ -9,6 +10,8 @@ public class ExamResponse {
 
     private long id;
     private String description;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "America/Sao_Paulo")
     private Timestamp examDate;
     private Exam type;
     private Status status;

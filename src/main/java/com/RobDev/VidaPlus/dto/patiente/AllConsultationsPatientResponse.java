@@ -2,6 +2,7 @@ package com.RobDev.VidaPlus.dto.patiente;
 
 import com.RobDev.VidaPlus.entities.enums.Sex;
 import com.RobDev.VidaPlus.dto.consultation.ConsultationPatientResponse;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ import java.util.List;
 public class AllConsultationsPatientResponse {
     private long id;
     private String name;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Sao_Paulo")
     private Timestamp birth_date;
     private String phone;
     private Sex sex;

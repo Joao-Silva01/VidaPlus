@@ -6,6 +6,7 @@ import com.RobDev.VidaPlus.dto.healthProfessional.HpResponse;
 import com.RobDev.VidaPlus.dto.hospitalAdmission.HospitalAdmissionResponse;
 import com.RobDev.VidaPlus.dto.medicalExamination.ExamResponse;
 import com.RobDev.VidaPlus.dto.prescription.PrescriptionResponse;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -13,7 +14,10 @@ import java.util.Date;
 import java.util.List;
 
 public class ConsultationPatientResponse {
+
     private long id;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "America/Sao_Paulo")
     private Date consultationMoment;
     private String diagnostic;
     private String symptoms;

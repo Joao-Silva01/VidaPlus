@@ -2,6 +2,7 @@ package com.RobDev.VidaPlus.dto.consultation;
 
 import com.RobDev.VidaPlus.entities.enums.Modality;
 import com.RobDev.VidaPlus.entities.enums.Status;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -9,6 +10,8 @@ import java.util.Date;
 public class UpdateConsultResponse {
 
     private long id;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "America/Sao_Paulo")
     private Date consultationMoment;
     private String diagnostic;
     private String symptoms;

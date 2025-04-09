@@ -12,6 +12,7 @@ public interface MedicalRecordMapper {
 
     @Mapping(target = "patient", ignore = true)
     @Mapping(target = "professionals", ignore = true)
+    @Mapping(target = "dateRecord", ignore = true)
     MedicalRecord toCreateEntity(CreateMedicalRecordRequest request);
 
     MinMedicalRecordResponse toMinResponse(MedicalRecord entity);
