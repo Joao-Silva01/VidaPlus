@@ -1,11 +1,10 @@
 package com.RobDev.VidaPlus.mapper.prescription;
 
 import com.RobDev.VidaPlus.dto.prescription.PrescriptionResponse;
+import com.RobDev.VidaPlus.dto.prescription.UpdatePrescriptionRequest;
 import com.RobDev.VidaPlus.entities.Prescription;
 import com.RobDev.VidaPlus.dto.prescription.PrescriptionRequest;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
+import org.mapstruct.*;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface PrescriptionMapper {
@@ -15,4 +14,7 @@ public interface PrescriptionMapper {
     Prescription toCreatePrescription (PrescriptionRequest request);
 
     PrescriptionResponse toResponse(Prescription entity);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void requestUpdate(UpdatePrescriptionRequest request, @MappingTarget Prescription entity);
 }

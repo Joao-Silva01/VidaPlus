@@ -6,7 +6,6 @@ import com.RobDev.VidaPlus.dto.patiente.CreatePatientRequest;
 import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
 import com.RobDev.VidaPlus.dto.patiente.UpdatePatientRequest;
 import com.RobDev.VidaPlus.mapper.patient.PatientMapper;
-import com.RobDev.VidaPlus.mapper.patient.PatientUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +19,6 @@ public class PatientService {
 
     @Autowired
     private PatientMapper patientMapper;
-
-    @Autowired
-    private PatientUpdate patientUpdate;
 
     public PatientResponse byId(long id){
         return patientMapper.toResponseDTO(patientRepository.findById(id).orElseThrow());
@@ -39,7 +35,7 @@ public class PatientService {
 
     public void updatePatient(long id,UpdatePatientRequest request){
         var patient = patientRepository.findById(id).orElseThrow();
-        patientUpdate.requestUpdate(request,patient);
+        patientMapper.requestUpdate(request,patient);
         patientRepository.save(patient);
     }
 }

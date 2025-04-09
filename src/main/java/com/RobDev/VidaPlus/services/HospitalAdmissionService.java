@@ -5,7 +5,6 @@ import com.RobDev.VidaPlus.dto.hospitalAdmission.UpdateHospitalAdmissionRequest;
 import com.RobDev.VidaPlus.entities.Consultation;
 import com.RobDev.VidaPlus.entities.HospitalAdmission;
 import com.RobDev.VidaPlus.mapper.hospitalAdmission.HospitalAdmissionMapper;
-import com.RobDev.VidaPlus.mapper.hospitalAdmission.HospitalAdmissionUpdate;
 import com.RobDev.VidaPlus.repositories.ConsultationRepository;
 import com.RobDev.VidaPlus.repositories.HospitalAdmissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +20,13 @@ public class HospitalAdmissionService {
     private ConsultationRepository consultationRepository;
 
     @Autowired
-    private HospitalAdmissionUpdate admissionUpdate;
-
-    @Autowired
     private HospitalAdmissionMapper admissionMapper;
 
     public HospitalAdmissionResponse HospitalizationUpdate(long consultId, UpdateHospitalAdmissionRequest request){
         Consultation consultation = consultationRepository.findById(consultId).orElseThrow();
         HospitalAdmission hospitalization = consultation.getHospitalization();
 
-        admissionUpdate.requestUpdate(request,hospitalization);
+        admissionMapper.requestUpdate(request,hospitalization);
 
         return admissionMapper.toResponse(hospitalAdmissionRepository.save(hospitalization));
     }

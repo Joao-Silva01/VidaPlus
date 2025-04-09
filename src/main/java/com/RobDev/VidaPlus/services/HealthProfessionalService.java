@@ -6,7 +6,6 @@ import com.RobDev.VidaPlus.dto.healthProfessional.CreateHpRequest;
 import com.RobDev.VidaPlus.dto.healthProfessional.HpResponse;
 import com.RobDev.VidaPlus.dto.healthProfessional.UpdateHpRequest;
 import com.RobDev.VidaPlus.mapper.healthProfessional.HealthProfessionalMapper;
-import com.RobDev.VidaPlus.mapper.healthProfessional.HealthProfessionalUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +20,7 @@ public class HealthProfessionalService {
     @Autowired
     private HealthProfessionalMapper hpMapper;
 
-    @Autowired
-    private HealthProfessionalUpdate hpUpdate;
+
 
     public List<HpResponse> allProfessionals(){
         return hpMapper.toList(hpRepository.findAll());
@@ -41,7 +39,7 @@ public class HealthProfessionalService {
 
     public void updateProfessional(long id, UpdateHpRequest request){
         var professional = hpRepository.findById(id).orElseThrow();
-        hpUpdate.requestUpdate(request, professional);
+        hpMapper.requestUpdate(request, professional);
         hpRepository.save(professional);
     }
 }

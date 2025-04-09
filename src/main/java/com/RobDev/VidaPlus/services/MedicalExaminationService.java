@@ -5,7 +5,6 @@ import com.RobDev.VidaPlus.dto.medicalExamination.UpdateExamRequest;
 import com.RobDev.VidaPlus.entities.Consultation;
 import com.RobDev.VidaPlus.entities.MedicalExamination;
 import com.RobDev.VidaPlus.mapper.medicalExamination.MedicalExaminationMapper;
-import com.RobDev.VidaPlus.mapper.medicalExamination.MedicalExaminationUpdate;
 import com.RobDev.VidaPlus.repositories.ConsultationRepository;
 import com.RobDev.VidaPlus.repositories.MedicalExaminationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +22,6 @@ public class MedicalExaminationService {
     private ConsultationRepository consultationRepository;
 
     @Autowired
-    private MedicalExaminationUpdate examinationUpdate;
-
-    @Autowired
     private MedicalExaminationMapper examinationMapper;
 
     public ExamResponse ExamUpdate(long consultId, long examId, UpdateExamRequest request) {
@@ -34,7 +30,7 @@ public class MedicalExaminationService {
 
         for (MedicalExamination exam : exams){
             if(exam.getId() == examId){
-                examinationUpdate.requestUpdate(request, exam);
+                examinationMapper.requestUpdate(request, exam);
                 return examinationMapper.toResponse(examinationRepository.save(exam));
             }
         }
