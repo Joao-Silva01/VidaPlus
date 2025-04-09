@@ -4,18 +4,18 @@ import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
 
 import java.sql.Timestamp;
 
-public class CreateMedicalRecordResponse {
+public class MinMedicalRecordResponse {
     private long id;
     private Timestamp dateRecord;
     private String diagnostic;
     private String patientObservation;
     private PatientResponse patient;
 
-    public CreateMedicalRecordResponse(){
+    public MinMedicalRecordResponse(){
 
     }
 
-    public CreateMedicalRecordResponse(long id, Timestamp dateRecord, String diagnostic, String patientObservation, PatientResponse patient) {
+    public MinMedicalRecordResponse(long id, Timestamp dateRecord, String diagnostic, String patientObservation, PatientResponse patient) {
         this.id = id;
         this.dateRecord = dateRecord;
         this.diagnostic = diagnostic;

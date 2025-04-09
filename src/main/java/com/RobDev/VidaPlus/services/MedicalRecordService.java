@@ -2,8 +2,9 @@ package com.RobDev.VidaPlus.services;
 
 import com.RobDev.VidaPlus.dto.healthProfessional.RecordProfessionalResponse;
 import com.RobDev.VidaPlus.dto.medicalRecord.CreateMedicalRecordRequest;
-import com.RobDev.VidaPlus.dto.medicalRecord.CreateMedicalRecordResponse;
+import com.RobDev.VidaPlus.dto.medicalRecord.MinMedicalRecordResponse;
 import com.RobDev.VidaPlus.dto.medicalRecord.MedicalRecordResponse;
+import com.RobDev.VidaPlus.dto.medicalRecord.UpdateMedicalRecordRequest;
 import com.RobDev.VidaPlus.entities.HealthProfessional;
 import com.RobDev.VidaPlus.entities.MedicalRecord;
 import com.RobDev.VidaPlus.entities.Patient;
@@ -39,8 +40,7 @@ public class MedicalRecordService {
     private HealthProfessionalMapper hpMapper;
 
     public MedicalRecordResponse getRecord(long patientId){
-        patientRepository.findById(patientId).orElseThrow();
-        MedicalRecord record = medicalRecordRepository.findByPatient(patientId);
+        MedicalRecord record = medicalRecordRepository.findByPatient(patientId).orElseThrow();
 
         MedicalRecordResponse response = recordMapper.toResponse(record);
 
@@ -51,7 +51,7 @@ public class MedicalRecordService {
         return response;
     }
 
-    public CreateMedicalRecordResponse createRecord(CreateMedicalRecordRequest request){
+    public MinMedicalRecordResponse createRecord(CreateMedicalRecordRequest request){
         HealthProfessional professional = professionalRepository.findById(request.getProfessionalId()).orElseThrow();
         Patient patient = patientRepository.findById(request.getPatientId()).orElseThrow();
 
@@ -68,7 +68,13 @@ public class MedicalRecordService {
         medicalRecord.setProfessionals(updateLog);
         medicalRecord.setPatient(patient);
 
-        return recordMapper.toCreateResponse(medicalRecordRepository.save(medicalRecord));
+        return recordMapper.toMinResponse(medicalRecordRepository.save(medicalRecord));
+    }
 
+    public MinMedicalRecordResponse updateRecord(long patientId, UpdateMedicalRecordRequest request){
+        MedicalRecord medicalRecord = medicalRecordRepository.findByPatient(patientId).orElseThrow();
+        recordMapper.requestUpdate(request, medicalRecord);
+
+        return recordMapper.toMinResponse(medicalRecord);
     }
 }

@@ -6,10 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface MedicalRecordRepository extends JpaRepository<MedicalRecord, Long> {
 
     @Query(value = "SELECT * FROM MEDICAL_RECORD AS MR " +
             "WHERE MR.id = ?", nativeQuery = true)
-    MedicalRecord findByPatient(long patientId);
+    Optional<MedicalRecord> findByPatient(long patientId);
 }

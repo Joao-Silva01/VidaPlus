@@ -1,12 +1,11 @@
 package com.RobDev.VidaPlus.mapper.medicalRecord;
 
 import com.RobDev.VidaPlus.dto.medicalRecord.CreateMedicalRecordRequest;
-import com.RobDev.VidaPlus.dto.medicalRecord.CreateMedicalRecordResponse;
+import com.RobDev.VidaPlus.dto.medicalRecord.MinMedicalRecordResponse;
 import com.RobDev.VidaPlus.dto.medicalRecord.MedicalRecordResponse;
+import com.RobDev.VidaPlus.dto.medicalRecord.UpdateMedicalRecordRequest;
 import com.RobDev.VidaPlus.entities.MedicalRecord;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
+import org.mapstruct.*;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface MedicalRecordMapper {
@@ -15,8 +14,12 @@ public interface MedicalRecordMapper {
     @Mapping(target = "professionals", ignore = true)
     MedicalRecord toCreateEntity(CreateMedicalRecordRequest request);
 
-    CreateMedicalRecordResponse toCreateResponse(MedicalRecord entity);
+    MinMedicalRecordResponse toMinResponse(MedicalRecord entity);
 
     @Mapping(target = "professionals", ignore = true)
     MedicalRecordResponse toResponse(MedicalRecord entity);
+
+    @Mapping(target = "professionals", ignore = true)
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void requestUpdate(UpdateMedicalRecordRequest request, @MappingTarget MedicalRecord entity);
 }
