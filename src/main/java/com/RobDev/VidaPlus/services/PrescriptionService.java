@@ -1,5 +1,6 @@
 package com.RobDev.VidaPlus.services;
 
+import com.RobDev.VidaPlus.dto.prescription.PrescriptionRequest;
 import com.RobDev.VidaPlus.dto.prescription.PrescriptionResponse;
 import com.RobDev.VidaPlus.dto.prescription.UpdatePrescriptionRequest;
 import com.RobDev.VidaPlus.entities.Consultation;
@@ -22,6 +23,19 @@ public class PrescriptionService {
 
     @Autowired
     private PrescriptionMapper prescriptionMapper;
+
+    public PrescriptionResponse prescriptionCreate(long consultId,PrescriptionRequest request){
+        Consultation consultation = consultationRepository.findById(consultId).orElseThrow();
+        if (consultation.getPrescription() != null){
+            System.out.println("Tem prescrição");
+            return null;
+        }
+        Prescription prescription = prescriptionMapper.toCreatePrescription(request);
+        prescription.setConsultation(consultation);
+        consultation.setPrescription(prescription);
+
+        return prescriptionMapper.toResponse(prescriptionRepository.save(prescription));
+    }
 
     public PrescriptionResponse prescriptionUpdate(long consult_id, UpdatePrescriptionRequest request){
         Consultation consultation = consultationRepository.findById(consult_id)
