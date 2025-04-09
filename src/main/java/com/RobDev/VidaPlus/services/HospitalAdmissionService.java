@@ -4,6 +4,7 @@ import com.RobDev.VidaPlus.dto.hospitalAdmission.HospitalAdmissionResponse;
 import com.RobDev.VidaPlus.dto.hospitalAdmission.UpdateHospitalAdmissionRequest;
 import com.RobDev.VidaPlus.entities.Consultation;
 import com.RobDev.VidaPlus.entities.HospitalAdmission;
+import com.RobDev.VidaPlus.exception.IdNotFoundException;
 import com.RobDev.VidaPlus.mapper.HospitalAdmissionMapper;
 import com.RobDev.VidaPlus.repositories.ConsultationRepository;
 import com.RobDev.VidaPlus.repositories.HospitalAdmissionRepository;
@@ -23,7 +24,9 @@ public class HospitalAdmissionService {
     private HospitalAdmissionMapper admissionMapper;
 
     public HospitalAdmissionResponse HospitalizationUpdate(long consultId, UpdateHospitalAdmissionRequest request){
-        Consultation consultation = consultationRepository.findById(consultId).orElseThrow();
+        Consultation consultation = consultationRepository.findById(consultId)
+                .orElseThrow(() -> new IdNotFoundException("Query not found for hospitalization update!"));
+
         HospitalAdmission hospitalization = consultation.getHospitalization();
 
         admissionMapper.requestUpdate(request,hospitalization);

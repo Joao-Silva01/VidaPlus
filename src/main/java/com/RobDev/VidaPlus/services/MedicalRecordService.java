@@ -9,6 +9,7 @@ import com.RobDev.VidaPlus.entities.HealthProfessional;
 import com.RobDev.VidaPlus.entities.MedicalRecord;
 import com.RobDev.VidaPlus.entities.Patient;
 import com.RobDev.VidaPlus.entities.UpdateLog;
+import com.RobDev.VidaPlus.exception.IdNotFoundException;
 import com.RobDev.VidaPlus.mapper.HealthProfessionalMapper;
 import com.RobDev.VidaPlus.mapper.MedicalRecordMapper;
 import com.RobDev.VidaPlus.repositories.HealthProfessionalRepository;
@@ -40,11 +41,12 @@ public class MedicalRecordService {
     private HealthProfessionalMapper hpMapper;
 
     public MedicalRecordResponse getRecord(long patientId){
-        MedicalRecord record = medicalRecordRepository.findByPatient(patientId).orElseThrow();
+        MedicalRecord record = medicalRecordRepository.findByPatient(patientId)
+                .orElseThrow(() -> new IdNotFoundException("Medical Record not found!"));
 
         MedicalRecordResponse response = recordMapper.toResponse(record);
 
-        // Tranformando os dados completos em mínimos e associando a resposta
+        // Diminuindo os dados dos profissionais para a resposta
         List<RecordProfessionalResponse> listProfessionals = record.getProfessionals().stream().map(x -> hpMapper.toMinResponse(x.getProfessional())).toList();
         response.setProfessionals(listProfessionals);
 
@@ -52,8 +54,12 @@ public class MedicalRecordService {
     }
 
     public MinMedicalRecordResponse createRecord(CreateMedicalRecordRequest request){
-        HealthProfessional professional = professionalRepository.findById(request.getProfessionalId()).orElseThrow();
-        Patient patient = patientRepository.findById(request.getPatientId()).orElseThrow();
+
+        HealthProfessional professional = professionalRepository.findById(request.getProfessionalId())
+                .orElseThrow(() -> new IdNotFoundException("Healthcare professional not found to create medical record!"));
+
+        Patient patient = patientRepository.findById(request.getPatientId())
+                .orElseThrow(() -> new IdNotFoundException("Patient not found for Medical Record creation!"));
 
         MedicalRecord medicalRecord = recordMapper.toCreateEntity(request);
         medicalRecord.setDateRecord(Timestamp.from(Instant.now()));
@@ -73,7 +79,8 @@ public class MedicalRecordService {
     }
 
     public MinMedicalRecordResponse updateRecord(long patientId, UpdateMedicalRecordRequest request){
-        MedicalRecord medicalRecord = medicalRecordRepository.findByPatient(patientId).orElseThrow();
+        MedicalRecord medicalRecord = medicalRecordRepository.findByPatient(patientId)
+                .orElseThrow(() -> new IdNotFoundException("Medical record not found for update!"));
         recordMapper.requestUpdate(request, medicalRecord);
 
         return recordMapper.toMinResponse(medicalRecord);

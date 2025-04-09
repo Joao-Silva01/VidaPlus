@@ -1,6 +1,8 @@
 package com.RobDev.VidaPlus.services;
 
+import com.RobDev.VidaPlus.entities.Patient;
 import com.RobDev.VidaPlus.entities.enums.UserRole;
+import com.RobDev.VidaPlus.exception.IdNotFoundException;
 import com.RobDev.VidaPlus.repositories.PatientRepository;
 import com.RobDev.VidaPlus.dto.patiente.CreatePatientRequest;
 import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
@@ -21,20 +23,22 @@ public class PatientService {
     private PatientMapper patientMapper;
 
     public PatientResponse byId(long id){
-        return patientMapper.toResponseDTO(patientRepository.findById(id).orElseThrow());
+        return patientMapper.toResponseDTO(patientRepository.findById(id)
+                .orElseThrow(() -> new IdNotFoundException("Patient not found!")));
     }
     public List<PatientResponse> allPatients(){
         return patientMapper.toList(patientRepository.findAll());
     }
 
     public PatientResponse createPatient(CreatePatientRequest request){
-        var newPatient = patientMapper.toCreateEntity(request);
+        Patient newPatient = patientMapper.toCreateEntity(request);
         newPatient.setRole(UserRole.PATIENT);
         return patientMapper.toResponseDTO(patientRepository.save(newPatient));
     }
 
     public void updatePatient(long id,UpdatePatientRequest request){
-        var patient = patientRepository.findById(id).orElseThrow();
+        Patient patient = patientRepository.findById(id)
+                .orElseThrow(() -> new IdNotFoundException("Patient not found for update!"));
         patientMapper.requestUpdate(request,patient);
         patientRepository.save(patient);
     }

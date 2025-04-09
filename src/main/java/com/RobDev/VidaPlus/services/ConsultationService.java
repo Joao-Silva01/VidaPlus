@@ -5,6 +5,7 @@ import com.RobDev.VidaPlus.dto.consultation.UpdateConsultResponse;
 import com.RobDev.VidaPlus.entities.*;
 import com.RobDev.VidaPlus.entities.enums.Modality;
 import com.RobDev.VidaPlus.entities.enums.Status;
+import com.RobDev.VidaPlus.exception.IdNotFoundException;
 import com.RobDev.VidaPlus.repositories.ConsultationRepository;
 import com.RobDev.VidaPlus.repositories.HealthProfessionalRepository;
 import com.RobDev.VidaPlus.repositories.PatientRepository;
@@ -53,20 +54,24 @@ public class ConsultationService {
     private PatientMapper patientMapper;
 
     public AllConsultationsPatientResponse getAllMedicalAppointmentsPatient(long patient_id){
-        var patient = patientRepository.findById(patient_id).orElseThrow();
+        var patient = patientRepository.findById(patient_id)
+                .orElseThrow(() -> new IdNotFoundException("Patient not found!"));
 
         return patientMapper.toAllConsultationsResponse(patient);
     }
 
     public ConsultResponse getConsult(long consult_id){
-        Consultation consult = consultationRepository.findById(consult_id).orElseThrow();
+        Consultation consult = consultationRepository.findById(consult_id)
+                .orElseThrow(() -> new IdNotFoundException("Consultation not found!"));
 
         return consultMapper.toResponse(consult);
     }
 
     public ConsultResponse createConsult(CreateConsultRequest request) {
-        HealthProfessional professional = hpRepository.findById(request.getProfessional_id()).orElseThrow();
-        Patient patient = patientRepository.findById(request.getPatient_id()).orElseThrow();
+        HealthProfessional professional = hpRepository.findById(request.getProfessional_id())
+                .orElseThrow(() -> new IdNotFoundException("Healthcare professional not found to create appointment!"));
+        Patient patient = patientRepository.findById(request.getPatient_id())
+                .orElseThrow(() -> new IdNotFoundException("Patient not found to create appointment!"));
 
         Consultation newConsult = consultMapper.toCreateConsult(request);
         newConsult.setConsultationFee(BigDecimal.valueOf(245.00));
@@ -101,7 +106,7 @@ public class ConsultationService {
         }
 
         if(request.getType() == Modality.ONLINE){
-            newConsult.setConsultationLink("https://teleconsulta.example.com/consulta555");
+            newConsult.setConsultationLink("https://vidaPlus.com/consulta555");
         }
 
         return consultMapper.toResponse(consultationRepository.save(newConsult));
@@ -109,7 +114,8 @@ public class ConsultationService {
     }
 
     public UpdateConsultResponse updateConsult(long consult_id, UpdateConsultRequest request){
-        Consultation consult = consultationRepository.findById(consult_id).orElseThrow();
+        Consultation consult = consultationRepository.findById(consult_id)
+                .orElseThrow(() -> new IdNotFoundException("Query not found for update!"));
 
         consultMapper.requestUpdate(request, consult);
         return consultMapper.toUpdateResponse(consultationRepository.save(consult));
