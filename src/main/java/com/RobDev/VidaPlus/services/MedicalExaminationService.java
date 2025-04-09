@@ -4,7 +4,7 @@ import com.RobDev.VidaPlus.dto.medicalExamination.ExamResponse;
 import com.RobDev.VidaPlus.dto.medicalExamination.UpdateExamRequest;
 import com.RobDev.VidaPlus.entities.Consultation;
 import com.RobDev.VidaPlus.entities.MedicalExamination;
-import com.RobDev.VidaPlus.mapper.medicalExamination.MedicalExaminationMapper;
+import com.RobDev.VidaPlus.mapper.MedicalExaminationMapper;
 import com.RobDev.VidaPlus.repositories.ConsultationRepository;
 import com.RobDev.VidaPlus.repositories.MedicalExaminationRepository;
 import org.springframework.beans.factory.annotation.Autowired;

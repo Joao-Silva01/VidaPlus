@@ -1,4 +1,4 @@
-package com.RobDev.VidaPlus.mapper.medicalExamination;
+package com.RobDev.VidaPlus.mapper;
 
 import com.RobDev.VidaPlus.dto.medicalExamination.UpdateExamRequest;
 import com.RobDev.VidaPlus.entities.MedicalExamination;

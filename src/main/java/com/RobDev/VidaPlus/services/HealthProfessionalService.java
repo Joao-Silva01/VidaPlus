@@ -5,7 +5,7 @@ import com.RobDev.VidaPlus.repositories.HealthProfessionalRepository;
 import com.RobDev.VidaPlus.dto.healthProfessional.CreateHpRequest;
 import com.RobDev.VidaPlus.dto.healthProfessional.HpResponse;
 import com.RobDev.VidaPlus.dto.healthProfessional.UpdateHpRequest;
-import com.RobDev.VidaPlus.mapper.healthProfessional.HealthProfessionalMapper;
+import com.RobDev.VidaPlus.mapper.HealthProfessionalMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

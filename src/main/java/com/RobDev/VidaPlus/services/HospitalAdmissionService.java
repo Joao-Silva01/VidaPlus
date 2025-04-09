@@ -4,7 +4,7 @@ import com.RobDev.VidaPlus.dto.hospitalAdmission.HospitalAdmissionResponse;
 import com.RobDev.VidaPlus.dto.hospitalAdmission.UpdateHospitalAdmissionRequest;
 import com.RobDev.VidaPlus.entities.Consultation;
 import com.RobDev.VidaPlus.entities.HospitalAdmission;
-import com.RobDev.VidaPlus.mapper.hospitalAdmission.HospitalAdmissionMapper;
+import com.RobDev.VidaPlus.mapper.HospitalAdmissionMapper;
 import com.RobDev.VidaPlus.repositories.ConsultationRepository;
 import com.RobDev.VidaPlus.repositories.HospitalAdmissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;

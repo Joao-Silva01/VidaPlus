@@ -9,11 +9,11 @@ import com.RobDev.VidaPlus.repositories.PatientRepository;
 import com.RobDev.VidaPlus.dto.consultation.ConsultResponse;
 import com.RobDev.VidaPlus.dto.consultation.CreateConsultRequest;
 import com.RobDev.VidaPlus.dto.patiente.AllConsultationsPatientResponse;
-import com.RobDev.VidaPlus.mapper.consultation.ConsultationMapper;
-import com.RobDev.VidaPlus.mapper.hospitalAdmission.HospitalAdmissionMapper;
-import com.RobDev.VidaPlus.mapper.medicalExamination.MedicalExaminationMapper;
-import com.RobDev.VidaPlus.mapper.patient.PatientMapper;
-import com.RobDev.VidaPlus.mapper.prescription.PrescriptionMapper;
+import com.RobDev.VidaPlus.mapper.ConsultationMapper;
+import com.RobDev.VidaPlus.mapper.HospitalAdmissionMapper;
+import com.RobDev.VidaPlus.mapper.MedicalExaminationMapper;
+import com.RobDev.VidaPlus.mapper.PatientMapper;
+import com.RobDev.VidaPlus.mapper.PrescriptionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

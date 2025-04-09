@@ -1,4 +1,4 @@
-package com.RobDev.VidaPlus.mapper.patient;
+package com.RobDev.VidaPlus.mapper;
 
 
 import com.RobDev.VidaPlus.dto.patiente.UpdatePatientRequest;

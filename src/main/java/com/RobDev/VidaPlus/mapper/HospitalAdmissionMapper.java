@@ -1,11 +1,10 @@
-package com.RobDev.VidaPlus.mapper.hospitalAdmission;
+package com.RobDev.VidaPlus.mapper;
 
 import com.RobDev.VidaPlus.dto.hospitalAdmission.UpdateHospitalAdmissionRequest;
 import com.RobDev.VidaPlus.entities.HospitalAdmission;
 import com.RobDev.VidaPlus.dto.hospitalAdmission.CreateHospitalAdmissionRequest;
 import com.RobDev.VidaPlus.dto.hospitalAdmission.HospitalAdmissionResponse;
 import org.mapstruct.*;
-import org.springframework.context.annotation.Bean;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface HospitalAdmissionMapper {

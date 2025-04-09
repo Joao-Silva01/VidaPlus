@@ -1,4 +1,4 @@
-package com.RobDev.VidaPlus.mapper.prescription;
+package com.RobDev.VidaPlus.mapper;
 
 import com.RobDev.VidaPlus.dto.prescription.PrescriptionResponse;
 import com.RobDev.VidaPlus.dto.prescription.UpdatePrescriptionRequest;

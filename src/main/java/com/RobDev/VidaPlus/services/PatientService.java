@@ -5,7 +5,7 @@ import com.RobDev.VidaPlus.repositories.PatientRepository;
 import com.RobDev.VidaPlus.dto.patiente.CreatePatientRequest;
 import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
 import com.RobDev.VidaPlus.dto.patiente.UpdatePatientRequest;
-import com.RobDev.VidaPlus.mapper.patient.PatientMapper;
+import com.RobDev.VidaPlus.mapper.PatientMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

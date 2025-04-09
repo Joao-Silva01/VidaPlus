@@ -1,4 +1,4 @@
-package com.RobDev.VidaPlus.mapper.healthProfessional;
+package com.RobDev.VidaPlus.mapper;
 
 import com.RobDev.VidaPlus.dto.healthProfessional.RecordProfessionalResponse;
 import com.RobDev.VidaPlus.dto.healthProfessional.UpdateHpRequest;

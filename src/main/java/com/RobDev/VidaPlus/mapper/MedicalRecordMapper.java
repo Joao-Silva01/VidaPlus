@@ -1,4 +1,4 @@
-package com.RobDev.VidaPlus.mapper.medicalRecord;
+package com.RobDev.VidaPlus.mapper;
 
 import com.RobDev.VidaPlus.dto.medicalRecord.CreateMedicalRecordRequest;
 import com.RobDev.VidaPlus.dto.medicalRecord.MinMedicalRecordResponse;
