@@ -1,9 +1,11 @@
 package com.RobDev.VidaPlus.services;
 
+import com.RobDev.VidaPlus.dto.hospitalAdmission.CreateHospitalAdmissionRequest;
 import com.RobDev.VidaPlus.dto.hospitalAdmission.HospitalAdmissionResponse;
 import com.RobDev.VidaPlus.dto.hospitalAdmission.UpdateHospitalAdmissionRequest;
 import com.RobDev.VidaPlus.entities.Consultation;
 import com.RobDev.VidaPlus.entities.HospitalAdmission;
+import com.RobDev.VidaPlus.exception.HospitalizationBadRequestException;
 import com.RobDev.VidaPlus.exception.IdNotFoundException;
 import com.RobDev.VidaPlus.mapper.HospitalAdmissionMapper;
 import com.RobDev.VidaPlus.repositories.ConsultationRepository;
@@ -23,7 +25,22 @@ public class HospitalAdmissionService {
     @Autowired
     private HospitalAdmissionMapper admissionMapper;
 
-    public HospitalAdmissionResponse HospitalizationUpdate(long consultId, UpdateHospitalAdmissionRequest request){
+    public HospitalAdmissionResponse hospitalizationCreate(long consultId, CreateHospitalAdmissionRequest request){
+        Consultation consultation = consultationRepository.findById(consultId)
+                .orElseThrow(() -> new HospitalizationBadRequestException("Query not found for creating hospitalization"));
+
+        if (consultation.getHospitalization() != null){
+            throw new HospitalizationBadRequestException("This consultation already has a hospitalization");
+        }
+
+        HospitalAdmission admission = admissionMapper.toCreateEntity(request);
+        admission.setConsultation(consultation);
+        consultation.setHospitalization(admission);
+
+        return admissionMapper.toResponse(hospitalAdmissionRepository.save(admission));
+    }
+
+    public HospitalAdmissionResponse hospitalizationUpdate(long consultId, UpdateHospitalAdmissionRequest request){
         Consultation consultation = consultationRepository.findById(consultId)
                 .orElseThrow(() -> new IdNotFoundException("Query not found for hospitalization update!"));
 

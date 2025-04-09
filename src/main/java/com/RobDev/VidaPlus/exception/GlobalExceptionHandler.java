@@ -19,4 +19,26 @@ public class GlobalExceptionHandler {
                 );
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
+
+    @ExceptionHandler(PrescriptionBadRequestException.class)
+    public ResponseEntity<ErrorResponse> handlePrescriptionBadRequest( PrescriptionBadRequestException exception, HttpServletRequest request){
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                "Bad Request",
+                exception.getMessage(),
+                request.getRequestURI()
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    @ExceptionHandler(HospitalizationBadRequestException.class)
+    public ResponseEntity<ErrorResponse> handleHospitalizationBadRequest( HospitalizationBadRequestException exception, HttpServletRequest request){
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                "Bad Request",
+                exception.getMessage(),
+                request.getRequestURI()
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
 }

@@ -10,7 +10,6 @@ public class PrescriptionRequest {
 
     private String description;
     private Timestamp prescriptionDate;
-    private Modality type;
     private String digitalSignature;
 
     public PrescriptionRequest(){}
@@ -33,14 +32,6 @@ public class PrescriptionRequest {
 
     public void setPrescriptionDate(Timestamp prescriptionDate) {
         this.prescriptionDate = prescriptionDate;
-    }
-
-    public Modality getType() {
-        return type;
-    }
-
-    public void setType(Modality type) {
-        this.type = type;
     }
 
     public String getDigitalSignature() {

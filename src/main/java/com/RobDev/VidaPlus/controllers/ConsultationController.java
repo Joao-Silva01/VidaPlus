@@ -26,9 +26,6 @@ public class ConsultationController {
     private ConsultationService consultationService;
 
     @Autowired
-    private HospitalAdmissionService hospitalAdmissionService;
-
-    @Autowired
     private MedicalExaminationService medicalExaminationService;
 
     @GetMapping(value = "/{consult_id}")
@@ -51,13 +48,6 @@ public class ConsultationController {
                                                         @RequestBody UpdateConsultRequest request) {
 
         return ResponseEntity.ok().body(consultationService.updateConsult(consultId, request));
-    }
-
-    @PutMapping(value = "/{consultId}/hospitalization")
-    public ResponseEntity<HospitalAdmissionResponse> updateHospitalization(@PathVariable long consultId,
-                                                                           @RequestBody UpdateHospitalAdmissionRequest request){
-
-        return ResponseEntity.ok().body(hospitalAdmissionService.HospitalizationUpdate(consultId, request));
     }
 
     @PutMapping(value = "/{consultId}/exam/{examId}")

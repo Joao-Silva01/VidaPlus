@@ -11,6 +11,7 @@ public interface PrescriptionMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "consultation", ignore = true)
+    @Mapping(target = "type", ignore = true)
     Prescription toCreatePrescription (PrescriptionRequest request);
 
     PrescriptionResponse toResponse(Prescription entity);

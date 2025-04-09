@@ -6,6 +6,7 @@ import com.RobDev.VidaPlus.dto.prescription.UpdatePrescriptionRequest;
 import com.RobDev.VidaPlus.entities.Consultation;
 import com.RobDev.VidaPlus.entities.Prescription;
 import com.RobDev.VidaPlus.exception.IdNotFoundException;
+import com.RobDev.VidaPlus.exception.PrescriptionBadRequestException;
 import com.RobDev.VidaPlus.mapper.PrescriptionMapper;
 import com.RobDev.VidaPlus.repositories.ConsultationRepository;
 import com.RobDev.VidaPlus.repositories.PrescriptionRepository;
@@ -25,12 +26,13 @@ public class PrescriptionService {
     private PrescriptionMapper prescriptionMapper;
 
     public PrescriptionResponse prescriptionCreate(long consultId,PrescriptionRequest request){
-        Consultation consultation = consultationRepository.findById(consultId).orElseThrow();
+        Consultation consultation = consultationRepository.findById(consultId)
+                .orElseThrow(() -> new IdNotFoundException("Query not found for prescription creation"));
         if (consultation.getPrescription() != null){
-            System.out.println("Tem prescrição");
-            return null;
+            throw new PrescriptionBadRequestException("This consultation already has a prescription");
         }
         Prescription prescription = prescriptionMapper.toCreatePrescription(request);
+        prescription.setType(consultation.getType());
         prescription.setConsultation(consultation);
         consultation.setPrescription(prescription);
 
