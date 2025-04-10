@@ -31,6 +31,8 @@ public class Patient {
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
 
+    private Timestamp registerMoment;
+
     @OneToMany(mappedBy = "patient")
     private List<Consultation> consultations = new ArrayList<>();
 
@@ -41,7 +43,7 @@ public class Patient {
     }
 
     public Patient(Long id, String name, Timestamp birthDate, Sex sex, String password, String email,
-                   String phone, String document, UserRole role) {
+                   String phone, String document, UserRole role, Timestamp registerMoment) {
         this.id = id;
         this.name = name;
         this.birth_date = birthDate;
@@ -51,6 +53,7 @@ public class Patient {
         this.phone = phone;
         this.document = document;
         this.role = role;
+        this.registerMoment = registerMoment;
     }
 
     public Long getId() {
@@ -123,6 +126,14 @@ public class Patient {
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+
+    public Timestamp getRegisterMoment() {
+        return registerMoment;
+    }
+
+    public void setRegisterMoment(Timestamp registerMoment) {
+        this.registerMoment = registerMoment;
     }
 
     public List<Consultation> getConsultations() {

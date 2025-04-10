@@ -2,6 +2,7 @@ package com.RobDev.VidaPlus.dto.healthProfessional;
 
 import com.RobDev.VidaPlus.entities.enums.HealthProfession;
 import com.RobDev.VidaPlus.entities.HealthProfessional;
+import com.RobDev.VidaPlus.validations.cpf.CpfValid;
 import com.RobDev.VidaPlus.validations.email.EmailValid;
 import jakarta.validation.constraints.Size;
 import org.springframework.beans.BeanUtils;
@@ -21,6 +22,10 @@ public class CreateHpRequest implements Serializable {
 
     @Size(max = 150, message = "invalid password size")
     private String password;
+
+    @CpfValid
+    private String document;
+
     private HealthProfession profession;
 
     @Size(max = 100, message = "invalid specialty size")
@@ -38,7 +43,7 @@ public class CreateHpRequest implements Serializable {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.strip();
     }
 
     public String getEmail() {
@@ -46,7 +51,7 @@ public class CreateHpRequest implements Serializable {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.strip();
     }
 
     public String getPhone() {
@@ -54,7 +59,7 @@ public class CreateHpRequest implements Serializable {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.phone = phone.strip();
     }
 
     public String getPassword() {
@@ -62,7 +67,15 @@ public class CreateHpRequest implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = password.strip();
+    }
+
+    public String getDocument() {
+        return document;
+    }
+
+    public void setDocument(String document) {
+        this.document = document.strip();
     }
 
     public HealthProfession getProfession() {

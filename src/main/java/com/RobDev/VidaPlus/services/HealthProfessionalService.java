@@ -11,6 +11,8 @@ import com.RobDev.VidaPlus.mapper.HealthProfessionalMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -35,6 +37,8 @@ public class HealthProfessionalService {
     public HpResponse createProfessional(CreateHpRequest request){
         HealthProfessional newProfessional = hpMapper.toCreateEntity(request);
         newProfessional.setRole(UserRole.PROFESSIONAL);
+        newProfessional.setRegisterMoment(Timestamp.from(Instant.now()));
+
         return hpMapper.toResponse(hpRepository.save(newProfessional));
     }
 

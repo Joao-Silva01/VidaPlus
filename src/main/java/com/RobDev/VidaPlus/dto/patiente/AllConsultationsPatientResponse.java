@@ -18,11 +18,17 @@ public class AllConsultationsPatientResponse {
     private Sex sex;
     private String email;
     private String document;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "America/Sao_Paulo")
+    private Timestamp registerMoment;
+
     private List<ConsultationPatientResponse> consultations = new ArrayList<>();
 
     public AllConsultationsPatientResponse(){}
 
-    public AllConsultationsPatientResponse(long id, String name, Timestamp birth_date, String phone, Sex sex, String email, String document) {
+    public AllConsultationsPatientResponse(long id, String name, Timestamp birth_date,
+                                           String phone, Sex sex, String email, String document,
+                                           Timestamp registerMoment) {
         this.id = id;
         this.name = name;
         this.birth_date = birth_date;
@@ -30,6 +36,7 @@ public class AllConsultationsPatientResponse {
         this.sex = sex;
         this.email = email;
         this.document = document;
+        this.registerMoment = registerMoment;
     }
 
     public long getId() {
@@ -96,5 +103,13 @@ public class AllConsultationsPatientResponse {
 
     public void setConsultations(List<ConsultationPatientResponse> consultations) {
         this.consultations = consultations;
+    }
+
+    public Timestamp getRegisterMoment() {
+        return registerMoment;
+    }
+
+    public void setRegisterMoment(Timestamp registerMoment) {
+        this.registerMoment = registerMoment;
     }
 }

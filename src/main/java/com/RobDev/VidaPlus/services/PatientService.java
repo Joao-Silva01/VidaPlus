@@ -12,6 +12,8 @@ import com.RobDev.VidaPlus.mapper.PatientMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -34,6 +36,8 @@ public class PatientService {
     public PatientResponse createPatient(CreatePatientRequest request){
         Patient newPatient = patientMapper.toCreateEntity(request);
         newPatient.setRole(UserRole.PATIENT);
+        newPatient.setRegisterMoment(Timestamp.from(Instant.now()));
+
         return patientMapper.toResponseDTO(patientRepository.save(newPatient));
     }
 

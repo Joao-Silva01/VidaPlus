@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 public class PatientResponse implements Serializable {
@@ -19,6 +20,9 @@ public class PatientResponse implements Serializable {
     private Sex sex;
     private String email;
     private String document;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "America/Sao_Paulo")
+    private Timestamp registerMoment;
 
     public PatientResponse(){
 
@@ -85,5 +89,13 @@ public class PatientResponse implements Serializable {
 
     public void setDocument(String document) {
         this.document = document;
+    }
+
+    public Timestamp getRegisterMoment() {
+        return registerMoment;
+    }
+
+    public void setRegisterMoment(Timestamp registerMoment) {
+        this.registerMoment = registerMoment;
     }
 }

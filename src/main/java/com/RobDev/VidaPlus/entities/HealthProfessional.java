@@ -4,6 +4,7 @@ import com.RobDev.VidaPlus.entities.enums.HealthProfession;
 import com.RobDev.VidaPlus.entities.enums.UserRole;
 import jakarta.persistence.*;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -25,6 +26,8 @@ public class HealthProfessional {
     @Column(nullable = false)
     private String password;
 
+    private String document;
+
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private HealthProfession profession;
@@ -36,6 +39,8 @@ public class HealthProfessional {
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
 
+    private Timestamp registerMoment;
+
     @OneToMany(mappedBy = "professional")
     private List<Consultation> consultations = new ArrayList<>();
 
@@ -45,8 +50,9 @@ public class HealthProfessional {
     public HealthProfessional() {
     }
 
-    public HealthProfessional(Long id, String name, String email, String phone, String password, HealthProfession profession,
-                              String specialty, UserRole role) {
+    public HealthProfessional(Long id, String name, String email, String phone, String password, String document,
+                              HealthProfession profession,
+                              String specialty, UserRole role, Timestamp registerMoment) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -97,6 +103,14 @@ public class HealthProfessional {
         this.password = password;
     }
 
+    public String getDocument() {
+        return document;
+    }
+
+    public void setDocument(String document) {
+        this.document = document;
+    }
+
     public HealthProfession getProfession() {
         return profession;
     }
@@ -135,6 +149,14 @@ public class HealthProfessional {
 
     public void setMedicalRecords(List<UpdateLog> medicalRecords) {
         this.medicalRecords = medicalRecords;
+    }
+
+    public Timestamp getRegisterMoment() {
+        return registerMoment;
+    }
+
+    public void setRegisterMoment(Timestamp registerMoment) {
+        this.registerMoment = registerMoment;
     }
 
     @Override
