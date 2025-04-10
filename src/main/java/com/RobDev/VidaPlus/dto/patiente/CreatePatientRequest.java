@@ -2,6 +2,8 @@ package com.RobDev.VidaPlus.dto.patiente;
 
 import com.RobDev.VidaPlus.entities.enums.Sex;
 import com.RobDev.VidaPlus.entities.Patient;
+import com.RobDev.VidaPlus.validations.cpf.CpfValid;
+import com.RobDev.VidaPlus.validations.email.EmailValid;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
@@ -14,7 +16,11 @@ public class CreatePatientRequest implements Serializable {
     private String phone;
     private String password;
     private Sex sex;
+
+    @EmailValid
     private String email;
+
+    @CpfValid
     private String document;
 
     public CreatePatientRequest(){

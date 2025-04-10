@@ -5,7 +5,9 @@ import com.RobDev.VidaPlus.dto.patiente.CreatePatientRequest;
 import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
 import com.RobDev.VidaPlus.dto.patiente.UpdatePatientRequest;
 import com.RobDev.VidaPlus.services.PatientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +31,7 @@ public class PatientController {
     }
 
     @PostMapping
-    public ResponseEntity<PatientResponse> create(@RequestBody CreatePatientRequest request){
+    public ResponseEntity<PatientResponse> create(@Valid @RequestBody CreatePatientRequest request){
         return  ResponseEntity.ok().body(patientService.createPatient(request));
     }
 
