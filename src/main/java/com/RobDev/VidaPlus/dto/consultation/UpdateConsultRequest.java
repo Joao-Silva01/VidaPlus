@@ -1,11 +1,15 @@
 package com.RobDev.VidaPlus.dto.consultation;
 
 import com.RobDev.VidaPlus.entities.enums.Status;
+import jakarta.validation.constraints.Size;
 
 
 public class UpdateConsultRequest {
 
+    @Size(max = 200, message = "invalid diagnostic size")
     private String diagnostic;
+
+    @Size(max = 200, message = "invalid symptoms size")
     private String symptoms;
     private Status status;
 

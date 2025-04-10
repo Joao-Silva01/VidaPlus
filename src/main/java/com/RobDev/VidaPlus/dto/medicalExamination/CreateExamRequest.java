@@ -2,15 +2,22 @@ package com.RobDev.VidaPlus.dto.medicalExamination;
 
 import com.RobDev.VidaPlus.entities.enums.Exam;
 import com.RobDev.VidaPlus.entities.enums.Status;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.Size;
 
 import java.sql.Timestamp;
 
 public class CreateExamRequest {
 
+    @Size(max = 255 ,message = "invalid description size")
     private String description;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "America/Sao_Paulo")
     private Timestamp examDate;
     private Exam type;
     private Status status;
+
+    @Size(max = 250 , message = "invalid result size")
     private String result;
 
     public CreateExamRequest() {

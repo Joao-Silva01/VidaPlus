@@ -1,9 +1,14 @@
 package com.RobDev.VidaPlus.dto.medicalRecord;
 
 
+import jakarta.validation.constraints.Size;
+
 public class UpdateMedicalRecordRequest {
 
+    @Size(max = 300, message = "invalid diagnosis size")
     private String diagnostic;
+
+    @Size(max = 350, message = "invalid observation size")
     private String patientObservation;
 
     public UpdateMedicalRecordRequest(){

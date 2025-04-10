@@ -5,6 +5,7 @@ import com.RobDev.VidaPlus.dto.medicalRecord.MinMedicalRecordResponse;
 import com.RobDev.VidaPlus.dto.medicalRecord.MedicalRecordResponse;
 import com.RobDev.VidaPlus.dto.medicalRecord.UpdateMedicalRecordRequest;
 import com.RobDev.VidaPlus.services.MedicalRecordService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,13 +23,13 @@ public class MedicalRecordController {
     }
 
     @PostMapping
-    public ResponseEntity<MinMedicalRecordResponse> create(@RequestBody CreateMedicalRecordRequest request){
+    public ResponseEntity<MinMedicalRecordResponse> create(@Valid @RequestBody CreateMedicalRecordRequest request){
 
         return ResponseEntity.ok().body(recordService.createRecord(request));
     }
 
     @PutMapping(value = "/{patientId}")
-    public ResponseEntity<MinMedicalRecordResponse> update(@PathVariable long patientId,@RequestBody UpdateMedicalRecordRequest request){
+    public ResponseEntity<MinMedicalRecordResponse> update(@PathVariable long patientId,@Valid @RequestBody UpdateMedicalRecordRequest request){
         return ResponseEntity.ok().body(recordService.updateRecord(patientId,request));
     }
 }

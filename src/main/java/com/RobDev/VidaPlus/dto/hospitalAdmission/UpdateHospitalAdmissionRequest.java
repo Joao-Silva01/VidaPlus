@@ -2,15 +2,22 @@ package com.RobDev.VidaPlus.dto.hospitalAdmission;
 
 
 import com.RobDev.VidaPlus.entities.enums.Situation;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.Size;
 
 import java.sql.Timestamp;
 
 public class UpdateHospitalAdmissionRequest {
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "America/Sao_Paulo")
     private Timestamp dischargeDate;
+
+    @Size(max = 200, message = "invalid reason size")
     private String reason;
     private int patientRoom;
     private Situation situation;
+
+    @Size(max = 350, message = "invalid observation size")
     private String observation;
 
     public UpdateHospitalAdmissionRequest(){

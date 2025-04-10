@@ -2,6 +2,10 @@ package com.RobDev.VidaPlus.dto.patiente;
 
 import com.RobDev.VidaPlus.entities.enums.Sex;
 import com.RobDev.VidaPlus.entities.Patient;
+import com.RobDev.VidaPlus.validations.email.EmailValid;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.Null;
+import jakarta.validation.constraints.Size;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
@@ -9,11 +13,20 @@ import java.sql.Timestamp;
 
 public class UpdatePatientRequest implements Serializable {
 
+    @Size(max = 40, message = "invalid name length")
     private String name;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Sao_Paulo")
     private Timestamp birth_date;
+
+    @Size(max = 10, message = "invalid phone length")
     private String phone;
+
+    @Size(max = 150, message = "invalid password length")
     private String password;
     private Sex sex;
+
+    @EmailValid(value = "Update")
     private String email;
 
     public UpdatePatientRequest(){

@@ -4,6 +4,7 @@ import com.RobDev.VidaPlus.dto.prescription.PrescriptionRequest;
 import com.RobDev.VidaPlus.dto.prescription.PrescriptionResponse;
 import com.RobDev.VidaPlus.dto.prescription.UpdatePrescriptionRequest;
 import com.RobDev.VidaPlus.services.PrescriptionService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +17,13 @@ public class PrescriptionController {
     private PrescriptionService prescriptionService;
 
     @PostMapping(value = "/{consultId}")
-    public ResponseEntity<PrescriptionResponse> createPrescription(@PathVariable long consultId,@RequestBody PrescriptionRequest request){
+    public ResponseEntity<PrescriptionResponse> createPrescription(@PathVariable long consultId,@Valid @RequestBody PrescriptionRequest request){
         return ResponseEntity.ok().body(prescriptionService.prescriptionCreate(consultId,request));
     }
 
     @PutMapping(value = "/{consultId}/prescription")
     public ResponseEntity<PrescriptionResponse> updatePrescription(@PathVariable long consultId,
-                                                                   @RequestBody UpdatePrescriptionRequest request) {
+                                                                   @Valid @RequestBody UpdatePrescriptionRequest request) {
         return ResponseEntity.ok().body(prescriptionService.prescriptionUpdate(consultId, request));
     }
 }

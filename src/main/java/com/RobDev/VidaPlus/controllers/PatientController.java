@@ -7,7 +7,6 @@ import com.RobDev.VidaPlus.dto.patiente.UpdatePatientRequest;
 import com.RobDev.VidaPlus.services.PatientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +35,7 @@ public class PatientController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> update(@PathVariable long id, @RequestBody UpdatePatientRequest request){
+    public ResponseEntity<?> update(@PathVariable long id, @Valid @RequestBody UpdatePatientRequest request){
         patientService.updatePatient(id,request);
         return ResponseEntity.ok().build();
     }

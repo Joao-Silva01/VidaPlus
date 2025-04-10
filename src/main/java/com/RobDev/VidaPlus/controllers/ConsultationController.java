@@ -4,16 +4,8 @@ import com.RobDev.VidaPlus.dto.consultation.ConsultResponse;
 import com.RobDev.VidaPlus.dto.consultation.UpdateConsultRequest;
 import com.RobDev.VidaPlus.dto.consultation.CreateConsultRequest;
 import com.RobDev.VidaPlus.dto.consultation.UpdateConsultResponse;
-import com.RobDev.VidaPlus.dto.hospitalAdmission.HospitalAdmissionResponse;
-import com.RobDev.VidaPlus.dto.hospitalAdmission.UpdateHospitalAdmissionRequest;
-import com.RobDev.VidaPlus.dto.medicalExamination.ExamResponse;
-import com.RobDev.VidaPlus.dto.medicalExamination.UpdateExamRequest;
-import com.RobDev.VidaPlus.dto.prescription.PrescriptionResponse;
-import com.RobDev.VidaPlus.dto.prescription.UpdatePrescriptionRequest;
 import com.RobDev.VidaPlus.services.ConsultationService;
-import com.RobDev.VidaPlus.services.HospitalAdmissionService;
-import com.RobDev.VidaPlus.services.MedicalExaminationService;
-import com.RobDev.VidaPlus.services.PrescriptionService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,13 +23,13 @@ public class ConsultationController {
     }
 
     @PostMapping
-    public ResponseEntity<ConsultResponse> create(@RequestBody CreateConsultRequest request) {
+    public ResponseEntity<ConsultResponse> create( @Valid @RequestBody CreateConsultRequest request) {
         return ResponseEntity.ok().body(consultationService.createConsult(request));
     }
 
     @PutMapping(value = "/{consultId}")
     public ResponseEntity<UpdateConsultResponse> update(@PathVariable long consultId,
-                                                        @RequestBody UpdateConsultRequest request) {
+                                                        @Valid @RequestBody UpdateConsultRequest request) {
 
         return ResponseEntity.ok().body(consultationService.updateConsult(consultId, request));
     }

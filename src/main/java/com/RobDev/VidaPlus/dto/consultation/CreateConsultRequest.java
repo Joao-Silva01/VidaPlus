@@ -5,6 +5,8 @@ import com.RobDev.VidaPlus.entities.enums.Modality;
 import com.RobDev.VidaPlus.entities.enums.Status;
 import com.RobDev.VidaPlus.dto.medicalExamination.CreateExamRequest;
 import com.RobDev.VidaPlus.dto.prescription.PrescriptionRequest;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -14,10 +16,16 @@ import java.util.List;
 
 public class CreateConsultRequest implements Serializable {
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "America/Sao_Paulo")
     private Date consultationMoment;
+
+    @Size(max = 200, message = "invalid diagnostic size")
     private String diagnostic;
+
+    @Size(max = 200, message = "invalid symptoms size")
     private String symptoms;
     private Modality type;
+
     private long patient_id;
     private long professional_id;
     private PrescriptionRequest prescription;
