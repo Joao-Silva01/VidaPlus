@@ -5,8 +5,9 @@ import com.RobDev.VidaPlus.entities.enums.Status;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,7 +16,7 @@ public class Consultation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date consultationMoment;
+    private LocalDateTime consultationMoment;
     private String diagnostic;
     private String symptoms;
 
@@ -48,7 +49,7 @@ public class Consultation {
 
     public Consultation(){}
 
-    public Consultation(Long id, Date consultationMoment, String diagnostic, String symptoms, BigDecimal consultationFee,
+    public Consultation(Long id, LocalDateTime consultationMoment, String diagnostic, String symptoms, BigDecimal consultationFee,
                         String consultationLink, Modality type, Status status, Patient patient, HealthProfessional professional,
                         Prescription prescription, HospitalAdmission hospitalization) {
         this.id = id;
@@ -73,11 +74,11 @@ public class Consultation {
         this.id = id;
     }
 
-    public Date getConsultationMoment() {
+    public LocalDateTime getConsultationMoment() {
         return consultationMoment;
     }
 
-    public void setConsultationMoment(Date consultationMoment) {
+    public void setConsultationMoment(LocalDateTime consultationMoment) {
         this.consultationMoment = consultationMoment;
     }
 

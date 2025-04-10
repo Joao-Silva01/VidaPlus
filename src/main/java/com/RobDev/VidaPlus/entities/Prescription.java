@@ -4,6 +4,7 @@ import com.RobDev.VidaPlus.entities.enums.Modality;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -16,7 +17,7 @@ public class Prescription {
     private String description;
 
     @Column(nullable = false)
-    private Timestamp prescriptionDate;
+    private LocalDateTime prescriptionDate;
 
     @Column(nullable = false, length = 9)
     @Enumerated(value = EnumType.STRING)
@@ -33,7 +34,7 @@ public class Prescription {
 
     }
 
-    public Prescription(long id, String description, Timestamp prescriptionDate, Modality type, String digitalSignature,
+    public Prescription(long id, String description, LocalDateTime prescriptionDate, Modality type, String digitalSignature,
                         Consultation consultation) {
         this.id = id;
         this.description = description;
@@ -59,11 +60,11 @@ public class Prescription {
         this.description = description;
     }
 
-    public Timestamp getPrescriptionDate() {
+    public LocalDateTime getPrescriptionDate() {
         return prescriptionDate;
     }
 
-    public void setPrescriptionDate(Timestamp prescriptionDate) {
+    public void setPrescriptionDate(LocalDateTime prescriptionDate) {
         this.prescriptionDate = prescriptionDate;
     }
 

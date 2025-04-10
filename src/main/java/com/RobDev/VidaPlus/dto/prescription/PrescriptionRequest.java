@@ -2,14 +2,18 @@ package com.RobDev.VidaPlus.dto.prescription;
 
 import com.RobDev.VidaPlus.entities.enums.Modality;
 import com.RobDev.VidaPlus.entities.Prescription;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.BeanUtils;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class PrescriptionRequest {
 
     private String description;
-    private Timestamp prescriptionDate;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime prescriptionDate;
     private String digitalSignature;
 
     public PrescriptionRequest(){}
@@ -26,11 +30,11 @@ public class PrescriptionRequest {
         this.description = description;
     }
 
-    public Timestamp getPrescriptionDate() {
+    public LocalDateTime getPrescriptionDate() {
         return prescriptionDate;
     }
 
-    public void setPrescriptionDate(Timestamp prescriptionDate) {
+    public void setPrescriptionDate(LocalDateTime prescriptionDate) {
         this.prescriptionDate = prescriptionDate;
     }
 

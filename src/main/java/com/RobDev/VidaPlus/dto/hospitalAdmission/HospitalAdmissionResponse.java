@@ -4,16 +4,17 @@ import com.RobDev.VidaPlus.entities.enums.Situation;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class HospitalAdmissionResponse {
 
     private long id;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "America/Sao_Paulo")
-    private Timestamp hospitalizationDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime hospitalizationDate;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "America/Sao_Paulo")
-    private Timestamp dischargeDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime dischargeDate;
     private String reason;
     private int patientRoom;
     private Situation situation;
@@ -23,7 +24,7 @@ public class HospitalAdmissionResponse {
     }
 
 
-    public HospitalAdmissionResponse(long id, Timestamp hospitalizationDate, Timestamp dischargeDate, String reason, int patientRoom, Situation situation, String observation) {
+    public HospitalAdmissionResponse(long id, LocalDateTime hospitalizationDate, LocalDateTime dischargeDate, String reason, int patientRoom, Situation situation, String observation) {
         this.id = id;
         this.hospitalizationDate = hospitalizationDate;
         this.dischargeDate = dischargeDate;
@@ -41,19 +42,19 @@ public class HospitalAdmissionResponse {
         this.id = id;
     }
 
-    public Timestamp getHospitalizationDate() {
+    public LocalDateTime getHospitalizationDate() {
         return hospitalizationDate;
     }
 
-    public void setHospitalizationDate(Timestamp hospitalizationDate) {
+    public void setHospitalizationDate(LocalDateTime hospitalizationDate) {
         this.hospitalizationDate = hospitalizationDate;
     }
 
-    public Timestamp getDischargeDate() {
+    public LocalDateTime getDischargeDate() {
         return dischargeDate;
     }
 
-    public void setDischargeDate(Timestamp dischargeDate) {
+    public void setDischargeDate(LocalDateTime dischargeDate) {
         this.dischargeDate = dischargeDate;
     }
 

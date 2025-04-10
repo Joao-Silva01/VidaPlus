@@ -2,22 +2,22 @@ package com.RobDev.VidaPlus.dto.consultation;
 
 import com.RobDev.VidaPlus.dto.hospitalAdmission.CreateHospitalAdmissionRequest;
 import com.RobDev.VidaPlus.entities.enums.Modality;
-import com.RobDev.VidaPlus.entities.enums.Status;
+
 import com.RobDev.VidaPlus.dto.medicalExamination.CreateExamRequest;
 import com.RobDev.VidaPlus.dto.prescription.PrescriptionRequest;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class CreateConsultRequest implements Serializable {
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "America/Sao_Paulo")
-    private Date consultationMoment;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime consultationMoment;
 
     @Size(max = 200, message = "invalid diagnostic size")
     private String diagnostic;
@@ -35,7 +35,7 @@ public class CreateConsultRequest implements Serializable {
     public CreateConsultRequest() {
     }
 
-    public CreateConsultRequest(Date consultationMoment, String diagnostic, String symptoms,
+    public CreateConsultRequest(LocalDateTime consultationMoment, String diagnostic, String symptoms,
                                 Modality type, long patient_id,
                                 long professional_id, PrescriptionRequest prescription,
                                 CreateHospitalAdmissionRequest hospitalization) {
@@ -49,11 +49,11 @@ public class CreateConsultRequest implements Serializable {
         this.hospitalization = hospitalization;
     }
 
-    public Date getConsultationMoment() {
+    public LocalDateTime getConsultationMoment() {
         return consultationMoment;
     }
 
-    public void setConsultationMoment(Date consultationMoment) {
+    public void setConsultationMoment(LocalDateTime consultationMoment) {
         this.consultationMoment = consultationMoment;
     }
 

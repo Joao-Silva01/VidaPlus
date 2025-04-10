@@ -5,21 +5,22 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class PrescriptionResponse implements Serializable {
 
     private long id;
     private String description;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "America/Sao_Paulo")
-    private Timestamp prescriptionDate;
+    @JsonFormat( pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime prescriptionDate;
     private Modality type;
     private String digitalSignature;
 
     public PrescriptionResponse() {
     }
 
-    public PrescriptionResponse(long id, String description, Timestamp prescriptionDate, Modality type, String digitalSignature) {
+    public PrescriptionResponse(long id, String description, LocalDateTime prescriptionDate, Modality type, String digitalSignature) {
         this.id = id;
         this.description = description;
         this.prescriptionDate = prescriptionDate;
@@ -43,11 +44,11 @@ public class PrescriptionResponse implements Serializable {
         this.description = description;
     }
 
-    public Timestamp getPrescriptionDate() {
+    public LocalDateTime getPrescriptionDate() {
         return prescriptionDate;
     }
 
-    public void setPrescriptionDate(Timestamp prescriptionDate) {
+    public void setPrescriptionDate(LocalDateTime prescriptionDate) {
         this.prescriptionDate = prescriptionDate;
     }
 

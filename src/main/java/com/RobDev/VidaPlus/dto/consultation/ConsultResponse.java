@@ -15,6 +15,9 @@ import org.springframework.format.annotation.NumberFormat;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,8 +26,8 @@ public class ConsultResponse implements Serializable {
 
     private long id;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "America/Sao_Paulo")
-    private Date consultationMoment;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime consultationMoment;
     private String diagnostic;
     private String symptoms;
     private BigDecimal ConsultationFee;
@@ -48,7 +51,7 @@ public class ConsultResponse implements Serializable {
     public ConsultResponse() {
     }
 
-    public ConsultResponse(long id, Date consultationMoment, String diagnostic, String symptoms, BigDecimal consultationFee, String consultationLink, Modality type, Status status, PatientResponse patient, HpResponse professional, PrescriptionResponse prescription, HospitalAdmissionResponse hospitalization) {
+    public ConsultResponse(long id, LocalDateTime consultationMoment, String diagnostic, String symptoms, BigDecimal consultationFee, String consultationLink, Modality type, Status status, PatientResponse patient, HpResponse professional, PrescriptionResponse prescription, HospitalAdmissionResponse hospitalization) {
         this.id = id;
         this.consultationMoment = consultationMoment;
         this.diagnostic = diagnostic;
@@ -71,11 +74,11 @@ public class ConsultResponse implements Serializable {
         this.id = id;
     }
 
-    public Date getConsultationMoment() {
+    public LocalDateTime getConsultationMoment() {
         return consultationMoment;
     }
 
-    public void setConsultationMoment(Date consultationMoment) {
+    public void setConsultationMoment(LocalDateTime consultationMoment) {
         this.consultationMoment = consultationMoment;
     }
 

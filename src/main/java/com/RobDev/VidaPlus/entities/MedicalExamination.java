@@ -4,7 +4,9 @@ import com.RobDev.VidaPlus.entities.enums.Exam;
 import com.RobDev.VidaPlus.entities.enums.Status;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -14,7 +16,8 @@ public class MedicalExamination {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String description;
-    private Timestamp examDate;
+    private LocalDateTime examDate;
+    private BigDecimal examFee;
 
     @Enumerated(value = EnumType.STRING)
     private Exam type;
@@ -29,7 +32,8 @@ public class MedicalExamination {
 
     public MedicalExamination(){}
 
-    public MedicalExamination(long id, String description, Timestamp examDate, Exam type, Status status, String result, Consultation consultation) {
+    public MedicalExamination(long id, String description, LocalDateTime examDate, BigDecimal examFee,
+                              Exam type, Status status, String result, Consultation consultation) {
         this.id = id;
         this.description = description;
         this.examDate = examDate;
@@ -37,6 +41,7 @@ public class MedicalExamination {
         this.status = status;
         this.result = result;
         this.consultation = consultation;
+        this.examFee = examFee;
     }
 
     public long getId() {
@@ -55,12 +60,20 @@ public class MedicalExamination {
         this.description = description;
     }
 
-    public Timestamp getExamDate() {
+    public LocalDateTime getExamDate() {
         return examDate;
     }
 
-    public void setExamDate(Timestamp examDate) {
+    public void setExamDate(LocalDateTime examDate) {
         this.examDate = examDate;
+    }
+
+    public BigDecimal getExamFee() {
+        return examFee;
+    }
+
+    public void setExamFee(BigDecimal examFee) {
+        this.examFee = examFee;
     }
 
     public Exam getType() {

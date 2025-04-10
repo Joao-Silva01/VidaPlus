@@ -6,11 +6,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Size;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class UpdateHospitalAdmissionRequest {
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "America/Sao_Paulo")
-    private Timestamp dischargeDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime dischargeDate;
 
     @Size(max = 200, message = "invalid reason size")
     private String reason;
@@ -24,7 +25,7 @@ public class UpdateHospitalAdmissionRequest {
 
     }
 
-    public UpdateHospitalAdmissionRequest(Timestamp dischargeDate, String reason, int patientRoom, Situation situation, String observation) {
+    public UpdateHospitalAdmissionRequest(LocalDateTime dischargeDate, String reason, int patientRoom, Situation situation, String observation) {
         this.dischargeDate = dischargeDate;
         this.reason = reason;
         this.patientRoom = patientRoom;
@@ -32,11 +33,11 @@ public class UpdateHospitalAdmissionRequest {
         this.observation = observation;
     }
 
-    public Timestamp getDischargeDate() {
+    public LocalDateTime getDischargeDate() {
         return dischargeDate;
     }
 
-    public void setDischargeDate(Timestamp dischargeDate) {
+    public void setDischargeDate(LocalDateTime dischargeDate) {
         this.dischargeDate = dischargeDate;
     }
 

@@ -6,15 +6,16 @@ import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 
 public class CreateHospitalAdmissionRequest implements Serializable {
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "America/Sao_Paulo")
-    private Timestamp hospitalizationDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime hospitalizationDate;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "America/Sao_Paulo")
-    private Timestamp dischargeDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime dischargeDate;
 
     @Size(max = 200, message = "invalid reason size")
     private String reason;
@@ -27,7 +28,7 @@ public class CreateHospitalAdmissionRequest implements Serializable {
     public CreateHospitalAdmissionRequest() {
     }
 
-    public CreateHospitalAdmissionRequest(Timestamp hospitalizationDate, Timestamp dischargeDate, String reason, int patientRoom, Situation situation, String observation) {
+    public CreateHospitalAdmissionRequest(LocalDateTime hospitalizationDate, LocalDateTime dischargeDate, String reason, int patientRoom, Situation situation, String observation) {
         this.hospitalizationDate = hospitalizationDate;
         this.dischargeDate = dischargeDate;
         this.reason = reason;
@@ -36,19 +37,19 @@ public class CreateHospitalAdmissionRequest implements Serializable {
         this.observation = observation;
     }
 
-    public Timestamp getHospitalizationDate() {
+    public LocalDateTime getHospitalizationDate() {
         return hospitalizationDate;
     }
 
-    public void setHospitalizationDate(Timestamp hospitalizationDate) {
+    public void setHospitalizationDate(LocalDateTime hospitalizationDate) {
         this.hospitalizationDate = hospitalizationDate;
     }
 
-    public Timestamp getDischargeDate() {
+    public LocalDateTime getDischargeDate() {
         return dischargeDate;
     }
 
-    public void setDischargeDate(Timestamp dischargeDate) {
+    public void setDischargeDate(LocalDateTime dischargeDate) {
         this.dischargeDate = dischargeDate;
     }
 
