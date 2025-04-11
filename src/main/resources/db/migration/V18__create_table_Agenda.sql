@@ -1,0 +1,6 @@
+CREATE TABLE AGENDA(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    scheduled_Task VARCHAR(200),
+    task_Date TIMESTAMP,
+    status VARCHAR(9)
+)
