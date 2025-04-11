@@ -41,6 +41,8 @@ public class HealthProfessional {
 
     private Timestamp registerMoment;
 
+    private String signature;
+
     @OneToMany(mappedBy = "professional")
     private List<Consultation> consultations = new ArrayList<>();
 
@@ -52,7 +54,7 @@ public class HealthProfessional {
 
     public HealthProfessional(Long id, String name, String email, String phone, String password, String document,
                               HealthProfession profession,
-                              String specialty, UserRole role, Timestamp registerMoment) {
+                              String specialty, UserRole role, Timestamp registerMoment,String signature) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -61,6 +63,8 @@ public class HealthProfessional {
         this.profession = profession;
         this.specialty = specialty;
         this.role = role;
+        this.registerMoment = registerMoment;
+        this.signature = signature;
     }
 
     public Long getId() {
@@ -157,6 +161,14 @@ public class HealthProfessional {
 
     public void setRegisterMoment(Timestamp registerMoment) {
         this.registerMoment = registerMoment;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 
     @Override

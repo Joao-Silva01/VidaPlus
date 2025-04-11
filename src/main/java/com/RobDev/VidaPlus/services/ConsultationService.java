@@ -22,6 +22,8 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 @Service
 public class ConsultationService {
@@ -50,7 +52,7 @@ public class ConsultationService {
     @Autowired
     private PatientMapper patientMapper;
 
-    public ConsultResponse getConsult(long consult_id){
+    public ConsultResponse getConsult(long consult_id) {
         Consultation consult = consultationRepository.findById(consult_id)
                 .orElseThrow(() -> new IdNotFoundException("Consultation not found!"));
 
@@ -67,22 +69,18 @@ public class ConsultationService {
         newConsult.setConsultationFee(BigDecimal.valueOf(245.00));
         newConsult.setStatus(Status.SCHEDULED);
 
-        // Realiza o relacionamento entre Patient/Professional com Consultation
-        newConsult.setPatient(patient);
-        newConsult.setProfessional(professional);
-
         // Realiza o relacionamento entre HospitalAdmission e Consultation
         HospitalAdmission admission = admissionMapper.toCreateEntity(request.getHospitalization());
-        if(admission != null){
+        if (admission != null) {
             newConsult.setHospitalization(admission);
             admission.setConsultation(newConsult);
         }
 
         // Realiza o relacionamento entre MedicalExamination e Consultation
         List<MedicalExamination> exams = examMapper.toCreateListRequest(request.getRequestedExams());
-        if(exams != null){
+        if (exams != null) {
             newConsult.setRequestedExams(exams);
-            for(MedicalExamination exam : exams){
+            for (MedicalExamination exam : exams) {
                 exam.setConsultation(newConsult);
             }
         }
@@ -93,17 +91,32 @@ public class ConsultationService {
             newConsult.setPrescription(prescription);
             prescription.setConsultation(newConsult);
             prescription.setType(newConsult.getType());
+
+            // Pega a assinatura padrão do profissional
+            prescription.setSignature(professional.getSignature());
         }
 
-        if(request.getType() == Modality.ONLINE){
-            newConsult.setConsultationLink("https://vidaPlus.com/consulta555");
+        if (request.getType() == Modality.ONLINE) {
+            String pathUnique = UUID.randomUUID().toString();
+            newConsult.setConsultationLink("https://vidaPlus.com/consulta/"+pathUnique);
         }
 
-        return consultMapper.toResponse(consultationRepository.save(newConsult));
+
+        // Realiza o relacionamento entre Patient/Professional com Consultation
+        newConsult.setPatient(patient);
+        newConsult.setProfessional(professional);
+
+
+        ConsultResponse response = consultMapper.toResponse(consultationRepository.save(newConsult));
+        if (admission != null && admission.getDischargeDate() != null) {
+            response.getHospitalization().setTotalCost(admission.totalValueHospitalization());
+        }
+
+        return response;
 
     }
 
-    public UpdateConsultResponse updateConsult(long consult_id, UpdateConsultRequest request){
+    public UpdateConsultResponse updateConsult(long consult_id, UpdateConsultRequest request) {
         Consultation consult = consultationRepository.findById(consult_id)
                 .orElseThrow(() -> new IdNotFoundException("Query not found for update!"));
 

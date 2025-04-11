@@ -15,17 +15,17 @@ public class PrescriptionResponse implements Serializable {
     @JsonFormat( pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime prescriptionDate;
     private Modality type;
-    private String digitalSignature;
+    private String signature;
 
     public PrescriptionResponse() {
     }
 
-    public PrescriptionResponse(long id, String description, LocalDateTime prescriptionDate, Modality type, String digitalSignature) {
+    public PrescriptionResponse(long id, String description, LocalDateTime prescriptionDate, Modality type, String signature) {
         this.id = id;
         this.description = description;
         this.prescriptionDate = prescriptionDate;
         this.type = type;
-        this.digitalSignature = digitalSignature;
+        this.signature = signature;
     }
 
     public long getId() {
@@ -60,11 +60,11 @@ public class PrescriptionResponse implements Serializable {
         this.type = type;
     }
 
-    public String getDigitalSignature() {
-        return digitalSignature;
+    public String getSignature() {
+        return signature;
     }
 
-    public void setDigitalSignature(String digitalSignature) {
-        this.digitalSignature = digitalSignature;
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 }

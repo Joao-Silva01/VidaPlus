@@ -37,7 +37,10 @@ public class HospitalAdmissionService {
         admission.setConsultation(consultation);
         consultation.setHospitalization(admission);
 
-        return admissionMapper.toResponse(hospitalAdmissionRepository.save(admission));
+        HospitalAdmissionResponse response = admissionMapper.toResponse(hospitalAdmissionRepository.save(admission));
+        response.setTotalCost(admission.totalValueHospitalization());
+
+        return response;
     }
 
     public HospitalAdmissionResponse hospitalizationUpdate(long consultId, UpdateHospitalAdmissionRequest request){
@@ -48,6 +51,9 @@ public class HospitalAdmissionService {
 
         admissionMapper.requestUpdate(request,hospitalization);
 
-        return admissionMapper.toResponse(hospitalAdmissionRepository.save(hospitalization));
+        HospitalAdmissionResponse response = admissionMapper.toResponse(hospitalAdmissionRepository.save(hospitalization));
+        response.setTotalCost(hospitalization.totalValueHospitalization());
+
+        return response;
     }
 }

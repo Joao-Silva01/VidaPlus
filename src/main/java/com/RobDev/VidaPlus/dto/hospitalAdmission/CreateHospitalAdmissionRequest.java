@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
@@ -16,6 +17,7 @@ public class CreateHospitalAdmissionRequest implements Serializable {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime dischargeDate;
+    private BigDecimal dailyCost;
 
     @Size(max = 200, message = "invalid reason size")
     private String reason;
@@ -28,7 +30,10 @@ public class CreateHospitalAdmissionRequest implements Serializable {
     public CreateHospitalAdmissionRequest() {
     }
 
-    public CreateHospitalAdmissionRequest(LocalDateTime hospitalizationDate, LocalDateTime dischargeDate, String reason, int patientRoom, Situation situation, String observation) {
+    public CreateHospitalAdmissionRequest(LocalDateTime hospitalizationDate,
+                                          LocalDateTime dischargeDate, BigDecimal dailyCost,
+                                          String reason, int patientRoom, Situation situation,
+                                          String observation) {
         this.hospitalizationDate = hospitalizationDate;
         this.dischargeDate = dischargeDate;
         this.reason = reason;
@@ -51,6 +56,14 @@ public class CreateHospitalAdmissionRequest implements Serializable {
 
     public void setDischargeDate(LocalDateTime dischargeDate) {
         this.dischargeDate = dischargeDate;
+    }
+
+    public BigDecimal getDailyCost() {
+        return dailyCost;
+    }
+
+    public void setDailyCost(BigDecimal dailyCost) {
+        this.dailyCost = dailyCost;
     }
 
     public String getReason() {

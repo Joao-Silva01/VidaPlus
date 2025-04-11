@@ -5,6 +5,7 @@ import com.RobDev.VidaPlus.entities.enums.Situation;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Size;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
@@ -12,6 +13,7 @@ public class UpdateHospitalAdmissionRequest {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime dischargeDate;
+    private BigDecimal dailyCost;
 
     @Size(max = 200, message = "invalid reason size")
     private String reason;
@@ -25,12 +27,14 @@ public class UpdateHospitalAdmissionRequest {
 
     }
 
-    public UpdateHospitalAdmissionRequest(LocalDateTime dischargeDate, String reason, int patientRoom, Situation situation, String observation) {
+    public UpdateHospitalAdmissionRequest(LocalDateTime dischargeDate, BigDecimal dailyCost, String reason,
+                                          int patientRoom, Situation situation, String observation) {
         this.dischargeDate = dischargeDate;
         this.reason = reason;
         this.patientRoom = patientRoom;
         this.situation = situation;
         this.observation = observation;
+        this.dailyCost = dailyCost;
     }
 
     public LocalDateTime getDischargeDate() {
@@ -39,6 +43,14 @@ public class UpdateHospitalAdmissionRequest {
 
     public void setDischargeDate(LocalDateTime dischargeDate) {
         this.dischargeDate = dischargeDate;
+    }
+
+    public BigDecimal getDailyCost() {
+        return dailyCost;
+    }
+
+    public void setDailyCost(BigDecimal dailyCost) {
+        this.dailyCost = dailyCost;
     }
 
     public String getReason() {

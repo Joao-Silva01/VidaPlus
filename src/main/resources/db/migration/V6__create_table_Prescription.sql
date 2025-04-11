@@ -3,5 +3,5 @@ CREATE TABLE PRESCRIPTION(
     description VARCHAR(350) NOT NULL,
     prescription_Date TIMESTAMP NOT NUll,
     type VARCHAR(9) NOT NULL,
-    Digital_Signature VARCHAR(100) NOT NULL
+    signature VARCHAR(100) NOT NULL
 )

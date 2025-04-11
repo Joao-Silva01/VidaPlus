@@ -24,7 +24,7 @@ public class Prescription {
     private Modality type;
 
     @Column(nullable = false, length = 100)
-    private String digitalSignature;
+    private String signature;
 
     @OneToOne
     @JoinColumn(name = "consultation", unique = true)
@@ -34,13 +34,14 @@ public class Prescription {
 
     }
 
-    public Prescription(long id, String description, LocalDateTime prescriptionDate, Modality type, String digitalSignature,
+    public Prescription(long id, String description, LocalDateTime prescriptionDate,
+                        Modality type, String signature,
                         Consultation consultation) {
         this.id = id;
         this.description = description;
         this.prescriptionDate = prescriptionDate;
         this.type = type;
-        this.digitalSignature = digitalSignature;
+        this.signature = signature;
         this.consultation = consultation;
     }
 
@@ -76,12 +77,12 @@ public class Prescription {
         this.type = type;
     }
 
-    public String getDigitalSignature() {
-        return digitalSignature;
+    public String getSignature() {
+        return signature;
     }
 
-    public void setDigitalSignature(String digitalSignature) {
-        this.digitalSignature = digitalSignature;
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 
     public Consultation getConsultation() {

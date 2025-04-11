@@ -23,6 +23,9 @@ public class CreateHpRequest implements Serializable {
     @Size(max = 150, message = "invalid password size")
     private String password;
 
+    @Size(max = 100, message = "invalid signature size")
+    private String signature;
+
     @CpfValid
     private String document;
 
@@ -92,5 +95,13 @@ public class CreateHpRequest implements Serializable {
 
     public void setSpecialty(String specialty) {
         this.specialty = specialty;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 }

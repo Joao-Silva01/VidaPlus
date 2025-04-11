@@ -14,7 +14,6 @@ public class PrescriptionRequest {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime prescriptionDate;
-    private String digitalSignature;
 
     public PrescriptionRequest(){}
 
@@ -36,13 +35,5 @@ public class PrescriptionRequest {
 
     public void setPrescriptionDate(LocalDateTime prescriptionDate) {
         this.prescriptionDate = prescriptionDate;
-    }
-
-    public String getDigitalSignature() {
-        return digitalSignature;
-    }
-
-    public void setDigitalSignature(String digitalSignature) {
-        this.digitalSignature = digitalSignature;
     }
 }
