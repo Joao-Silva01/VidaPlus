@@ -1,30 +1,25 @@
-package com.RobDev.VidaPlus.entities;
+package com.RobDev.VidaPlus.dto.agenda;
 
+import com.RobDev.VidaPlus.dto.healthProfessional.HpResponse;
 import com.RobDev.VidaPlus.entities.enums.Status;
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
-@Entity
-public class Agenda {
+public class AgendaResponse {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String scheduledTask;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime taskDate;
-
-    @Enumerated(value = EnumType.STRING)
     private Status status;
+    private HpResponse professional;
 
-    @ManyToOne
-    @JoinColumn(name = "professional")
-    private HealthProfessional professional;
+    public AgendaResponse(){
 
-    public Agenda(){}
+    }
 
-    public Agenda(long id, String scheduledTask, LocalDateTime taskDate, Status status, HealthProfessional professional) {
+    public AgendaResponse(long id, String scheduledTask, LocalDateTime taskDate, Status status, HpResponse professional) {
         this.id = id;
         this.scheduledTask = scheduledTask;
         this.taskDate = taskDate;
@@ -64,24 +59,11 @@ public class Agenda {
         this.status = status;
     }
 
-    public HealthProfessional getProfessional() {
+    public HpResponse getProfessional() {
         return professional;
     }
 
-    public void setProfessional(HealthProfessional professional) {
+    public void setProfessional(HpResponse professional) {
         this.professional = professional;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Agenda agenda = (Agenda) o;
-        return id == agenda.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
     }
 }

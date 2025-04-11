@@ -49,6 +49,9 @@ public class HealthProfessional {
     @OneToMany(mappedBy = "professional")
     private List<UpdateLog> medicalRecords = new ArrayList<>();
 
+    @OneToMany(mappedBy = "professional")
+    private List<Agenda> scheduling = new ArrayList<>();
+
     public HealthProfessional() {
     }
 
@@ -169,6 +172,14 @@ public class HealthProfessional {
 
     public void setSignature(String signature) {
         this.signature = signature;
+    }
+
+    public List<Agenda> getScheduling() {
+        return scheduling;
+    }
+
+    public void setScheduling(List<Agenda> scheduling) {
+        this.scheduling = scheduling;
     }
 
     @Override
