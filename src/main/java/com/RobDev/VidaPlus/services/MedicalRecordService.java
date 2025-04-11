@@ -4,7 +4,6 @@ import com.RobDev.VidaPlus.dto.healthProfessional.RecordProfessionalResponse;
 import com.RobDev.VidaPlus.dto.medicalRecord.CreateMedicalRecordRequest;
 import com.RobDev.VidaPlus.dto.medicalRecord.MinMedicalRecordResponse;
 import com.RobDev.VidaPlus.dto.medicalRecord.MedicalRecordResponse;
-import com.RobDev.VidaPlus.dto.medicalRecord.UpdateMedicalRecordRequest;
 import com.RobDev.VidaPlus.entities.HealthProfessional;
 import com.RobDev.VidaPlus.entities.MedicalRecord;
 import com.RobDev.VidaPlus.entities.Patient;
@@ -20,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -68,7 +68,7 @@ public class MedicalRecordService {
         UpdateLog updateLog = new UpdateLog();
         updateLog.setProfessional(professional);
         updateLog.setMedicalRecord(medicalRecord);
-        updateLog.setUpdateDate(Timestamp.from(Instant.now()));
+        updateLog.setUpdateDate(LocalDateTime.now());
         updateLog.setUpdateDescription("Create Record");
 
         //Realizando os relacionamentos do Registro
@@ -76,13 +76,5 @@ public class MedicalRecordService {
         medicalRecord.setPatient(patient);
 
         return recordMapper.toMinResponse(medicalRecordRepository.save(medicalRecord));
-    }
-
-    public MinMedicalRecordResponse updateRecord(long patientId, UpdateMedicalRecordRequest request){
-        MedicalRecord medicalRecord = medicalRecordRepository.findByPatient(patientId)
-                .orElseThrow(() -> new IdNotFoundException("Medical record not found for update!"));
-        recordMapper.requestUpdate(request, medicalRecord);
-
-        return recordMapper.toMinResponse(medicalRecord);
     }
 }

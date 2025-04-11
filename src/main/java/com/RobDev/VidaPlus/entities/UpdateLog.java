@@ -3,6 +3,7 @@ package com.RobDev.VidaPlus.entities;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -12,7 +13,7 @@ public class UpdateLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String updateDescription;
-    private Timestamp updateDate;
+    private LocalDateTime updateDate;
 
     @ManyToOne
     @JoinColumn(name = "medicalRecord")
@@ -26,7 +27,7 @@ public class UpdateLog {
 
     }
 
-    public UpdateLog(long id, String updateDescription, Timestamp updateDate, MedicalRecord medicalRecord, HealthProfessional professional) {
+    public UpdateLog(long id, String updateDescription, LocalDateTime updateDate, MedicalRecord medicalRecord, HealthProfessional professional) {
         this.id = id;
         this.updateDescription = updateDescription;
         this.updateDate = updateDate;
@@ -66,11 +67,11 @@ public class UpdateLog {
         this.updateDescription = updateDescription;
     }
 
-    public Timestamp getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Timestamp updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
 
