@@ -13,8 +13,14 @@ public class Administrator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(length = 50)
     private String name;
+
+    @Column(length = 100)
     private String email;
+
+    @Column(length = 150)
     private String password;
 
     @Enumerated(value = EnumType.STRING)

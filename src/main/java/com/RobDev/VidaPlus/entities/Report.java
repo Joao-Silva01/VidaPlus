@@ -17,6 +17,8 @@ public class Report {
     private long numberHospitalization;
     private long numberExams;
     private long numberPrescriptions;
+
+    @Column(length = 350)
     private String observation;
 
     @Column(scale = 100, precision = 2)
