@@ -1,6 +1,7 @@
 package com.RobDev.VidaPlus.controllers;
 
 import com.RobDev.VidaPlus.dto.healthProfessional.CreateHpRequest;
+import com.RobDev.VidaPlus.dto.healthProfessional.HpAgendaResponse;
 import com.RobDev.VidaPlus.dto.healthProfessional.HpResponse;
 import com.RobDev.VidaPlus.dto.healthProfessional.UpdateHpRequest;
 import com.RobDev.VidaPlus.services.HealthProfessionalService;
@@ -37,5 +38,12 @@ public class HealthProfessionalController {
     public ResponseEntity<?> update(@PathVariable long id,@Valid @RequestBody UpdateHpRequest request){
         hpService.updateProfessional(id,request);
         return ResponseEntity.ok().build();
+    }
+
+
+    @GetMapping(value = "agenda/{id}")
+    public ResponseEntity<HpAgendaResponse> allCommitments(@PathVariable long id){
+
+        return ResponseEntity.ok().body(hpService.allCommitments(id));
     }
 }

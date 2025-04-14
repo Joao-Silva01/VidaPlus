@@ -1,5 +1,6 @@
 package com.RobDev.VidaPlus.services;
 
+import com.RobDev.VidaPlus.dto.healthProfessional.HpAgendaResponse;
 import com.RobDev.VidaPlus.entities.HealthProfessional;
 import com.RobDev.VidaPlus.entities.enums.UserRole;
 import com.RobDev.VidaPlus.exception.IdNotFoundException;
@@ -47,5 +48,12 @@ public class HealthProfessionalService {
                 .orElseThrow(() -> new IdNotFoundException("Healthcare Professional not found for update!"));
         hpMapper.requestUpdate(request, professional);
         hpRepository.save(professional);
+    }
+
+    public HpAgendaResponse allCommitments(long id){
+          var professional =  hpRepository.findById(id).orElseThrow();
+
+          return hpMapper.toAllCommitmentsResponse(professional);
+
     }
 }
