@@ -1,11 +1,8 @@
 package com.RobDev.VidaPlus.mapper;
 
 
-import com.RobDev.VidaPlus.dto.patiente.UpdatePatientRequest;
+import com.RobDev.VidaPlus.dto.patiente.*;
 import com.RobDev.VidaPlus.entities.Patient;
-import com.RobDev.VidaPlus.dto.patiente.AllConsultationsPatientResponse;
-import com.RobDev.VidaPlus.dto.patiente.CreatePatientRequest;
-import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
 import org.mapstruct.*;
 
 import java.util.List;
@@ -22,6 +19,8 @@ public interface PatientMapper{
     List<PatientResponse> toList(List<Patient> list);
 
     AllConsultationsPatientResponse toAllConsultationsResponse(Patient entity);
+
+    PatientNotificationResponse toPatientNotification(Patient entity);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void requestUpdate(UpdatePatientRequest request, @MappingTarget Patient entity);

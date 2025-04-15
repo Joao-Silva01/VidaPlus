@@ -2,6 +2,7 @@ package com.RobDev.VidaPlus.controllers;
 
 
 import com.RobDev.VidaPlus.dto.patiente.CreatePatientRequest;
+import com.RobDev.VidaPlus.dto.patiente.PatientNotificationResponse;
 import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
 import com.RobDev.VidaPlus.dto.patiente.UpdatePatientRequest;
 import com.RobDev.VidaPlus.services.PatientService;
@@ -40,8 +41,13 @@ public class PatientController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping(value = "consults/{id}")
+    @GetMapping(value = "/{id}/consults")
     public ResponseEntity<?> patientAllConsults(@PathVariable long id) {
         return ResponseEntity.ok().body(patientService.getAllMedicalAppointmentsPatient(id));
+    }
+
+    @GetMapping(value = "/{id}/notifications")
+    public ResponseEntity<PatientNotificationResponse> allNotification(@PathVariable long id){
+        return ResponseEntity.ok().body(patientService.allNotification(id));
     }
 }

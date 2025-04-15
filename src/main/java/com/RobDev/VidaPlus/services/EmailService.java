@@ -13,6 +13,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class EmailService {
 
@@ -38,6 +40,7 @@ public class EmailService {
 
         Notification email = notificationMapper.toRequest(request);
         email.setPatient(patient);
+        email.setMomentEmail(LocalDateTime.now());
 
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(sender);

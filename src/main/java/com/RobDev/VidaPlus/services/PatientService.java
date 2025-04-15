@@ -1,16 +1,13 @@
 package com.RobDev.VidaPlus.services;
 
 import com.RobDev.VidaPlus.dto.consultation.ConsultationPatientResponse;
-import com.RobDev.VidaPlus.dto.patiente.AllConsultationsPatientResponse;
+import com.RobDev.VidaPlus.dto.patiente.*;
 import com.RobDev.VidaPlus.entities.Consultation;
 import com.RobDev.VidaPlus.entities.Patient;
 import com.RobDev.VidaPlus.entities.enums.UserRole;
 import com.RobDev.VidaPlus.exception.IdNotFoundException;
 import com.RobDev.VidaPlus.repositories.HospitalAdmissionRepository;
 import com.RobDev.VidaPlus.repositories.PatientRepository;
-import com.RobDev.VidaPlus.dto.patiente.CreatePatientRequest;
-import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
-import com.RobDev.VidaPlus.dto.patiente.UpdatePatientRequest;
 import com.RobDev.VidaPlus.mapper.PatientMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,5 +57,12 @@ public class PatientService {
                 .orElseThrow(() -> new IdNotFoundException("Patient not found!"));
 
         return patientMapper.toAllConsultationsResponse(patient);
+    }
+
+    public PatientNotificationResponse allNotification(long id){
+        var patient = patientRepository.findById(id)
+                .orElseThrow(() -> new IdNotFoundException("Patient not found"));
+
+        return patientMapper.toPatientNotification(patient);
     }
 }

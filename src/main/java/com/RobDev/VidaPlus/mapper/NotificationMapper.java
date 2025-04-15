@@ -11,5 +11,6 @@ public interface NotificationMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "patient", ignore = true)
+    @Mapping(target = "momentEmail", ignore = true)
     Notification toRequest(NotificationRequest request);
 }

@@ -67,7 +67,8 @@ public class HpAgendaResponse implements Serializable {
     }
 
     public String getPhone() {
-        return phone;
+        // Retorna o número formatado com espaço
+        return phone.replaceFirst("(\\d{2})(\\d{9})", "$1 $2");
     }
 
     public void setPhone(String phone) {
@@ -75,7 +76,8 @@ public class HpAgendaResponse implements Serializable {
     }
 
     public String getDocument() {
-        return document;
+        //retorna o cpf formatado '111.111.111-11'
+        return document.replaceFirst("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
     }
 
     public void setDocument(String document) {

@@ -3,6 +3,7 @@ package com.RobDev.VidaPlus.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -18,16 +19,19 @@ public class Notification {
     @Column(length = 350)
     private String message;
 
+    private LocalDateTime momentEmail;
+
     @ManyToOne
     @JoinColumn(name = "patient")
     private Patient patient;
 
     public Notification(){}
 
-    public Notification(long id, String title, String message, Patient patient) {
+    public Notification(long id, String title, String message, LocalDateTime momentEmail, Patient patient) {
         this.id = id;
         this.title = title;
         this.message = message;
+        this.momentEmail = momentEmail;
         this.patient = patient;
     }
 
@@ -53,6 +57,14 @@ public class Notification {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public LocalDateTime getMomentEmail() {
+        return momentEmail;
+    }
+
+    public void setMomentEmail(LocalDateTime momentEmail) {
+        this.momentEmail = momentEmail;
     }
 
     public Patient getPatient() {
