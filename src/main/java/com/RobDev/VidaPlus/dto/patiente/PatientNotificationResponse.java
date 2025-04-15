@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+// usado como resposta, serve para mostrar todas as notificação que o paciente recebeu
 public class PatientNotificationResponse {
 
     private Long id;

@@ -2,6 +2,8 @@ package com.RobDev.VidaPlus.dto.healthProfessional;
 
 import com.RobDev.VidaPlus.entities.enums.HealthProfession;
 
+
+// Usado como resposta, serve para retornar dados do professional de forma reduzida
 public class RecordProfessionalResponse {
 
     private Long id;

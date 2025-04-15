@@ -1,8 +1,7 @@
 package com.RobDev.VidaPlus.services;
 
-import com.RobDev.VidaPlus.dto.consultation.ConsultationPatientResponse;
+
 import com.RobDev.VidaPlus.dto.patiente.*;
-import com.RobDev.VidaPlus.entities.Consultation;
 import com.RobDev.VidaPlus.entities.Patient;
 import com.RobDev.VidaPlus.entities.enums.UserRole;
 import com.RobDev.VidaPlus.exception.IdNotFoundException;

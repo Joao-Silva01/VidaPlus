@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
 
+// Usado como resposta reduzida da Agenda, tirando a referencia ao profissional
 public class MinAgendaResponse {
 
     private long id;

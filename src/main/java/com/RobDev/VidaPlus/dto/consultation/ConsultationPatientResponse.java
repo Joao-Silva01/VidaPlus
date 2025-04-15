@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+// Usado como resposta da Consulta, tirando a referencia ao paciente
 public class ConsultationPatientResponse {
 
     private long id;

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.sql.Timestamp;
 
+// Usado como resposta, serve para mostrar dados reduzidos do prontuário
 public class MinMedicalRecordResponse {
     private long id;
 

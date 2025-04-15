@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+// Usado como resposta, serve para mostrar todas as consultas do paciente
 public class AllConsultationsPatientResponse {
     private long id;
     private String name;

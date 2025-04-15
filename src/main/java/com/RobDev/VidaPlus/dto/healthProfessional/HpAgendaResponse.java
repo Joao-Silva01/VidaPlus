@@ -1,6 +1,6 @@
 package com.RobDev.VidaPlus.dto.healthProfessional;
 
-import com.RobDev.VidaPlus.dto.agenda.AgendaResponse;
+
 import com.RobDev.VidaPlus.dto.agenda.MinAgendaResponse;
 import com.RobDev.VidaPlus.entities.enums.HealthProfession;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+// Usado como resposta, para trazer os dados do profissional e toda(s) sua(s) agenda/tarefas
 public class HpAgendaResponse implements Serializable {
 
     private long id;
