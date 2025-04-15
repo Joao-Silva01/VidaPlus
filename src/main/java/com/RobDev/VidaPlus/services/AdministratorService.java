@@ -5,6 +5,7 @@ import com.RobDev.VidaPlus.dto.administrator.AdminResponse;
 import com.RobDev.VidaPlus.dto.administrator.UpdateAdminRequest;
 import com.RobDev.VidaPlus.entities.Administrator;
 import com.RobDev.VidaPlus.entities.enums.UserRole;
+import com.RobDev.VidaPlus.exception.IdNotFoundException;
 import com.RobDev.VidaPlus.mapper.AdministratorMapper;
 import com.RobDev.VidaPlus.repositories.AdministratorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,8 @@ public class AdministratorService {
     private AdministratorMapper adminMapper;
 
     public AdminResponse getAdmin(long id){
-        Administrator admin = adminRepository.findById(id).orElseThrow();
+        Administrator admin = adminRepository.findById(id)
+                .orElseThrow(() -> new IdNotFoundException("Administrator not found"));
         return adminMapper.toResponse(admin);
     }
 
@@ -31,7 +33,8 @@ public class AdministratorService {
     }
 
     public void update(long id,UpdateAdminRequest request){
-        Administrator admin = adminRepository.findById(id).orElseThrow();
+        Administrator admin = adminRepository.findById(id)
+                .orElseThrow(() -> new IdNotFoundException("Administrator not found for update") );
 
         adminMapper.toUpdateRequest(request,admin);
 

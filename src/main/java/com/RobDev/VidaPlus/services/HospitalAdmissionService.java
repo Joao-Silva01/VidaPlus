@@ -13,11 +13,15 @@ import com.RobDev.VidaPlus.repositories.HospitalAdmissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+
 @Service
 public class HospitalAdmissionService {
 
     @Autowired
-    private HospitalAdmissionRepository  hospitalAdmissionRepository;
+    private HospitalAdmissionRepository hospitalAdmissionRepository;
 
     @Autowired
     private ConsultationRepository consultationRepository;
@@ -25,11 +29,11 @@ public class HospitalAdmissionService {
     @Autowired
     private HospitalAdmissionMapper admissionMapper;
 
-    public HospitalAdmissionResponse hospitalizationCreate(long consultId, CreateHospitalAdmissionRequest request){
+    public HospitalAdmissionResponse hospitalizationCreate(long consultId, CreateHospitalAdmissionRequest request) {
         Consultation consultation = consultationRepository.findById(consultId)
                 .orElseThrow(() -> new HospitalizationBadRequestException("Query not found for creating hospitalization"));
 
-        if (consultation.getHospitalization() != null){
+        if (consultation.getHospitalization() != null) {
             throw new HospitalizationBadRequestException("This consultation already has a hospitalization");
         }
 
@@ -37,23 +41,60 @@ public class HospitalAdmissionService {
         admission.setConsultation(consultation);
         consultation.setHospitalization(admission);
 
-        HospitalAdmissionResponse response = admissionMapper.toResponse(hospitalAdmissionRepository.save(admission));
-        response.setTotalCost(admission.totalValueHospitalization());
+        HospitalAdmissionResponse response = admissionMapper.toResponse(admission);
 
-        return response;
+        if (admission.getDischargeDate() == null) {
+            return admissionMapper.toResponse(hospitalAdmissionRepository.save(admission));
+        } else {
+            var totalCost = totalValueHospitalization(admission.getDailyCost(),
+                    admission.getHospitalizationDate(),
+                    admission.getDischargeDate());
+
+            admission.setTotalCost(totalCost);
+        }
+
+
+        return admissionMapper.toResponse(hospitalAdmissionRepository.save(admission));
     }
 
-    public HospitalAdmissionResponse hospitalizationUpdate(long consultId, UpdateHospitalAdmissionRequest request){
+    public HospitalAdmissionResponse hospitalizationUpdate(long consultId, UpdateHospitalAdmissionRequest request) {
         Consultation consultation = consultationRepository.findById(consultId)
                 .orElseThrow(() -> new IdNotFoundException("Query not found for hospitalization update!"));
 
         HospitalAdmission hospitalization = consultation.getHospitalization();
 
-        admissionMapper.requestUpdate(request,hospitalization);
+        admissionMapper.requestUpdate(request, hospitalization);
 
-        HospitalAdmissionResponse response = admissionMapper.toResponse(hospitalAdmissionRepository.save(hospitalization));
-        response.setTotalCost(hospitalization.totalValueHospitalization());
+        if (hospitalization.getDischargeDate() == null) {
+            return admissionMapper.toResponse(hospitalAdmissionRepository.save(hospitalization));
+        } else {
+            var totalCost = totalValueHospitalization(
+                    hospitalization.getDailyCost(),
+                    hospitalization.getHospitalizationDate(),
+                    hospitalization.getDischargeDate());
 
-        return response;
+            hospitalization.setTotalCost(totalCost);
+        }
+
+        return admissionMapper.toResponse(hospitalAdmissionRepository.save(hospitalization));
+    }
+
+
+    public static BigDecimal totalValueHospitalization(BigDecimal dailyCost, LocalDateTime startDate, LocalDateTime endDate) {
+
+        Long totalDays = null;
+
+        // adiciona mais 1 dia caso a data da alta do paciente passe de 12 horas
+        if (endDate.getHour() > 12) {
+            totalDays = ChronoUnit.DAYS.between(startDate, endDate.plusDays(1));
+        } else {
+            totalDays = ChronoUnit.DAYS.between(startDate, endDate);
+        }
+
+        //Realiza o calculo total do custo da hospitalização
+        BigDecimal calculation = dailyCost.multiply(BigDecimal.valueOf(totalDays));
+
+        return calculation;
+
     }
 }

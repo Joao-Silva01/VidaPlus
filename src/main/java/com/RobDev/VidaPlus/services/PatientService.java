@@ -59,23 +59,6 @@ public class PatientService {
         var patient = patientRepository.findById(patient_id)
                 .orElseThrow(() -> new IdNotFoundException("Patient not found!"));
 
-        AllConsultationsPatientResponse response = patientMapper.toAllConsultationsResponse(patient);
-
-        //Passa por totas as consultas do paciente
-        for (ConsultationPatientResponse consult : response.getConsultations()) {
-
-            // verifica se a data da alta do paciente está nula
-            if (consult.getHospitalization().getDischargeDate() != null) {
-
-                // Pega a hospitalização diretamente do banco de dados
-                var admission = admissionRepository.findById(consult.getHospitalization().getId())
-                        .orElseThrow();
-
-                // Colocar o valor total de cada consulta do paciente
-                consult.getHospitalization().setTotalCost(admission.totalValueHospitalization());
-            }
-        }
-
-        return response;
+        return patientMapper.toAllConsultationsResponse(patient);
     }
 }

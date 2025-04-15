@@ -52,16 +52,17 @@ public class ConsultationService {
     @Autowired
     private PatientMapper patientMapper;
 
+
     public ConsultResponse getConsult(long consult_id) {
         Consultation consult = consultationRepository.findById(consult_id)
                 .orElseThrow(() -> new IdNotFoundException("Consultation not found!"));
-
         return consultMapper.toResponse(consult);
     }
 
     public ConsultResponse createConsult(CreateConsultRequest request) {
         HealthProfessional professional = hpRepository.findById(request.getProfessional_id())
                 .orElseThrow(() -> new IdNotFoundException("Healthcare professional not found to create appointment!"));
+
         Patient patient = patientRepository.findById(request.getPatient_id())
                 .orElseThrow(() -> new IdNotFoundException("Patient not found to create appointment!"));
 
@@ -74,6 +75,15 @@ public class ConsultationService {
         if (admission != null) {
             newConsult.setHospitalization(admission);
             admission.setConsultation(newConsult);
+
+            if(admission.getDischargeDate() != null){
+                var totalCost = HospitalAdmissionService.totalValueHospitalization(
+                        admission.getDailyCost(),
+                        admission.getHospitalizationDate(),
+                        admission.getDischargeDate());
+
+                admission.setTotalCost(totalCost);
+            }
         }
 
         // Realiza o relacionamento entre MedicalExamination e Consultation
@@ -106,13 +116,7 @@ public class ConsultationService {
         newConsult.setPatient(patient);
         newConsult.setProfessional(professional);
 
-
-        ConsultResponse response = consultMapper.toResponse(consultationRepository.save(newConsult));
-        if (admission != null && admission.getDischargeDate() != null) {
-            response.getHospitalization().setTotalCost(admission.totalValueHospitalization());
-        }
-
-        return response;
+        return  consultMapper.toResponse(consultationRepository.save(newConsult));
 
     }
 

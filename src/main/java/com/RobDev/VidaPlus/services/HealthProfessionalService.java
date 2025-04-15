@@ -51,7 +51,8 @@ public class HealthProfessionalService {
     }
 
     public HpAgendaResponse allCommitments(long id){
-          var professional =  hpRepository.findById(id).orElseThrow();
+          var professional =  hpRepository.findById(id)
+                  .orElseThrow(() -> new IdNotFoundException("Healthcare professional not found"));
 
           return hpMapper.toAllCommitmentsResponse(professional);
 

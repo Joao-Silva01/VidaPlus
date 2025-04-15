@@ -2,6 +2,7 @@ package com.RobDev.VidaPlus.dto.hospitalAdmission;
 
 import com.RobDev.VidaPlus.entities.enums.Situation;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
@@ -17,6 +18,8 @@ public class CreateHospitalAdmissionRequest implements Serializable {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime dischargeDate;
+
+    @NotNull
     private BigDecimal dailyCost;
 
     @Size(max = 200, message = "invalid reason size")

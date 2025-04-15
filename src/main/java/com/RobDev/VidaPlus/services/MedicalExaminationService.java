@@ -27,7 +27,8 @@ public class MedicalExaminationService {
     private MedicalExaminationMapper examinationMapper;
 
     public ExamResponse examCreate(long consultId, CreateExamRequest request){
-        Consultation consultation = consultationRepository.findById(consultId).orElseThrow();
+        Consultation consultation = consultationRepository.findById(consultId)
+                .orElseThrow(() -> new IdNotFoundException("Query not found for exam creation"));
         
         MedicalExamination exam = examinationMapper.toCreateExam(request);
         exam.setConsultation(consultation);

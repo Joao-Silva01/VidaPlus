@@ -26,6 +26,10 @@ public class HospitalAdmission {
     private Situation situation;
     private String observation;
 
+    @Column(scale = 100, precision = 2)
+    private BigDecimal totalCost;
+
+
     @OneToOne
     @JoinColumn(name = "consultation", unique = true)
     private Consultation consultation;
@@ -118,27 +122,12 @@ public class HospitalAdmission {
         this.consultation = consultation;
     }
 
-    public BigDecimal totalValueHospitalization(){
+    public BigDecimal getTotalCost() {
+        return totalCost;
+    }
 
-        // Verifica se a data da alta do paciente não é null
-        if (dischargeDate == null){
-            throw new RuntimeException("NULOOOOOO");
-        }
-
-        Long totalDays = null;
-
-        // adiciona mais 1 dia caso a data da alta do paciente passe de 12 horas
-        if(dischargeDate.getHour() > 12){
-            totalDays = ChronoUnit.DAYS.between(hospitalizationDate, dischargeDate.plusDays(1));
-        }else {
-            totalDays = ChronoUnit.DAYS.between(hospitalizationDate, dischargeDate);
-        }
-
-        //Realiza o calculo total do custo da hospitalização
-        BigDecimal calculation = dailyCost.multiply(BigDecimal.valueOf(totalDays));
-
-        return calculation;
-
+    public void setTotalCost(BigDecimal totalCost) {
+        this.totalCost = totalCost;
     }
 
     @Override
