@@ -39,6 +39,9 @@ public class Patient {
     @OneToOne(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
     private MedicalRecord medicalRecord;
 
+    @OneToMany(mappedBy = "patient")
+    private List<Notification> notifications = new ArrayList<>();
+
     public Patient() {
     }
 
@@ -150,6 +153,14 @@ public class Patient {
 
     public void setConsultations(List<Consultation> consultations) {
         this.consultations = consultations;
+    }
+
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
     }
 
     @Override
