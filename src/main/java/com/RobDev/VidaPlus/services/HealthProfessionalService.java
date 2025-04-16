@@ -10,6 +10,8 @@ import com.RobDev.VidaPlus.dto.healthProfessional.HpResponse;
 import com.RobDev.VidaPlus.dto.healthProfessional.UpdateHpRequest;
 import com.RobDev.VidaPlus.mapper.HealthProfessionalMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -25,6 +27,9 @@ public class HealthProfessionalService {
     @Autowired
     private HealthProfessionalMapper hpMapper;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     public List<HpResponse> allProfessionals(){
         return hpMapper.toList(hpRepository.findAll());
     }
@@ -39,6 +44,8 @@ public class HealthProfessionalService {
         HealthProfessional newProfessional = hpMapper.toCreateEntity(request);
         newProfessional.setRole(UserRole.PROFESSIONAL);
         newProfessional.setRegisterMoment(Timestamp.from(Instant.now()));
+        newProfessional.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));
+        newProfessional.setSignature(bCryptPasswordEncoder.encode(request.getSignature()));
 
         return hpMapper.toResponse(hpRepository.save(newProfessional));
     }

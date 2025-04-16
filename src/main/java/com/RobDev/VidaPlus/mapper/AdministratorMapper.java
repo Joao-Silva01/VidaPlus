@@ -12,6 +12,7 @@ public interface AdministratorMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "role", ignore = true)
     @Mapping(target = "reports", ignore = true)
+    @Mapping(target = "password", ignore = true)
     Administrator toRequest(AdminRequest request);
 
     AdminResponse toResponse(Administrator entity);

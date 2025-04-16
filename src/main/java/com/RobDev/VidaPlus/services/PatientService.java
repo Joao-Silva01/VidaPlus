@@ -9,6 +9,7 @@ import com.RobDev.VidaPlus.repositories.HospitalAdmissionRepository;
 import com.RobDev.VidaPlus.repositories.PatientRepository;
 import com.RobDev.VidaPlus.mapper.PatientMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -27,6 +28,9 @@ public class PatientService {
     @Autowired
     private PatientMapper patientMapper;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     public PatientResponse byId(long id) {
         return patientMapper.toResponseDTO(patientRepository.findById(id)
                 .orElseThrow(() -> new IdNotFoundException("Patient not found!")));
@@ -40,6 +44,7 @@ public class PatientService {
         Patient newPatient = patientMapper.toCreateEntity(request);
         newPatient.setRole(UserRole.PATIENT);
         newPatient.setRegisterMoment(Timestamp.from(Instant.now()));
+        newPatient.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));
 
         return patientMapper.toResponseDTO(patientRepository.save(newPatient));
     }

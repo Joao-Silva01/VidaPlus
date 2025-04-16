@@ -12,6 +12,7 @@ public interface PatientMapper{
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "role", ignore = true)
+    @Mapping(target = "password", ignore = true)
     Patient toCreateEntity (CreatePatientRequest request);
 
     PatientResponse toResponseDTO(Patient entity);

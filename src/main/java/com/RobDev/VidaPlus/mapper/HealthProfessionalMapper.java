@@ -11,6 +11,8 @@ public interface HealthProfessionalMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "role", ignore = true)
+    @Mapping(target = "password", ignore = true)
+    @Mapping(target = "signature", ignore = true)
     HealthProfessional toCreateEntity(CreateHpRequest request);
 
     HpResponse toResponse(HealthProfessional entity);
