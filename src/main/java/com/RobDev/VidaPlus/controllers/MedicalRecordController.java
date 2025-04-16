@@ -36,7 +36,7 @@ public class MedicalRecordController {
 
     @PutMapping(value = "/{patientId}")
     @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
-    public ResponseEntity<?> updateLog(@PathVariable long patientId,@RequestBody UpdateLogRequest request){
+    public ResponseEntity<Void> updateLog(@PathVariable long patientId,@RequestBody UpdateLogRequest request){
 
         updateLogService.createLog(patientId,request);
         return ResponseEntity.ok().build();

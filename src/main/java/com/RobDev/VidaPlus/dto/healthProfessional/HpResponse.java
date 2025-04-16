@@ -3,6 +3,7 @@ package com.RobDev.VidaPlus.dto.healthProfessional;
 import com.RobDev.VidaPlus.entities.enums.HealthProfession;
 import com.RobDev.VidaPlus.entities.HealthProfessional;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
@@ -13,6 +14,8 @@ public class HpResponse implements Serializable {
     private long id;
     private String name;
     private String email;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String phone;
     private String document;
     private HealthProfession profession;
@@ -54,7 +57,10 @@ public class HpResponse implements Serializable {
 
     public String getPhone() {
         // Retorna o número formatado com espaço
-        return phone.replaceFirst("(\\d{2})(\\d{9})", "$1 $2");
+        if (phone != null) {
+            return phone.replaceFirst("(\\d{2})(\\d{9})", "$1 $2");
+        }
+        return phone;
     }
 
     public void setPhone(String phone) {

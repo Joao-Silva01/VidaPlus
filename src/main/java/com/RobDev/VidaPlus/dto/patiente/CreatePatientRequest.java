@@ -7,6 +7,9 @@ import com.RobDev.VidaPlus.validations.email.EmailValid;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import org.springframework.beans.BeanUtils;
 
@@ -15,17 +18,24 @@ import java.sql.Timestamp;
 
 public class CreatePatientRequest implements Serializable {
 
+    @NotBlank(message = "Name cannot be empty or null")
+    @Pattern(regexp = "^[a-zA-Z ]+$", message = "Name can only contain letters")
     @Size(max = 40, message = "invalid name length")
     private String name;
 
+    @NotNull(message = "Birthdate cannot be null")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Sao_Paulo")
     private Timestamp birth_date;
+
 
     @Size(max = 10, message = "invalid phone length")
     private String phone;
 
+    @NotBlank(message = "Password cannot be empty or null")
     @Size(max = 150, message = "invalid password length")
     private String password;
+
+    @NotNull(message = "Sex cannot be null")
     private Sex sex;
 
     @EmailValid

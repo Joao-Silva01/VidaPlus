@@ -40,7 +40,7 @@ public class HealthProfessionalController {
 
     @PutMapping(value = "/{id}")
     @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
-    public ResponseEntity<?> update(@PathVariable long id,@Valid @RequestBody UpdateHpRequest request){
+    public ResponseEntity<Void> update(@PathVariable long id,@Valid @RequestBody UpdateHpRequest request){
         hpService.updateProfessional(id,request);
         return ResponseEntity.ok().build();
     }

@@ -5,6 +5,7 @@ import com.RobDev.VidaPlus.dto.patiente.*;
 import com.RobDev.VidaPlus.entities.Patient;
 import com.RobDev.VidaPlus.entities.enums.UserRole;
 import com.RobDev.VidaPlus.exception.IdNotFoundException;
+import com.RobDev.VidaPlus.exception.ThisAlreadyExistsException;
 import com.RobDev.VidaPlus.repositories.HospitalAdmissionRepository;
 import com.RobDev.VidaPlus.repositories.PatientRepository;
 import com.RobDev.VidaPlus.mapper.PatientMapper;
@@ -41,6 +42,11 @@ public class PatientService {
     }
 
     public PatientResponse createPatient(CreatePatientRequest request) {
+
+        if(patientRepository.findByEmail(request.getEmail()).isPresent() || patientRepository.findByDocument(request.getDocument()).isPresent()){
+            throw new ThisAlreadyExistsException("The email or document is already registered.");
+        }
+
         Patient newPatient = patientMapper.toCreateEntity(request);
         newPatient.setRole(UserRole.PATIENT);
         newPatient.setRegisterMoment(Timestamp.from(Instant.now()));

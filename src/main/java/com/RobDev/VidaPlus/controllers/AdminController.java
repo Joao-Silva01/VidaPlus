@@ -24,14 +24,14 @@ public class AdminController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('MAIN_ADMIN')")
-    public ResponseEntity<?> create(@RequestBody AdminRequest request){
+    public ResponseEntity<Void> create(@RequestBody AdminRequest request){
         adminService.create(request);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping(value = "/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'MAIN_ADMIN')")
-    public ResponseEntity<?> update(@PathVariable long id, @RequestBody UpdateAdminRequest request){
+    public ResponseEntity<Void> update(@PathVariable long id, @RequestBody UpdateAdminRequest request){
         adminService.update(id, request);
         return ResponseEntity.ok().build();
     }

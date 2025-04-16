@@ -1,10 +1,7 @@
 package com.RobDev.VidaPlus.controllers;
 
 
-import com.RobDev.VidaPlus.dto.patiente.CreatePatientRequest;
-import com.RobDev.VidaPlus.dto.patiente.PatientNotificationResponse;
-import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
-import com.RobDev.VidaPlus.dto.patiente.UpdatePatientRequest;
+import com.RobDev.VidaPlus.dto.patiente.*;
 import com.RobDev.VidaPlus.services.PatientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,14 +37,14 @@ public class PatientController {
 
     @PutMapping(value = "/{id}")
     @PreAuthorize("hasAnyAuthority('PATIENT','ADMIN', 'MAIN_ADMIN')")
-    public ResponseEntity<?> update(@PathVariable long id, @Valid @RequestBody UpdatePatientRequest request){
+    public ResponseEntity<Void> update(@PathVariable long id, @Valid @RequestBody UpdatePatientRequest request){
         patientService.updatePatient(id,request);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping(value = "/{id}/consults")
     @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
-    public ResponseEntity<?> patientAllConsults(@PathVariable long id) {
+    public ResponseEntity<AllConsultationsPatientResponse> patientAllConsults(@PathVariable long id) {
         return ResponseEntity.ok().body(patientService.getAllMedicalAppointmentsPatient(id));
     }
 

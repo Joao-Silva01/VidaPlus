@@ -16,7 +16,7 @@ public class NotificationController {
 
     @PostMapping(value = "/{patientId}")
     @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
-    public ResponseEntity<?> sendEmail(@PathVariable long patientId,@RequestBody NotificationRequest request){
+    public ResponseEntity<Void> sendEmail(@PathVariable long patientId,@RequestBody NotificationRequest request){
         emailService.sendEmail(patientId,request);
         return ResponseEntity.ok().build();
     }

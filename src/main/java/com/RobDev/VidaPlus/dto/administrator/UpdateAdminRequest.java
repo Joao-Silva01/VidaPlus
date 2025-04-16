@@ -1,12 +1,19 @@
 package com.RobDev.VidaPlus.dto.administrator;
 
 import com.RobDev.VidaPlus.validations.email.EmailValid;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 public class UpdateAdminRequest {
 
+    @Pattern(regexp = "^[a-zA-Z_. ]+$", message = "Name invalid")
+    @Size(max = 50 , message = "invalid name size")
     private String name;
+
     @EmailValid(value = "Update")
     private String email;
+
+    @Size(max = 150 , message = "invalid password size")
     private String password;
 
     public UpdateAdminRequest(){

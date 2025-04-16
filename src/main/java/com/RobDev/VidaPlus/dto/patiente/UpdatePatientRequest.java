@@ -5,6 +5,7 @@ import com.RobDev.VidaPlus.entities.Patient;
 import com.RobDev.VidaPlus.validations.email.EmailValid;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Null;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import org.springframework.beans.BeanUtils;
 
@@ -13,6 +14,7 @@ import java.sql.Timestamp;
 
 public class UpdatePatientRequest implements Serializable {
 
+    @Pattern(regexp = "^[a-zA-Z ]+$", message = "Name can only contain letters")
     @Size(max = 40, message = "invalid name length")
     private String name;
 

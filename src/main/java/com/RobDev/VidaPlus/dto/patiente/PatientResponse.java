@@ -3,6 +3,7 @@ package com.RobDev.VidaPlus.dto.patiente;
 import com.RobDev.VidaPlus.entities.enums.Sex;
 import com.RobDev.VidaPlus.entities.Patient;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
@@ -16,6 +17,8 @@ public class PatientResponse implements Serializable {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Sao_Paulo")
     private Timestamp birth_date;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String phone;
     private Sex sex;
     private String email;
@@ -59,7 +62,10 @@ public class PatientResponse implements Serializable {
 
     public String getPhone() {
         // Retorna o número formatado com espaço
-        return phone.replaceFirst("(\\d{2})(\\d{9})", "$1 $2");
+        if(phone != null) {
+            return phone.replaceFirst("(\\d{2})(\\d{9})", "$1 $2");
+        }
+        return phone;
     }
 
     public void setPhone(String phone) {
