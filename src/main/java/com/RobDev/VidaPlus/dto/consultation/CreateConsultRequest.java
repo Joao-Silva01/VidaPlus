@@ -6,6 +6,8 @@ import com.RobDev.VidaPlus.entities.enums.Modality;
 import com.RobDev.VidaPlus.dto.medicalExamination.CreateExamRequest;
 import com.RobDev.VidaPlus.dto.prescription.PrescriptionRequest;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
@@ -16,18 +18,27 @@ import java.util.List;
 
 public class CreateConsultRequest implements Serializable {
 
+    @NotNull(message = "Date cannot be null")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime consultationMoment;
 
+    @NotBlank(message = "Diagnostic cannot be empty or null")
     @Size(max = 200, message = "invalid diagnostic size")
     private String diagnostic;
 
+    @NotBlank(message = "Symptoms cannot be empty or null")
     @Size(max = 200, message = "invalid symptoms size")
     private String symptoms;
+
+    @NotNull(message = "Type cannot be null")
     private Modality type;
 
+    @NotNull(message = "Patient cannot be null")
     private long patient_id;
+
+    @NotNull(message = "Professional cannot be null")
     private long professional_id;
+
     private PrescriptionRequest prescription;
     private List<CreateExamRequest> requestedExams = new ArrayList<>();
     private CreateHospitalAdmissionRequest hospitalization;

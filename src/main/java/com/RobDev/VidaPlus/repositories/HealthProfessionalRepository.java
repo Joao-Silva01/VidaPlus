@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface HealthProfessionalRepository extends JpaRepository<HealthProfessional, Long> {
 
     Optional<HealthProfessional> findByEmail(String email);
+    Optional<HealthProfessional> findByDocument(String document);
 }

@@ -3,6 +3,8 @@ package com.RobDev.VidaPlus.controllers;
 import com.RobDev.VidaPlus.dto.login.LoginRequest;
 import com.RobDev.VidaPlus.dto.login.LoginResponse;
 import com.RobDev.VidaPlus.services.TokenService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +20,7 @@ public class LoginController {
     private TokenService tokenService;
 
     @PostMapping
-    private ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request){
+    private ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request){
 
         return ResponseEntity.ok().body(tokenService.login(request));
     }

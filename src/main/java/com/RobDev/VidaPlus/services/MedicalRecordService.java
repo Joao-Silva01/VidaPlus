@@ -9,6 +9,7 @@ import com.RobDev.VidaPlus.entities.MedicalRecord;
 import com.RobDev.VidaPlus.entities.Patient;
 import com.RobDev.VidaPlus.entities.UpdateLog;
 import com.RobDev.VidaPlus.exception.IdNotFoundException;
+import com.RobDev.VidaPlus.exception.ThisAlreadyExistsException;
 import com.RobDev.VidaPlus.mapper.HealthProfessionalMapper;
 import com.RobDev.VidaPlus.mapper.MedicalRecordMapper;
 import com.RobDev.VidaPlus.repositories.HealthProfessionalRepository;
@@ -54,6 +55,11 @@ public class MedicalRecordService {
     }
 
     public MinMedicalRecordResponse createRecord(CreateMedicalRecordRequest request){
+
+        if (medicalRecordRepository.findByPatient(request.getPatientId()).isPresent()){
+            throw new ThisAlreadyExistsException("This patient already has a medical record, " +
+                    "now he only has the option to update it");
+        }
 
         HealthProfessional professional = professionalRepository.findById(request.getProfessionalId())
                 .orElseThrow(() -> new IdNotFoundException("Healthcare professional not found to create medical record!"));

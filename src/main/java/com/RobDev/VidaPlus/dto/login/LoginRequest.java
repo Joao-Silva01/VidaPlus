@@ -1,11 +1,14 @@
 package com.RobDev.VidaPlus.dto.login;
 
 import com.RobDev.VidaPlus.validations.email.EmailValid;
+import jakarta.validation.constraints.NotBlank;
 
 public class LoginRequest {
 
     @EmailValid
     private String email;
+
+    @NotBlank(message = "Password cannot be empty or null")
     private String password;
 
     public LoginRequest(){}
