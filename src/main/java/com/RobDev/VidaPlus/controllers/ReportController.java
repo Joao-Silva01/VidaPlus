@@ -5,6 +5,7 @@ import com.RobDev.VidaPlus.dto.report.ReportResponse;
 import com.RobDev.VidaPlus.services.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,16 +18,19 @@ public class ReportController {
     private ReportService reportService;
 
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'MAIN_ADMIN')")
     public ResponseEntity<List<ReportResponse>> getAllReports(){
         return ResponseEntity.ok().body(reportService.getAllReports());
     }
 
     @GetMapping(value = "/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'MAIN_ADMIN')")
     public ResponseEntity<ReportResponse> getReport(@PathVariable long id){
         return ResponseEntity.ok().body(reportService.getReport(id));
     }
 
     @PostMapping(value = "/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'MAIN_ADMIN')")
     public ResponseEntity<ReportResponse> create(@PathVariable long id, @RequestBody(required = false) ReportRequest request){
         return ResponseEntity.ok().body(reportService.create(id, request));
     }

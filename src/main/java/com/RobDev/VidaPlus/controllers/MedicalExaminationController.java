@@ -7,6 +7,7 @@ import com.RobDev.VidaPlus.services.MedicalExaminationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,6 +18,7 @@ public class MedicalExaminationController {
     private MedicalExaminationService medicalExaminationService;
 
     @PostMapping(value = "/{consultId}")
+    @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
     public ResponseEntity<ExamResponse> createExam(@PathVariable long consultId,
                                                    @Valid @RequestBody CreateExamRequest request){
 
@@ -24,6 +26,7 @@ public class MedicalExaminationController {
     }
 
     @PutMapping(value = "/{consultId}/exam/{examId}")
+    @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
     public ResponseEntity<ExamResponse> updateExam(@PathVariable long consultId, @PathVariable long examId,
                                                    @Valid @RequestBody UpdateExamRequest request){
 

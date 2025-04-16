@@ -7,6 +7,7 @@ import com.RobDev.VidaPlus.services.HospitalAdmissionService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,6 +18,7 @@ public class HospitalAdmissionController {
     private HospitalAdmissionService hospitalAdmissionService;
 
     @PostMapping(value = "/{consultId}")
+    @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
     public ResponseEntity<HospitalAdmissionResponse> createHospitalization(@PathVariable long consultId,
                                                                            @Valid @RequestBody CreateHospitalAdmissionRequest request) {
 
@@ -25,6 +27,7 @@ public class HospitalAdmissionController {
     }
 
     @PutMapping(value = "/{consultId}")
+    @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
     public ResponseEntity<HospitalAdmissionResponse> updateHospitalization(@PathVariable long consultId,
                                                                            @Valid @RequestBody UpdateHospitalAdmissionRequest request) {
 

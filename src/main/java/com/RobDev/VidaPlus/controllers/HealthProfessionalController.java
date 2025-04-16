@@ -8,6 +8,7 @@ import com.RobDev.VidaPlus.services.HealthProfessionalService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,21 +21,25 @@ public class HealthProfessionalController {
     private HealthProfessionalService hpService;
 
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'MAIN_ADMIN')")
     public ResponseEntity<List<HpResponse>> listAll (){
         return ResponseEntity.ok().body(hpService.allProfessionals());
     }
 
     @GetMapping(value = "/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'MAIN_ADMIN')")
     public ResponseEntity<HpResponse> findById(@PathVariable long id){
         return ResponseEntity.ok().body(hpService.byId(id));
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'MAIN_ADMIN')")
     public ResponseEntity<HpResponse> create(@Valid @RequestBody CreateHpRequest request){
         return ResponseEntity.ok().body(hpService.createProfessional(request));
     }
 
     @PutMapping(value = "/{id}")
+    @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
     public ResponseEntity<?> update(@PathVariable long id,@Valid @RequestBody UpdateHpRequest request){
         hpService.updateProfessional(id,request);
         return ResponseEntity.ok().build();
@@ -42,6 +47,7 @@ public class HealthProfessionalController {
 
 
     @GetMapping(value = "agenda/{id}")
+    @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
     public ResponseEntity<HpAgendaResponse> allCommitments(@PathVariable long id){
 
         return ResponseEntity.ok().body(hpService.allCommitments(id));

@@ -8,6 +8,7 @@ import com.RobDev.VidaPlus.services.ConsultationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,11 +24,13 @@ public class ConsultationController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
     public ResponseEntity<ConsultResponse> create( @Valid @RequestBody CreateConsultRequest request) {
         return ResponseEntity.ok().body(consultationService.createConsult(request));
     }
 
     @PutMapping(value = "/{consultId}")
+    @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
     public ResponseEntity<UpdateConsultResponse> update(@PathVariable long consultId,
                                                         @Valid @RequestBody UpdateConsultRequest request) {
 

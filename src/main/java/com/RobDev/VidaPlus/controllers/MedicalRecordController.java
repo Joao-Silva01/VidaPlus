@@ -9,6 +9,7 @@ import com.RobDev.VidaPlus.services.UpdateLogService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,17 +28,14 @@ public class MedicalRecordController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
     public ResponseEntity<MinMedicalRecordResponse> create(@Valid @RequestBody CreateMedicalRecordRequest request){
 
         return ResponseEntity.ok().body(recordService.createRecord(request));
     }
 
-    //@PutMapping(value = "/{patientId}")
-    //public ResponseEntity<MinMedicalRecordResponse> update(@PathVariable long patientId,@Valid @RequestBody UpdateMedicalRecordRequest request){
-  //      return ResponseEntity.ok().body(recordService.updateRecord(patientId,request));
-//    }
-
     @PutMapping(value = "/{patientId}")
+    @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
     public ResponseEntity<?> updateLog(@PathVariable long patientId,@RequestBody UpdateLogRequest request){
 
         updateLogService.createLog(patientId,request);

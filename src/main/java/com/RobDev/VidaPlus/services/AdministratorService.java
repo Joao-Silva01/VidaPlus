@@ -32,7 +32,7 @@ public class AdministratorService {
 
     public void create(AdminRequest request){
         Administrator newAdmin = adminMapper.toRequest(request);
-        newAdmin.setRole(UserRole.ADMINISTRATOR);
+        newAdmin.setRole(UserRole.ADMIN);
         newAdmin.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));
 
 
