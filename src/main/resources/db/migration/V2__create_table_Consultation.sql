@@ -1,5 +1,5 @@
 CREATE TABLE CONSULTATION(
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     consultation_moment TIMESTAMP,
     diagnostic VARCHAR(200),
     symptoms VARCHAR (200),

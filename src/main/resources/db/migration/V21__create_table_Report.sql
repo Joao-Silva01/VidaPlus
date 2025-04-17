@@ -1,5 +1,5 @@
 CREATE TABLE REPORT(
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     generation_date TIMESTAMP,
     number_queries BIGINT,
     number_hospitalization BIGINT,

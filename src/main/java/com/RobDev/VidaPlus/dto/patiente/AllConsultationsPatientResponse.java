@@ -5,6 +5,8 @@ import com.RobDev.VidaPlus.dto.consultation.ConsultationPatientResponse;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,22 +16,22 @@ public class AllConsultationsPatientResponse {
     private String name;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Sao_Paulo")
-    private Timestamp birth_date;
+    private LocalDate birth_date;
     private String phone;
     private Sex sex;
     private String email;
     private String document;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "America/Sao_Paulo")
-    private Timestamp registerMoment;
+    private LocalDateTime registerMoment;
 
     private List<ConsultationPatientResponse> consultations = new ArrayList<>();
 
     public AllConsultationsPatientResponse(){}
 
-    public AllConsultationsPatientResponse(long id, String name, Timestamp birth_date,
+    public AllConsultationsPatientResponse(long id, String name, LocalDate birth_date,
                                            String phone, Sex sex, String email, String document,
-                                           Timestamp registerMoment) {
+                                           LocalDateTime registerMoment) {
         this.id = id;
         this.name = name;
         this.birth_date = birth_date;
@@ -56,11 +58,11 @@ public class AllConsultationsPatientResponse {
         this.name = name;
     }
 
-    public Timestamp getBirth_date() {
+    public LocalDate getBirth_date() {
         return birth_date;
     }
 
-    public void setBirth_date(Timestamp birth_date) {
+    public void setBirth_date(LocalDate birth_date) {
         this.birth_date = birth_date;
     }
 
@@ -106,11 +108,11 @@ public class AllConsultationsPatientResponse {
         this.consultations = consultations;
     }
 
-    public Timestamp getRegisterMoment() {
+    public LocalDateTime getRegisterMoment() {
         return registerMoment;
     }
 
-    public void setRegisterMoment(Timestamp registerMoment) {
+    public void setRegisterMoment(LocalDateTime registerMoment) {
         this.registerMoment = registerMoment;
     }
 }

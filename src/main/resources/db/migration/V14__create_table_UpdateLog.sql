@@ -1,5 +1,5 @@
 CREATE TABLE UPDATE_LOG(
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     professional BIGINT,
     medical_Record BIGINT,
     update_Description VARCHAR(350),

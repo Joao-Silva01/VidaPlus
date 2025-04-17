@@ -9,6 +9,8 @@ import org.springframework.beans.BeanUtils;
 import java.io.Serializable;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class PatientResponse implements Serializable {
 
@@ -16,7 +18,7 @@ public class PatientResponse implements Serializable {
     private String name;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Sao_Paulo")
-    private Timestamp birth_date;
+    private LocalDate birth_date;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String phone;
@@ -25,7 +27,7 @@ public class PatientResponse implements Serializable {
     private String document;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "America/Sao_Paulo")
-    private Timestamp registerMoment;
+    private LocalDateTime registerMoment;
 
     public PatientResponse(){
 
@@ -52,11 +54,11 @@ public class PatientResponse implements Serializable {
         this.name = name;
     }
 
-    public Timestamp getBirth_date() {
+    public LocalDate getBirth_date() {
         return birth_date;
     }
 
-    public void setBirth_date(Timestamp birth_date) {
+    public void setBirth_date(LocalDate birth_date) {
         this.birth_date = birth_date;
     }
 
@@ -97,11 +99,11 @@ public class PatientResponse implements Serializable {
         this.document = document;
     }
 
-    public Timestamp getRegisterMoment() {
+    public LocalDateTime getRegisterMoment() {
         return registerMoment;
     }
 
-    public void setRegisterMoment(Timestamp registerMoment) {
+    public void setRegisterMoment(LocalDateTime registerMoment) {
         this.registerMoment = registerMoment;
     }
 }

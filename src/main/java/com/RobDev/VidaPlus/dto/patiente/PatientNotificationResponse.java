@@ -5,6 +5,7 @@ import com.RobDev.VidaPlus.entities.enums.Sex;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class PatientNotificationResponse {
     private String name;
 
     @JsonFormat( pattern = "yyyy-MM-dd HH:mm")
-    private Timestamp birth_date;
+    private LocalDate birth_date;
     private String phone;
     private Sex sex;
     private String email;
@@ -27,7 +28,7 @@ public class PatientNotificationResponse {
     }
 
     public PatientNotificationResponse(Long id, String name,
-                                       Timestamp birth_date,
+                                       LocalDate birth_date,
                                        String phone, Sex sex,
                                        String email, String document) {
         this.id = id;
@@ -55,11 +56,11 @@ public class PatientNotificationResponse {
         this.name = name;
     }
 
-    public Timestamp getBirth_date() {
+    public LocalDate getBirth_date() {
         return birth_date;
     }
 
-    public void setBirth_date(Timestamp birth_date) {
+    public void setBirth_date(LocalDate birth_date) {
         this.birth_date = birth_date;
     }
 

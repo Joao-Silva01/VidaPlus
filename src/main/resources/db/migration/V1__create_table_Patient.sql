@@ -1,7 +1,7 @@
 CREATE TABLE Patient(
-    id BIGINT auto_increment primary key,
+    id BIGSERIAL primary key,
     name VARCHAR(40) NOT NULL,
-    birth_date TIMESTAMP,
+    birth_date DATE,
     sex VARCHAR(9) NOT NULL,
     password VARCHAR(150) NOT NULL,
     email VARCHAR(100) UNIQUE,

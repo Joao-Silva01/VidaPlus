@@ -5,6 +5,8 @@ import com.RobDev.VidaPlus.entities.enums.UserRole;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,7 +17,7 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Timestamp birth_date;
+    private LocalDate birth_date;
     private String phone;
     private String password;
 
@@ -31,7 +33,7 @@ public class Patient {
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
 
-    private Timestamp registerMoment;
+    private LocalDateTime registerMoment;
 
     @OneToMany(mappedBy = "patient")
     private List<Consultation> consultations = new ArrayList<>();
@@ -45,8 +47,8 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(Long id, String name, Timestamp birthDate, Sex sex, String password, String email,
-                   String phone, String document, UserRole role, Timestamp registerMoment) {
+    public Patient(Long id, String name, LocalDate birthDate, Sex sex, String password, String email,
+                   String phone, String document, UserRole role, LocalDateTime registerMoment) {
         this.id = id;
         this.name = name;
         this.birth_date = birthDate;
@@ -75,11 +77,11 @@ public class Patient {
         this.name = name;
     }
 
-    public Timestamp getBirth_date() {
+    public LocalDate getBirth_date() {
         return birth_date;
     }
 
-    public void setBirth_date(Timestamp birth_date) {
+    public void setBirth_date(LocalDate birth_date) {
         this.birth_date = birth_date;
     }
 
@@ -131,11 +133,11 @@ public class Patient {
         this.role = role;
     }
 
-    public Timestamp getRegisterMoment() {
+    public LocalDateTime getRegisterMoment() {
         return registerMoment;
     }
 
-    public void setRegisterMoment(Timestamp registerMoment) {
+    public void setRegisterMoment(LocalDateTime registerMoment) {
         this.registerMoment = registerMoment;
     }
 
