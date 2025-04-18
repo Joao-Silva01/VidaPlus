@@ -1,9 +1,6 @@
 package com.RobDev.VidaPlus.controllers;
 
-import com.RobDev.VidaPlus.dto.consultation.ConsultResponse;
-import com.RobDev.VidaPlus.dto.consultation.UpdateConsultRequest;
-import com.RobDev.VidaPlus.dto.consultation.CreateConsultRequest;
-import com.RobDev.VidaPlus.dto.consultation.UpdateConsultResponse;
+import com.RobDev.VidaPlus.dto.consultation.*;
 import com.RobDev.VidaPlus.services.ConsultationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +19,11 @@ public class ConsultationController {
     @GetMapping(value = "/{consult_id}")
     public ResponseEntity<ConsultResponse> getById(@PathVariable long consult_id) {
         return ResponseEntity.ok().body(consultationService.getConsult(consult_id));
+    }
+
+    @GetMapping(value = "/{consultId}/link")
+    public ResponseEntity<ConsultationLinkResponse> getLinkConsult(@PathVariable long consultId) {
+        return ResponseEntity.ok().body(consultationService.linkConsult(consultId));
     }
 
     @PostMapping

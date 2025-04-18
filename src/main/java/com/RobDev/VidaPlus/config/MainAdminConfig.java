@@ -1,12 +1,9 @@
 package com.RobDev.VidaPlus.config;
 
-import com.RobDev.VidaPlus.entities.Administrator;
-import com.RobDev.VidaPlus.entities.HealthProfessional;
-import com.RobDev.VidaPlus.entities.Patient;
-import com.RobDev.VidaPlus.entities.enums.HealthProfession;
-import com.RobDev.VidaPlus.entities.enums.Sex;
-import com.RobDev.VidaPlus.entities.enums.UserRole;
+import com.RobDev.VidaPlus.entities.*;
+import com.RobDev.VidaPlus.entities.enums.*;
 import com.RobDev.VidaPlus.repositories.AdministratorRepository;
+import com.RobDev.VidaPlus.repositories.ConsultationRepository;
 import com.RobDev.VidaPlus.repositories.HealthProfessionalRepository;
 import com.RobDev.VidaPlus.repositories.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +11,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Configuration
 public class MainAdminConfig implements CommandLineRunner {
@@ -32,11 +31,16 @@ public class MainAdminConfig implements CommandLineRunner {
     private HealthProfessionalRepository healthProfessionalRepository;
 
     @Autowired
+    private ConsultationRepository consultationRepository;
+
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
 
+
+        // Creating Main_admin
         if (!adminRepository.existsById(1L)) {
             Administrator main_admin = new Administrator();
 
@@ -48,25 +52,45 @@ public class MainAdminConfig implements CommandLineRunner {
             adminRepository.save(main_admin);
         }
 
-        Patient patient = new Patient();
+
+        // Creating patients
+        Patient patient1 = new Patient();
 
         if (!patientRepository.existsById(1L)) {
-            patient.setName("João Silva");
-            patient.setBirth_date(LocalDate.of(1990, 5, 20));
-            patient.setPhone("1199999999");
-            patient.setPassword(bCryptPasswordEncoder.encode("senhaSegura123"));
-            patient.setSex(Sex.MALE);
-            patient.setEmail("joao.silva@gmail.com");
-            patient.setDocument("12345678901");
-            patient.setRole(UserRole.PATIENT);
-            patient.setRegisterMoment(LocalDateTime.now());
+            patient1.setName("João Silva");
+            patient1.setBirth_date(LocalDate.of(1990, 5, 20));
+            patient1.setPhone("1199999999");
+            patient1.setPassword(bCryptPasswordEncoder.encode("_joao"));
+            patient1.setSex(Sex.MALE);
+            patient1.setEmail("joao.silva@gmail.com");
+            patient1.setDocument("12345678901");
+            patient1.setRole(UserRole.PATIENT);
+            patient1.setRegisterMoment(LocalDateTime.now());
 
-            patientRepository.save(patient);
+            patientRepository.save(patient1);
         }
+
+        Patient patient2 = new Patient();
+
+        if (!patientRepository.existsById(2L)) {
+            patient2.setName("Maria Fonseca");
+            patient2.setBirth_date(LocalDate.of(2004, 1, 14));
+            patient2.setPhone("9846781234");
+            patient2.setPassword(bCryptPasswordEncoder.encode("1990_fonseca"));
+            patient2.setSex(Sex.FEMALE);
+            patient2.setEmail("fonseca@gmail.com");
+            patient2.setDocument("43775943030");
+            patient2.setRole(UserRole.PATIENT);
+            patient2.setRegisterMoment(LocalDateTime.now());
+
+            patientRepository.save(patient2);
+        }
+
+        // Creating professional
 
         HealthProfessional professional = new HealthProfessional();
 
-        if(!healthProfessionalRepository.existsById(1L)) {
+        if (!healthProfessionalRepository.existsById(1L)) {
             professional.setName("Dra. Maria Oliveira");
             professional.setEmail("maria.oliveira@gmail.com");
             professional.setPhone("11988888888");
@@ -79,6 +103,45 @@ public class MainAdminConfig implements CommandLineRunner {
             professional.setSignature("Dra. Maria Oliveira");
 
             healthProfessionalRepository.save(professional);
+        }
+
+        // Creating Consultation
+        if (patientRepository.existsById(1L) || healthProfessionalRepository.existsById(1L)) {
+
+            if (!consultationRepository.existsById(1L)) {
+                Consultation consultation = new Consultation();
+                consultation.setConsultationMoment(LocalDateTime.now());
+                consultation.setDiagnostic("Infecção bacteriana");
+                consultation.setSymptoms("Febre, dor de cabeça e fadiga");
+                consultation.setConsultationFee(BigDecimal.valueOf(245.00));
+                consultation.setType(Modality.IN_PERSON);
+                consultation.setStatus(Status.SCHEDULED);
+
+                consultation.setPatient(patient1);
+                consultation.setProfessional(professional);
+
+                Prescription prescription = new Prescription();
+                prescription.setDescription("Uso de antibiótico por 7 dias");
+                prescription.setPrescriptionDate(LocalDateTime.now());
+                prescription.setType(consultation.getType());
+                prescription.setSignature(professional.getSignature());
+
+                prescription.setConsultation(consultation);
+                consultation.setPrescription(prescription);
+
+
+                MedicalExamination exam = new MedicalExamination();
+                exam.setDescription("Exame de sangue completo");
+                exam.setExamDate(LocalDateTime.of(2025, 6, 20, 14, 30));
+                exam.setType(Exam.LABORATORY);
+                exam.setExamFee(BigDecimal.valueOf(55.65));
+                exam.setStatus(Status.SCHEDULED);
+
+                exam.setConsultation(consultation);
+                consultation.setRequestedExams(List.of(exam));
+
+                consultationRepository.save(consultation);
+            }
         }
     }
 }

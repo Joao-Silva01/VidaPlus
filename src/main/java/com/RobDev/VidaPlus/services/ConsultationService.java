@@ -1,17 +1,14 @@
 package com.RobDev.VidaPlus.services;
 
-import com.RobDev.VidaPlus.dto.consultation.UpdateConsultRequest;
-import com.RobDev.VidaPlus.dto.consultation.UpdateConsultResponse;
+import com.RobDev.VidaPlus.dto.consultation.*;
 import com.RobDev.VidaPlus.entities.*;
 import com.RobDev.VidaPlus.entities.enums.Modality;
 import com.RobDev.VidaPlus.entities.enums.Status;
 import com.RobDev.VidaPlus.exception.IdNotFoundException;
+import com.RobDev.VidaPlus.exception.NoLinkException;
 import com.RobDev.VidaPlus.repositories.ConsultationRepository;
 import com.RobDev.VidaPlus.repositories.HealthProfessionalRepository;
 import com.RobDev.VidaPlus.repositories.PatientRepository;
-import com.RobDev.VidaPlus.dto.consultation.ConsultResponse;
-import com.RobDev.VidaPlus.dto.consultation.CreateConsultRequest;
-import com.RobDev.VidaPlus.dto.patiente.AllConsultationsPatientResponse;
 import com.RobDev.VidaPlus.mapper.ConsultationMapper;
 import com.RobDev.VidaPlus.mapper.HospitalAdmissionMapper;
 import com.RobDev.VidaPlus.mapper.MedicalExaminationMapper;
@@ -22,7 +19,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 @Service
@@ -59,6 +55,17 @@ public class ConsultationService {
         return consultMapper.toResponse(consult);
     }
 
+    public ConsultationLinkResponse linkConsult(long consultId) {
+        Consultation consult = consultationRepository.findById(consultId)
+                .orElseThrow(() -> new IdNotFoundException("Consultation not found!"));
+
+        if (consult.getType() == Modality.IN_PERSON) {
+            throw new NoLinkException("This query has no link");
+        }
+
+        return consultMapper.toConsultLinkResponse(consult);
+    }
+
     public ConsultResponse createConsult(CreateConsultRequest request) {
         HealthProfessional professional = hpRepository.findById(request.getProfessional_id())
                 .orElseThrow(() -> new IdNotFoundException("Healthcare professional not found to create appointment!"));
@@ -76,7 +83,7 @@ public class ConsultationService {
             newConsult.setHospitalization(admission);
             admission.setConsultation(newConsult);
 
-            if(admission.getDischargeDate() != null){
+            if (admission.getDischargeDate() != null) {
                 var totalCost = HospitalAdmissionService.totalValueHospitalization(
                         admission.getDailyCost(),
                         admission.getHospitalizationDate(),
@@ -108,7 +115,7 @@ public class ConsultationService {
 
         if (request.getType() == Modality.ONLINE) {
             String pathUnique = UUID.randomUUID().toString();
-            newConsult.setConsultationLink("https://vidaPlus.com/consulta/"+pathUnique);
+            newConsult.setConsultationLink("https://vidaPlus.com/consulta/" + pathUnique);
         }
 
 
@@ -116,7 +123,7 @@ public class ConsultationService {
         newConsult.setPatient(patient);
         newConsult.setProfessional(professional);
 
-        return  consultMapper.toResponse(consultationRepository.save(newConsult));
+        return consultMapper.toResponse(consultationRepository.save(newConsult));
 
     }
 

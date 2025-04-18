@@ -4,19 +4,21 @@ import com.RobDev.VidaPlus.entities.enums.HealthProfession;
 
 
 // Usado como resposta, serve para retornar dados do professional de forma reduzida
-public class RecordProfessionalResponse {
+public class MinHpResponse {
 
     private Long id;
     private String name;
+    private String email;
     private HealthProfession profession;
 
-    public RecordProfessionalResponse() {
+    public MinHpResponse() {
 
     }
 
-    public RecordProfessionalResponse(Long id, String name, HealthProfession profession) {
+    public MinHpResponse(Long id, String name, String email, HealthProfession profession) {
         this.id = id;
         this.name = name;
+        this.email = email;
         this.profession = profession;
     }
 
@@ -36,6 +38,14 @@ public class RecordProfessionalResponse {
         this.name = name;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public HealthProfession getProfession() {
         return profession;
     }
@@ -43,6 +53,4 @@ public class RecordProfessionalResponse {
     public void setProfession(HealthProfession profession) {
         this.profession = profession;
     }
-
-
 }

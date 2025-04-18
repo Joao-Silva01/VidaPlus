@@ -1,6 +1,6 @@
 package com.RobDev.VidaPlus.services;
 
-import com.RobDev.VidaPlus.dto.healthProfessional.RecordProfessionalResponse;
+import com.RobDev.VidaPlus.dto.healthProfessional.MinHpResponse;
 import com.RobDev.VidaPlus.dto.medicalRecord.CreateMedicalRecordRequest;
 import com.RobDev.VidaPlus.dto.medicalRecord.MinMedicalRecordResponse;
 import com.RobDev.VidaPlus.dto.medicalRecord.MedicalRecordResponse;
@@ -48,7 +48,7 @@ public class MedicalRecordService {
         MedicalRecordResponse response = recordMapper.toResponse(record);
 
         // Diminuindo os dados dos profissionais para a resposta
-        List<RecordProfessionalResponse> listProfessionals = record.getProfessionals().stream().map(x -> hpMapper.toMinResponse(x.getProfessional())).toList();
+        List<MinHpResponse> listProfessionals = record.getProfessionals().stream().map(x -> hpMapper.toMinResponse(x.getProfessional())).toList();
         response.setProfessionals(listProfessionals);
 
         return response;

@@ -1,10 +1,7 @@
 package com.RobDev.VidaPlus.mapper;
 
-import com.RobDev.VidaPlus.dto.consultation.UpdateConsultRequest;
-import com.RobDev.VidaPlus.dto.consultation.UpdateConsultResponse;
+import com.RobDev.VidaPlus.dto.consultation.*;
 import com.RobDev.VidaPlus.entities.Consultation;
-import com.RobDev.VidaPlus.dto.consultation.ConsultResponse;
-import com.RobDev.VidaPlus.dto.consultation.CreateConsultRequest;
 import org.mapstruct.*;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
@@ -17,6 +14,8 @@ public interface ConsultationMapper {
     Consultation toCreateConsult(CreateConsultRequest request);
 
     ConsultResponse toResponse (Consultation entity);
+
+    ConsultationLinkResponse toConsultLinkResponse(Consultation entity);
 
     UpdateConsultResponse toUpdateResponse(Consultation entity);
 

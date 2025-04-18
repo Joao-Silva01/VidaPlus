@@ -17,7 +17,7 @@ public interface HealthProfessionalMapper {
 
     HpResponse toResponse(HealthProfessional entity);
 
-    RecordProfessionalResponse toMinResponse(HealthProfessional entity);
+    MinHpResponse toMinResponse(HealthProfessional entity);
 
     List<HpResponse> toList(List<HealthProfessional> entityList);
 
