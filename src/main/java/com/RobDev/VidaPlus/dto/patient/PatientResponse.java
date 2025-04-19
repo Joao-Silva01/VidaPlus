@@ -1,4 +1,4 @@
-package com.RobDev.VidaPlus.dto.patiente;
+package com.RobDev.VidaPlus.dto.patient;
 
 import com.RobDev.VidaPlus.entities.enums.Sex;
 import com.RobDev.VidaPlus.entities.Patient;
@@ -7,8 +7,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 

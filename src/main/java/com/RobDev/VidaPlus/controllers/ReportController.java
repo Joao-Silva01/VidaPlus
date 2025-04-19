@@ -1,5 +1,6 @@
 package com.RobDev.VidaPlus.controllers;
 
+import com.RobDev.VidaPlus.dto.SucessResponse;
 import com.RobDev.VidaPlus.dto.report.ReportRequest;
 import com.RobDev.VidaPlus.dto.report.ReportResponse;
 import com.RobDev.VidaPlus.services.ReportService;
@@ -31,7 +32,7 @@ public class ReportController {
 
     @PostMapping(value = "/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'MAIN_ADMIN')")
-    public ResponseEntity<ReportResponse> create(@PathVariable long id, @RequestBody(required = false) ReportRequest request){
+    public ResponseEntity<SucessResponse> create(@PathVariable long id, @RequestBody(required = false) ReportRequest request){
         return ResponseEntity.ok().body(reportService.create(id, request));
     }
 }

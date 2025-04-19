@@ -5,21 +5,15 @@ import com.RobDev.VidaPlus.entities.enums.Status;
 import com.RobDev.VidaPlus.dto.healthProfessional.HpResponse;
 import com.RobDev.VidaPlus.dto.hospitalAdmission.HospitalAdmissionResponse;
 import com.RobDev.VidaPlus.dto.medicalExamination.ExamResponse;
-import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
+import com.RobDev.VidaPlus.dto.patient.PatientResponse;
 import com.RobDev.VidaPlus.dto.prescription.PrescriptionResponse;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.annotation.Nullable;
-import jakarta.persistence.Column;
-import org.springframework.format.annotation.NumberFormat;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ConsultResponse implements Serializable {

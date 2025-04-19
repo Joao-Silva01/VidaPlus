@@ -1,5 +1,6 @@
 package com.RobDev.VidaPlus.services;
 
+import com.RobDev.VidaPlus.dto.SucessResponse;
 import com.RobDev.VidaPlus.dto.healthProfessional.MinHpResponse;
 import com.RobDev.VidaPlus.dto.medicalRecord.CreateMedicalRecordRequest;
 import com.RobDev.VidaPlus.dto.medicalRecord.MinMedicalRecordResponse;
@@ -54,7 +55,7 @@ public class MedicalRecordService {
         return response;
     }
 
-    public MinMedicalRecordResponse createRecord(CreateMedicalRecordRequest request){
+    public SucessResponse createRecord(CreateMedicalRecordRequest request){
 
         if (medicalRecordRepository.findByPatient(request.getPatientId()).isPresent()){
             throw new ThisAlreadyExistsException("This patient already has a medical record, " +
@@ -81,6 +82,7 @@ public class MedicalRecordService {
         medicalRecord.setProfessionals(updateLog);
         medicalRecord.setPatient(patient);
 
-        return recordMapper.toMinResponse(medicalRecordRepository.save(medicalRecord));
+        medicalRecordRepository.save(medicalRecord);
+        return new SucessResponse("Medical record created successfully");
     }
 }

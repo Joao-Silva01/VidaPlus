@@ -1,5 +1,6 @@
 package com.RobDev.VidaPlus.controllers;
 
+import com.RobDev.VidaPlus.dto.SucessResponse;
 import com.RobDev.VidaPlus.dto.consultation.*;
 import com.RobDev.VidaPlus.services.ConsultationService;
 import jakarta.validation.Valid;
@@ -28,13 +29,13 @@ public class ConsultationController {
 
     @PostMapping
     @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
-    public ResponseEntity<ConsultResponse> create( @Valid @RequestBody CreateConsultRequest request) {
+    public ResponseEntity<SucessResponse> create(@Valid @RequestBody CreateConsultRequest request) {
         return ResponseEntity.ok().body(consultationService.createConsult(request));
     }
 
     @PutMapping(value = "/{consultId}")
     @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
-    public ResponseEntity<UpdateConsultResponse> update(@PathVariable long consultId,
+    public ResponseEntity<SucessResponse> update(@PathVariable long consultId,
                                                         @Valid @RequestBody UpdateConsultRequest request) {
 
         return ResponseEntity.ok().body(consultationService.updateConsult(consultId, request));

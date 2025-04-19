@@ -2,7 +2,7 @@ package com.RobDev.VidaPlus.dto.medicalRecord;
 
 
 import com.RobDev.VidaPlus.dto.healthProfessional.MinHpResponse;
-import com.RobDev.VidaPlus.dto.patiente.PatientResponse;
+import com.RobDev.VidaPlus.dto.patient.PatientResponse;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.sql.Timestamp;

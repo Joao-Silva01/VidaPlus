@@ -1,5 +1,6 @@
 package com.RobDev.VidaPlus.services;
 
+import com.RobDev.VidaPlus.dto.SucessResponse;
 import com.RobDev.VidaPlus.dto.prescription.PrescriptionRequest;
 import com.RobDev.VidaPlus.dto.prescription.PrescriptionResponse;
 import com.RobDev.VidaPlus.dto.prescription.UpdatePrescriptionRequest;
@@ -25,7 +26,7 @@ public class PrescriptionService {
     @Autowired
     private PrescriptionMapper prescriptionMapper;
 
-    public PrescriptionResponse prescriptionCreate(long consultId,PrescriptionRequest request){
+    public SucessResponse prescriptionCreate(long consultId,PrescriptionRequest request){
         Consultation consultation = consultationRepository.findById(consultId)
                 .orElseThrow(() -> new IdNotFoundException("Query not found for prescription creation"));
         if (consultation.getPrescription() != null){
@@ -37,15 +38,17 @@ public class PrescriptionService {
         consultation.setPrescription(prescription);
         prescription.setSignature(consultation.getProfessional().getSignature());
 
-        return prescriptionMapper.toResponse(prescriptionRepository.save(prescription));
+        prescriptionRepository.save(prescription);
+        return new SucessResponse("Prescription created successfully");
     }
 
-    public PrescriptionResponse prescriptionUpdate(long consult_id, UpdatePrescriptionRequest request){
+    public SucessResponse prescriptionUpdate(long consult_id, UpdatePrescriptionRequest request){
         Consultation consultation = consultationRepository.findById(consult_id)
                 .orElseThrow(() -> new IdNotFoundException("Query not found for prescription update!"));
         Prescription prescription = consultation.getPrescription();
         prescriptionMapper.requestUpdate(request, prescription);
 
-        return prescriptionMapper.toResponse(prescriptionRepository.save(prescription));
+       prescriptionRepository.save(prescription);
+       return new SucessResponse("Prescription updated successfully");
     }
 }

@@ -1,5 +1,6 @@
 package com.RobDev.VidaPlus.controllers;
 
+import com.RobDev.VidaPlus.dto.SucessResponse;
 import com.RobDev.VidaPlus.dto.medicalExamination.CreateExamRequest;
 import com.RobDev.VidaPlus.dto.medicalExamination.ExamResponse;
 import com.RobDev.VidaPlus.dto.medicalExamination.UpdateExamRequest;
@@ -19,15 +20,15 @@ public class MedicalExaminationController {
 
     @PostMapping(value = "/{consultId}")
     @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
-    public ResponseEntity<ExamResponse> createExam(@PathVariable long consultId,
-                                                   @Valid @RequestBody CreateExamRequest request){
+    public ResponseEntity<SucessResponse> createExam(@PathVariable long consultId,
+                                                     @Valid @RequestBody CreateExamRequest request){
 
         return ResponseEntity.ok().body(medicalExaminationService.examCreate(consultId,request));
     }
 
     @PutMapping(value = "/{consultId}/exam/{examId}")
     @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
-    public ResponseEntity<ExamResponse> updateExam(@PathVariable long consultId, @PathVariable long examId,
+    public ResponseEntity<SucessResponse> updateExam(@PathVariable long consultId, @PathVariable long examId,
                                                    @Valid @RequestBody UpdateExamRequest request){
 
         return ResponseEntity.ok().body(medicalExaminationService.examUpdate(consultId,examId,request));

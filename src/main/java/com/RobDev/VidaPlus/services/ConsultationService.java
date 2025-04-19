@@ -1,5 +1,6 @@
 package com.RobDev.VidaPlus.services;
 
+import com.RobDev.VidaPlus.dto.SucessResponse;
 import com.RobDev.VidaPlus.dto.consultation.*;
 import com.RobDev.VidaPlus.entities.*;
 import com.RobDev.VidaPlus.entities.enums.Modality;
@@ -66,7 +67,7 @@ public class ConsultationService {
         return consultMapper.toConsultLinkResponse(consult);
     }
 
-    public ConsultResponse createConsult(CreateConsultRequest request) {
+    public SucessResponse createConsult(CreateConsultRequest request) {
         HealthProfessional professional = hpRepository.findById(request.getProfessional_id())
                 .orElseThrow(() -> new IdNotFoundException("Healthcare professional not found to create appointment!"));
 
@@ -123,15 +124,14 @@ public class ConsultationService {
         newConsult.setPatient(patient);
         newConsult.setProfessional(professional);
 
-        return consultMapper.toResponse(consultationRepository.save(newConsult));
-
+        return new SucessResponse("Query created successfully");
     }
 
-    public UpdateConsultResponse updateConsult(long consult_id, UpdateConsultRequest request) {
+    public SucessResponse updateConsult(long consult_id, UpdateConsultRequest request) {
         Consultation consult = consultationRepository.findById(consult_id)
                 .orElseThrow(() -> new IdNotFoundException("Query not found for update!"));
 
         consultMapper.requestUpdate(request, consult);
-        return consultMapper.toUpdateResponse(consultationRepository.save(consult));
+        return  new SucessResponse("Query updated successfully");
     }
 }

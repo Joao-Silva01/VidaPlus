@@ -1,7 +1,7 @@
 package com.RobDev.VidaPlus.mapper;
 
 
-import com.RobDev.VidaPlus.dto.patiente.*;
+import com.RobDev.VidaPlus.dto.patient.*;
 import com.RobDev.VidaPlus.entities.Patient;
 import org.mapstruct.*;
 

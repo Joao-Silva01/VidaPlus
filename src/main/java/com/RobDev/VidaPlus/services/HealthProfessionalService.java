@@ -1,5 +1,6 @@
 package com.RobDev.VidaPlus.services;
 
+import com.RobDev.VidaPlus.dto.SucessResponse;
 import com.RobDev.VidaPlus.dto.healthProfessional.HpAgendaResponse;
 import com.RobDev.VidaPlus.entities.HealthProfessional;
 import com.RobDev.VidaPlus.entities.enums.UserRole;
@@ -41,7 +42,7 @@ public class HealthProfessionalService {
         return hpMapper.toResponse(professional);
     }
 
-    public HpResponse createProfessional(CreateHpRequest request){
+    public SucessResponse createProfessional(CreateHpRequest request){
 
         if(hpRepository.findByEmail(request.getEmail()).isPresent() || hpRepository.findByDocument(request.getDocument()).isPresent()){
             throw new ThisAlreadyExistsException("The email or document is already registered.");
@@ -53,7 +54,7 @@ public class HealthProfessionalService {
         newProfessional.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));
         newProfessional.setSignature(bCryptPasswordEncoder.encode(request.getSignature()));
 
-        return hpMapper.toResponse(hpRepository.save(newProfessional));
+        return new SucessResponse("Healthcare professional successfully created");
     }
 
     public void updateProfessional(long id, UpdateHpRequest request){

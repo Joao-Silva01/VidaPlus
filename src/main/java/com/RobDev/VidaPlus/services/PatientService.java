@@ -1,7 +1,8 @@
 package com.RobDev.VidaPlus.services;
 
 
-import com.RobDev.VidaPlus.dto.patiente.*;
+import com.RobDev.VidaPlus.dto.SucessResponse;
+import com.RobDev.VidaPlus.dto.patient.*;
 import com.RobDev.VidaPlus.entities.Patient;
 import com.RobDev.VidaPlus.entities.enums.UserRole;
 import com.RobDev.VidaPlus.exception.IdNotFoundException;
@@ -13,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -42,7 +41,7 @@ public class PatientService {
         return patientMapper.toList(patientRepository.findAll());
     }
 
-    public PatientResponse createPatient(CreatePatientRequest request) {
+    public SucessResponse createPatient(CreatePatientRequest request) {
 
         if(patientRepository.findByEmail(request.getEmail()).isPresent() || patientRepository.findByDocument(request.getDocument()).isPresent()){
             throw new ThisAlreadyExistsException("The email or document is already registered.");
@@ -53,14 +52,16 @@ public class PatientService {
         newPatient.setRegisterMoment(LocalDateTime.now());
         newPatient.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));
 
-        return patientMapper.toResponseDTO(patientRepository.save(newPatient));
+        return new SucessResponse("Patient created successfully");
     }
 
-    public void updatePatient(long id, UpdatePatientRequest request) {
+    public SucessResponse updatePatient(long id, UpdatePatientRequest request) {
         Patient patient = patientRepository.findById(id)
                 .orElseThrow(() -> new IdNotFoundException("Patient not found for update!"));
         patientMapper.requestUpdate(request, patient);
         patientRepository.save(patient);
+
+        return new SucessResponse("Patient successfully updated");
     }
 
     public AllConsultationsPatientResponse getAllMedicalAppointmentsPatient(long patient_id) {

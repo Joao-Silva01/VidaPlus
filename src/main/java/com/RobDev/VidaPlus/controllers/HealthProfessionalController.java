@@ -1,5 +1,6 @@
 package com.RobDev.VidaPlus.controllers;
 
+import com.RobDev.VidaPlus.dto.SucessResponse;
 import com.RobDev.VidaPlus.dto.healthProfessional.CreateHpRequest;
 import com.RobDev.VidaPlus.dto.healthProfessional.HpAgendaResponse;
 import com.RobDev.VidaPlus.dto.healthProfessional.HpResponse;
@@ -34,7 +35,7 @@ public class HealthProfessionalController {
 
     @PostMapping
     @PreAuthorize("hasAnyAuthority('ADMIN', 'MAIN_ADMIN')")
-    public ResponseEntity<HpResponse> create(@Valid @RequestBody CreateHpRequest request){
+    public ResponseEntity<SucessResponse> create(@Valid @RequestBody CreateHpRequest request){
         return ResponseEntity.ok().body(hpService.createProfessional(request));
     }
 

@@ -1,5 +1,6 @@
 package com.RobDev.VidaPlus.services;
 
+import com.RobDev.VidaPlus.dto.SucessResponse;
 import com.RobDev.VidaPlus.dto.report.ReportRequest;
 import com.RobDev.VidaPlus.dto.report.ReportResponse;
 import com.RobDev.VidaPlus.entities.Administrator;
@@ -53,7 +54,7 @@ public class ReportService {
         );
     }
 
-    public ReportResponse create(long adminId, ReportRequest request) {
+    public SucessResponse create(long adminId, ReportRequest request) {
         Administrator admin = adminRepository.findById(adminId)
                 .orElseThrow(
                         () -> new IdNotFoundException("Report not found for creation")
@@ -76,6 +77,7 @@ public class ReportService {
 
         report.setAdmin(admin);
 
-        return reportMapper.toResponse(reportRepository.save(report));
+        reportRepository.save(report);
+        return new SucessResponse("Report created successfully");
     }
 }

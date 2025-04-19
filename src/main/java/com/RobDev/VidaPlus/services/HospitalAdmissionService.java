@@ -1,5 +1,6 @@
 package com.RobDev.VidaPlus.services;
 
+import com.RobDev.VidaPlus.dto.SucessResponse;
 import com.RobDev.VidaPlus.dto.hospitalAdmission.CreateHospitalAdmissionRequest;
 import com.RobDev.VidaPlus.dto.hospitalAdmission.HospitalAdmissionResponse;
 import com.RobDev.VidaPlus.dto.hospitalAdmission.UpdateHospitalAdmissionRequest;
@@ -29,7 +30,7 @@ public class HospitalAdmissionService {
     @Autowired
     private HospitalAdmissionMapper admissionMapper;
 
-    public HospitalAdmissionResponse hospitalizationCreate(long consultId, CreateHospitalAdmissionRequest request) {
+    public SucessResponse hospitalizationCreate(long consultId, CreateHospitalAdmissionRequest request) {
         Consultation consultation = consultationRepository.findById(consultId)
                 .orElseThrow(() -> new IdNotFoundException("Query not found for creating hospitalization"));
 
@@ -42,7 +43,8 @@ public class HospitalAdmissionService {
         consultation.setHospitalization(admission);
 
         if (admission.getDischargeDate() == null) {
-            return admissionMapper.toResponse(hospitalAdmissionRepository.save(admission));
+            hospitalAdmissionRepository.save(admission);
+            return new SucessResponse("Hospitalization created successfully");
         } else {
             var totalCost = totalValueHospitalization(admission.getDailyCost(),
                     admission.getHospitalizationDate(),
@@ -52,10 +54,11 @@ public class HospitalAdmissionService {
         }
 
 
-        return admissionMapper.toResponse(hospitalAdmissionRepository.save(admission));
+        hospitalAdmissionRepository.save(admission);
+        return new SucessResponse("Hospitalization created successfully");
     }
 
-    public HospitalAdmissionResponse hospitalizationUpdate(long consultId, UpdateHospitalAdmissionRequest request) {
+    public SucessResponse hospitalizationUpdate(long consultId, UpdateHospitalAdmissionRequest request) {
         Consultation consultation = consultationRepository.findById(consultId)
                 .orElseThrow(() -> new IdNotFoundException("Query not found for hospitalization update!"));
 
@@ -64,7 +67,9 @@ public class HospitalAdmissionService {
         admissionMapper.requestUpdate(request, hospitalization);
 
         if (hospitalization.getDischargeDate() == null) {
-            return admissionMapper.toResponse(hospitalAdmissionRepository.save(hospitalization));
+            hospitalAdmissionRepository.save(hospitalization);
+            return new SucessResponse("Hospitalization successfully updated");
+
         } else {
             var totalCost = totalValueHospitalization(
                     hospitalization.getDailyCost(),
@@ -74,7 +79,8 @@ public class HospitalAdmissionService {
             hospitalization.setTotalCost(totalCost);
         }
 
-        return admissionMapper.toResponse(hospitalAdmissionRepository.save(hospitalization));
+        hospitalAdmissionRepository.save(hospitalization);
+        return new SucessResponse("Hospitalization successfully updated");
     }
 
 

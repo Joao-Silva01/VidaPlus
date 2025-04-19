@@ -3,6 +3,7 @@ package com.RobDev.VidaPlus.dto.medicalExamination;
 import com.RobDev.VidaPlus.entities.enums.Exam;
 import com.RobDev.VidaPlus.entities.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -18,6 +19,8 @@ public class ExamResponse {
     private BigDecimal examFee;
     private Exam type;
     private Status status;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String result;
 
     public ExamResponse() {

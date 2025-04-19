@@ -1,36 +1,36 @@
-package com.RobDev.VidaPlus.dto.patiente;
+package com.RobDev.VidaPlus.dto.patient;
 
-import com.RobDev.VidaPlus.dto.notification.NotificationResponse;
 import com.RobDev.VidaPlus.entities.enums.Sex;
+import com.RobDev.VidaPlus.dto.consultation.ConsultationPatientResponse;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-// usado como resposta, serve para mostrar todas as notificação que o paciente recebeu
-public class PatientNotificationResponse {
-
-    private Long id;
+// Usado como resposta, serve para mostrar todas as consultas do paciente
+public class AllConsultationsPatientResponse {
+    private long id;
     private String name;
 
-    @JsonFormat( pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Sao_Paulo")
     private LocalDate birth_date;
     private String phone;
     private Sex sex;
     private String email;
     private String document;
 
-    private List<NotificationResponse> notifications = new ArrayList<>();
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "America/Sao_Paulo")
+    private LocalDateTime registerMoment;
 
-    public PatientNotificationResponse() {
-    }
+    private List<ConsultationPatientResponse> consultations = new ArrayList<>();
 
-    public PatientNotificationResponse(Long id, String name,
-                                       LocalDate birth_date,
-                                       String phone, Sex sex,
-                                       String email, String document) {
+    public AllConsultationsPatientResponse(){}
+
+    public AllConsultationsPatientResponse(long id, String name, LocalDate birth_date,
+                                           String phone, Sex sex, String email, String document,
+                                           LocalDateTime registerMoment) {
         this.id = id;
         this.name = name;
         this.birth_date = birth_date;
@@ -38,13 +38,14 @@ public class PatientNotificationResponse {
         this.sex = sex;
         this.email = email;
         this.document = document;
+        this.registerMoment = registerMoment;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -98,11 +99,19 @@ public class PatientNotificationResponse {
         this.document = document;
     }
 
-    public List<NotificationResponse> getNotifications() {
-        return notifications;
+    public List<ConsultationPatientResponse> getConsultations() {
+        return consultations;
     }
 
-    public void setNotifications(List<NotificationResponse> notifications) {
-        this.notifications = notifications;
+    public void setConsultations(List<ConsultationPatientResponse> consultations) {
+        this.consultations = consultations;
+    }
+
+    public LocalDateTime getRegisterMoment() {
+        return registerMoment;
+    }
+
+    public void setRegisterMoment(LocalDateTime registerMoment) {
+        this.registerMoment = registerMoment;
     }
 }

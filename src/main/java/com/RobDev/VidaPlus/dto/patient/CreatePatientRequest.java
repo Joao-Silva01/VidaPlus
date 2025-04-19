@@ -1,10 +1,14 @@
-package com.RobDev.VidaPlus.dto.patiente;
+package com.RobDev.VidaPlus.dto.patient;
 
 import com.RobDev.VidaPlus.entities.enums.Sex;
 import com.RobDev.VidaPlus.entities.Patient;
+import com.RobDev.VidaPlus.validations.cpf.CpfValid;
 import com.RobDev.VidaPlus.validations.email.EmailValid;
+
+
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.Null;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import org.springframework.beans.BeanUtils;
@@ -12,30 +16,39 @@ import org.springframework.beans.BeanUtils;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class UpdatePatientRequest implements Serializable {
+public class CreatePatientRequest implements Serializable {
 
+    @NotBlank(message = "Name cannot be empty or null")
     @Pattern(regexp = "^[a-zA-Z ]+$", message = "Name can only contain letters")
     @Size(max = 40, message = "invalid name length")
     private String name;
 
+    @NotNull(message = "Birthdate cannot be null")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Sao_Paulo")
     private Timestamp birth_date;
+
 
     @Size(max = 10, message = "invalid phone length")
     private String phone;
 
+    @NotBlank(message = "Password cannot be empty or null")
     @Size(max = 150, message = "invalid password length")
     private String password;
+
+    @NotNull(message = "Sex cannot be null")
     private Sex sex;
 
-    @EmailValid(value = "Update")
+    @EmailValid
     private String email;
 
-    public UpdatePatientRequest(){
+    @CpfValid
+    private String document;
+
+    public CreatePatientRequest(){
 
     }
 
-    public UpdatePatientRequest(Patient patient) {
+    public CreatePatientRequest(Patient patient) {
         BeanUtils.copyProperties(patient, this);
 
     }
@@ -45,7 +58,7 @@ public class UpdatePatientRequest implements Serializable {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.strip();
     }
 
     public Timestamp getBirth_date() {
@@ -61,7 +74,7 @@ public class UpdatePatientRequest implements Serializable {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.phone = phone.strip();
     }
 
     public String getPassword() {
@@ -69,7 +82,7 @@ public class UpdatePatientRequest implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = password.strip();
     }
 
     public Sex getSex() {
@@ -81,10 +94,18 @@ public class UpdatePatientRequest implements Serializable {
     }
 
     public String getEmail() {
-        return email;
+        return email.strip();
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.strip();
+    }
+
+    public String getDocument() {
+        return document;
+    }
+
+    public void setDocument(String document) {
+        this.document = document.strip();
     }
 }

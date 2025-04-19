@@ -45,7 +45,7 @@ public class MainAdminConfig implements CommandLineRunner {
             Administrator main_admin = new Administrator();
 
             main_admin.setName("MAIN_ADMIN");
-            main_admin.setEmail("jnete2004@gmail.com");
+            main_admin.setEmail("main@gmail.com");
             main_admin.setPassword(bCryptPasswordEncoder.encode("main_admin_password"));
             main_admin.setRole(UserRole.MAIN_ADMIN);
 
@@ -62,7 +62,7 @@ public class MainAdminConfig implements CommandLineRunner {
             patient1.setPhone("1199999999");
             patient1.setPassword(bCryptPasswordEncoder.encode("_joao"));
             patient1.setSex(Sex.MALE);
-            patient1.setEmail("joao.silva@gmail.com");
+            patient1.setEmail("jnete2003@gmail.com");
             patient1.setDocument("12345678901");
             patient1.setRole(UserRole.PATIENT);
             patient1.setRegisterMoment(LocalDateTime.now());

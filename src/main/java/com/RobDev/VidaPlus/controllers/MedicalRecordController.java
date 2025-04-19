@@ -1,5 +1,6 @@
 package com.RobDev.VidaPlus.controllers;
 
+import com.RobDev.VidaPlus.dto.SucessResponse;
 import com.RobDev.VidaPlus.dto.medicalRecord.CreateMedicalRecordRequest;
 import com.RobDev.VidaPlus.dto.medicalRecord.MinMedicalRecordResponse;
 import com.RobDev.VidaPlus.dto.medicalRecord.MedicalRecordResponse;
@@ -29,7 +30,7 @@ public class MedicalRecordController {
 
     @PostMapping
     @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
-    public ResponseEntity<MinMedicalRecordResponse> create(@Valid @RequestBody CreateMedicalRecordRequest request){
+    public ResponseEntity<SucessResponse> create(@Valid @RequestBody CreateMedicalRecordRequest request){
 
         return ResponseEntity.ok().body(recordService.createRecord(request));
     }

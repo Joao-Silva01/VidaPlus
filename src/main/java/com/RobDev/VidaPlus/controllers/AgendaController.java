@@ -1,5 +1,6 @@
 package com.RobDev.VidaPlus.controllers;
 
+import com.RobDev.VidaPlus.dto.SucessResponse;
 import com.RobDev.VidaPlus.dto.agenda.AgendaRequest;
 import com.RobDev.VidaPlus.dto.agenda.AgendaResponse;
 import com.RobDev.VidaPlus.services.AgendaService;
@@ -18,13 +19,13 @@ public class AgendaController {
 
     @PostMapping(value = "/{professionalId}")
     @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
-    public ResponseEntity<AgendaResponse> create(@PathVariable long professionalId, @Valid @RequestBody AgendaRequest request){
+    public ResponseEntity<SucessResponse> create(@PathVariable long professionalId, @Valid @RequestBody AgendaRequest request){
         return ResponseEntity.ok().body(agendaService.markingAgenda(professionalId, request));
     }
 
     @PutMapping(value = "/{agendaId}")
     @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
-    public ResponseEntity<AgendaResponse> update(@PathVariable long agendaId,@Valid @RequestBody AgendaRequest request){
+    public ResponseEntity<SucessResponse> update(@PathVariable long agendaId,@Valid @RequestBody AgendaRequest request){
         return ResponseEntity.ok().body(agendaService.updatingAgenda(agendaId,request));
     }
 }

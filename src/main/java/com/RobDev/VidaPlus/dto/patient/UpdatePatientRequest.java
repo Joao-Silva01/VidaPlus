@@ -1,14 +1,9 @@
-package com.RobDev.VidaPlus.dto.patiente;
+package com.RobDev.VidaPlus.dto.patient;
 
 import com.RobDev.VidaPlus.entities.enums.Sex;
 import com.RobDev.VidaPlus.entities.Patient;
-import com.RobDev.VidaPlus.validations.cpf.CpfValid;
 import com.RobDev.VidaPlus.validations.email.EmailValid;
-
-
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import org.springframework.beans.BeanUtils;
@@ -16,39 +11,30 @@ import org.springframework.beans.BeanUtils;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class CreatePatientRequest implements Serializable {
+public class UpdatePatientRequest implements Serializable {
 
-    @NotBlank(message = "Name cannot be empty or null")
     @Pattern(regexp = "^[a-zA-Z ]+$", message = "Name can only contain letters")
     @Size(max = 40, message = "invalid name length")
     private String name;
 
-    @NotNull(message = "Birthdate cannot be null")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Sao_Paulo")
     private Timestamp birth_date;
-
 
     @Size(max = 10, message = "invalid phone length")
     private String phone;
 
-    @NotBlank(message = "Password cannot be empty or null")
     @Size(max = 150, message = "invalid password length")
     private String password;
-
-    @NotNull(message = "Sex cannot be null")
     private Sex sex;
 
-    @EmailValid
+    @EmailValid(value = "Update")
     private String email;
 
-    @CpfValid
-    private String document;
-
-    public CreatePatientRequest(){
+    public UpdatePatientRequest(){
 
     }
 
-    public CreatePatientRequest(Patient patient) {
+    public UpdatePatientRequest(Patient patient) {
         BeanUtils.copyProperties(patient, this);
 
     }
@@ -58,7 +44,7 @@ public class CreatePatientRequest implements Serializable {
     }
 
     public void setName(String name) {
-        this.name = name.strip();
+        this.name = name;
     }
 
     public Timestamp getBirth_date() {
@@ -74,7 +60,7 @@ public class CreatePatientRequest implements Serializable {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone.strip();
+        this.phone = phone;
     }
 
     public String getPassword() {
@@ -82,7 +68,7 @@ public class CreatePatientRequest implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = password.strip();
+        this.password = password;
     }
 
     public Sex getSex() {
@@ -94,18 +80,10 @@ public class CreatePatientRequest implements Serializable {
     }
 
     public String getEmail() {
-        return email.strip();
+        return email;
     }
 
     public void setEmail(String email) {
-        this.email = email.strip();
-    }
-
-    public String getDocument() {
-        return document;
-    }
-
-    public void setDocument(String document) {
-        this.document = document.strip();
+        this.email = email;
     }
 }

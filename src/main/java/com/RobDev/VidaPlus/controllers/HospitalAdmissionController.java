@@ -1,5 +1,6 @@
 package com.RobDev.VidaPlus.controllers;
 
+import com.RobDev.VidaPlus.dto.SucessResponse;
 import com.RobDev.VidaPlus.dto.hospitalAdmission.CreateHospitalAdmissionRequest;
 import com.RobDev.VidaPlus.dto.hospitalAdmission.HospitalAdmissionResponse;
 import com.RobDev.VidaPlus.dto.hospitalAdmission.UpdateHospitalAdmissionRequest;
@@ -19,8 +20,8 @@ public class HospitalAdmissionController {
 
     @PostMapping(value = "/{consultId}")
     @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
-    public ResponseEntity<HospitalAdmissionResponse> createHospitalization(@PathVariable long consultId,
-                                                                           @Valid @RequestBody CreateHospitalAdmissionRequest request) {
+    public ResponseEntity<SucessResponse> createHospitalization(@PathVariable long consultId,
+                                                                @Valid @RequestBody CreateHospitalAdmissionRequest request) {
 
         return ResponseEntity.ok().body(hospitalAdmissionService.hospitalizationCreate(consultId, request));
 
@@ -28,7 +29,7 @@ public class HospitalAdmissionController {
 
     @PutMapping(value = "/{consultId}")
     @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
-    public ResponseEntity<HospitalAdmissionResponse> updateHospitalization(@PathVariable long consultId,
+    public ResponseEntity<SucessResponse> updateHospitalization(@PathVariable long consultId,
                                                                            @Valid @RequestBody UpdateHospitalAdmissionRequest request) {
 
         return ResponseEntity.ok().body(hospitalAdmissionService.hospitalizationUpdate(consultId, request));
