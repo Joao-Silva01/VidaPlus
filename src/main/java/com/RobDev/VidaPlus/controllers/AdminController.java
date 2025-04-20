@@ -36,4 +36,12 @@ public class AdminController {
         return ResponseEntity.ok().build();
     }
 
+
+    @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasAnyAuthority('MAIN_ADMIN')")
+    public ResponseEntity<Void> delete(@PathVariable long id){
+        adminService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
 }

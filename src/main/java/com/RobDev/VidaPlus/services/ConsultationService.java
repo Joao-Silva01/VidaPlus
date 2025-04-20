@@ -123,7 +123,7 @@ public class ConsultationService {
         // Realiza o relacionamento entre Patient/Professional com Consultation
         newConsult.setPatient(patient);
         newConsult.setProfessional(professional);
-
+        consultationRepository.save(newConsult);
         return new SucessResponse("Query created successfully");
     }
 
@@ -132,6 +132,14 @@ public class ConsultationService {
                 .orElseThrow(() -> new IdNotFoundException("Query not found for update!"));
 
         consultMapper.requestUpdate(request, consult);
+        consultationRepository.save(consult);
         return  new SucessResponse("Query updated successfully");
+    }
+
+    public void delete(long id){
+        Consultation consult = consultationRepository.findById(id)
+                .orElseThrow(() -> new IdNotFoundException("Consultation not found!"));
+
+        consultationRepository.delete(consult);
     }
 }

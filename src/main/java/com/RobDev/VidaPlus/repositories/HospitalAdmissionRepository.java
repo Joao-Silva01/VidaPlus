@@ -14,6 +14,6 @@ public interface HospitalAdmissionRepository extends JpaRepository<HospitalAdmis
     @Query(value = "SELECT COUNT(*) FROM HOSPITAL_ADMISSION", nativeQuery = true)
     long allHospitalizations();
 
-    @Query(value = "SELECT SUM(HA.TOTAL_COST) FROM HOSPITAL_ADMISSION AS HA;", nativeQuery = true)
+    @Query(value = "SELECT COALESCE(SUM(HA.TOTAL_COST),0) FROM HOSPITAL_ADMISSION AS HA;", nativeQuery = true)
     BigDecimal totalValue();
 }

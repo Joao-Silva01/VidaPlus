@@ -11,6 +11,7 @@ import com.RobDev.VidaPlus.exception.ThisAlreadyExistsException;
 import com.RobDev.VidaPlus.mapper.PrescriptionMapper;
 import com.RobDev.VidaPlus.repositories.ConsultationRepository;
 import com.RobDev.VidaPlus.repositories.PrescriptionRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,10 +27,10 @@ public class PrescriptionService {
     @Autowired
     private PrescriptionMapper prescriptionMapper;
 
-    public SucessResponse prescriptionCreate(long consultId,PrescriptionRequest request){
+    public SucessResponse prescriptionCreate(long consultId, PrescriptionRequest request) {
         Consultation consultation = consultationRepository.findById(consultId)
                 .orElseThrow(() -> new IdNotFoundException("Query not found for prescription creation"));
-        if (consultation.getPrescription() != null){
+        if (consultation.getPrescription() != null) {
             throw new ThisAlreadyExistsException("This consultation already has a prescription");
         }
         Prescription prescription = prescriptionMapper.toCreatePrescription(request);
@@ -42,13 +43,13 @@ public class PrescriptionService {
         return new SucessResponse("Prescription created successfully");
     }
 
-    public SucessResponse prescriptionUpdate(long consult_id, UpdatePrescriptionRequest request){
+    public SucessResponse prescriptionUpdate(long consult_id, UpdatePrescriptionRequest request) {
         Consultation consultation = consultationRepository.findById(consult_id)
                 .orElseThrow(() -> new IdNotFoundException("Query not found for prescription update!"));
         Prescription prescription = consultation.getPrescription();
         prescriptionMapper.requestUpdate(request, prescription);
 
-       prescriptionRepository.save(prescription);
-       return new SucessResponse("Prescription updated successfully");
+        prescriptionRepository.save(prescription);
+        return new SucessResponse("Prescription updated successfully");
     }
 }

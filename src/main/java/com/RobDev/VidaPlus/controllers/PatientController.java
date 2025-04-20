@@ -52,4 +52,13 @@ public class PatientController {
     public ResponseEntity<PatientNotificationResponse> allNotification(@PathVariable long id){
         return ResponseEntity.ok().body(patientService.allNotification(id));
     }
+
+    @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'MAIN_ADMIN')")
+    public ResponseEntity<Void> delete(@PathVariable long id){
+        patientService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+
 }

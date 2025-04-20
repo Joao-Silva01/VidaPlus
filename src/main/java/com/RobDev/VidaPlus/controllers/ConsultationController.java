@@ -40,4 +40,11 @@ public class ConsultationController {
 
         return ResponseEntity.ok().body(consultationService.updateConsult(consultId, request));
     }
+
+    @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
+    public ResponseEntity<Void> delete(@PathVariable long id){
+        consultationService.delete(id);
+        return ResponseEntity.ok().build();
+    }
 }

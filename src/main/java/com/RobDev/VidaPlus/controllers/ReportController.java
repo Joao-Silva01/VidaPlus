@@ -35,4 +35,11 @@ public class ReportController {
     public ResponseEntity<SucessResponse> create(@PathVariable long id, @RequestBody(required = false) ReportRequest request){
         return ResponseEntity.ok().body(reportService.create(id, request));
     }
+
+    @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'MAIN_ADMIN')")
+    public ResponseEntity<Void> delete(@PathVariable long id){
+        reportService.delete(id);
+        return ResponseEntity.ok().build();
+    }
 }

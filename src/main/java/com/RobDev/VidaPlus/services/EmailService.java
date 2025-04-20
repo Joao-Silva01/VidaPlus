@@ -1,5 +1,6 @@
 package com.RobDev.VidaPlus.services;
 
+import com.RobDev.VidaPlus.dto.SucessResponse;
 import com.RobDev.VidaPlus.dto.notification.NotificationRequest;
 import com.RobDev.VidaPlus.entities.Notification;
 import com.RobDev.VidaPlus.entities.Patient;
@@ -33,10 +34,11 @@ public class EmailService {
     @Value("spring.mail.username")
     private String sender;
 
-    public void sendEmail(long patientId,NotificationRequest request){
+    public SucessResponse sendEmail(long patientId, NotificationRequest request){
 
         Patient patient = patientRepository.findById(patientId)
                 .orElseThrow(() -> new IdNotFoundException("Patient not found for sending email"));
+
 
         Notification email = notificationMapper.toRequest(request);
         email.setPatient(patient);
@@ -52,6 +54,7 @@ public class EmailService {
 
         notificationRepository.save(email);
 
+        return new SucessResponse("Notification sent successfully");
     }
 
 }

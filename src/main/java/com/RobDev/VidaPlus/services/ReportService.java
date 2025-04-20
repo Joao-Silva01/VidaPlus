@@ -8,6 +8,7 @@ import com.RobDev.VidaPlus.entities.Report;
 import com.RobDev.VidaPlus.exception.IdNotFoundException;
 import com.RobDev.VidaPlus.mapper.ReportMapper;
 import com.RobDev.VidaPlus.repositories.*;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +55,7 @@ public class ReportService {
         );
     }
 
+    @Transactional
     public SucessResponse create(long adminId, ReportRequest request) {
         Administrator admin = adminRepository.findById(adminId)
                 .orElseThrow(
@@ -73,11 +75,20 @@ public class ReportService {
 
         // somando o faturamento pro relatório
         BigDecimal invoicing = examRepository.totalValue().add(consultationRepository.totalValue()).add(haRepository.totalValue());
+
         report.setInvoicing(invoicing);
 
         report.setAdmin(admin);
 
         reportRepository.save(report);
         return new SucessResponse("Report created successfully");
+    }
+
+    @Transactional
+    public void delete(long id){
+        var patient = reportRepository.findById(id)
+                .orElseThrow(() -> new IdNotFoundException("Report not found"));
+
+        reportRepository.delete(patient);
     }
 }

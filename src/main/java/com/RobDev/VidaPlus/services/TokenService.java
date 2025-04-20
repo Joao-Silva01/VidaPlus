@@ -85,7 +85,7 @@ public class TokenService {
 
         var jwtValue = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
 
-        return new LoginResponse(jwtValue);
+        return new LoginResponse("Login successful",jwtValue);
     }
 
     private void validatePassword(String passwordRequest, String password) {

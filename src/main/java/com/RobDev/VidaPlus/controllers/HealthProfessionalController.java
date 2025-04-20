@@ -53,4 +53,11 @@ public class HealthProfessionalController {
 
         return ResponseEntity.ok().body(hpService.allCommitments(id));
     }
+
+    @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'MAIN_ADMIN')")
+    public ResponseEntity<Void> delete(@PathVariable long id){
+        hpService.delete(id);
+        return ResponseEntity.ok().build();
+    }
 }

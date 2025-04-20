@@ -52,6 +52,17 @@ public class MainAdminConfig implements CommandLineRunner {
             adminRepository.save(main_admin);
         }
 
+        if (!adminRepository.existsById(2L)) {
+            Administrator main_admin = new Administrator();
+
+            main_admin.setName("ADMIN");
+            main_admin.setEmail("admin@gmail.com");
+            main_admin.setPassword(bCryptPasswordEncoder.encode("admin_password"));
+            main_admin.setRole(UserRole.ADMIN);
+
+            adminRepository.save(main_admin);
+        }
+
 
         // Creating patients
         Patient patient1 = new Patient();
@@ -96,7 +107,7 @@ public class MainAdminConfig implements CommandLineRunner {
             professional.setPhone("11988888888");
             professional.setPassword(bCryptPasswordEncoder.encode("senhaForte456"));
             professional.setDocument("10987654321");
-            professional.setProfession(HealthProfession.DOCTOR);
+            professional.setProfession(HealthProfession.CARDIOLOGIST);
             professional.setSpecialty("Cardiologia");
             professional.setRole(UserRole.PROFESSIONAL);
             professional.setRegisterMoment(Timestamp.from(Instant.now()));

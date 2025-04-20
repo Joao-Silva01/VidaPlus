@@ -10,6 +10,7 @@ import com.RobDev.VidaPlus.exception.IdNotFoundException;
 import com.RobDev.VidaPlus.mapper.MedicalExaminationMapper;
 import com.RobDev.VidaPlus.repositories.ConsultationRepository;
 import com.RobDev.VidaPlus.repositories.MedicalExaminationRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,7 @@ public class MedicalExaminationService {
     @Autowired
     private MedicalExaminationMapper examinationMapper;
 
+    @Transactional
     public SucessResponse examCreate(long consultId, CreateExamRequest request){
         Consultation consultation = consultationRepository.findById(consultId)
                 .orElseThrow(() -> new IdNotFoundException("Query not found for exam creation"));
@@ -39,6 +41,7 @@ public class MedicalExaminationService {
         return new SucessResponse("Exam created successfully");
     }
 
+    @Transactional
     public SucessResponse examUpdate(long consultId, long examId, UpdateExamRequest request) {
         Consultation consultation = consultationRepository.findById(consultId)
                 .orElseThrow(() -> new IdNotFoundException("Query not found for exam update!"));
@@ -54,5 +57,14 @@ public class MedicalExaminationService {
         }
 
         return null;
+    }
+
+    @Transactional
+    public void delete(long id){
+        MedicalExamination exam = examinationRepository.findById(id).orElseThrow(
+                () -> new IdNotFoundException("Exam not found")
+        );
+        examinationRepository.delete(exam);
+
     }
 }

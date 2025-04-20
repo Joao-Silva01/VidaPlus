@@ -13,6 +13,6 @@ public interface ConsultationRepository extends JpaRepository<Consultation, Long
     @Query(value = "SELECT COUNT(*) FROM CONSULTATION", nativeQuery = true)
     long allQueries();
 
-    @Query(value = "SELECT SUM(CO.CONSULTATION_FEE) FROM CONSULTATION AS CO",nativeQuery = true)
+    @Query(value = "SELECT COALESCE(SUM(CO.CONSULTATION_FEE),0) FROM CONSULTATION AS CO",nativeQuery = true)
     BigDecimal totalValue();
 }

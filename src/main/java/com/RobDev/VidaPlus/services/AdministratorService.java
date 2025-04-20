@@ -8,6 +8,7 @@ import com.RobDev.VidaPlus.entities.enums.UserRole;
 import com.RobDev.VidaPlus.exception.IdNotFoundException;
 import com.RobDev.VidaPlus.mapper.AdministratorMapper;
 import com.RobDev.VidaPlus.repositories.AdministratorRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,7 @@ public class AdministratorService {
         return adminMapper.toResponse(admin);
     }
 
+    @Transactional
     public void create(AdminRequest request){
         Administrator newAdmin = adminMapper.toRequest(request);
         newAdmin.setRole(UserRole.ADMIN);
@@ -39,6 +41,7 @@ public class AdministratorService {
         adminRepository.save(newAdmin);
     }
 
+    @Transactional
     public void update(long id,UpdateAdminRequest request){
         Administrator admin = adminRepository.findById(id)
                 .orElseThrow(() -> new IdNotFoundException("Administrator not found for update") );
@@ -46,5 +49,13 @@ public class AdministratorService {
         adminMapper.toUpdateRequest(request,admin);
 
         adminRepository.save(admin);
+    }
+
+    @Transactional
+    public void delete(long id){
+        var patient = adminRepository.findById(id)
+                .orElseThrow(() -> new IdNotFoundException("Admin not found"));
+
+        adminRepository.delete(patient);
     }
 }

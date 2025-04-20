@@ -28,4 +28,11 @@ public class AgendaController {
     public ResponseEntity<SucessResponse> update(@PathVariable long agendaId,@Valid @RequestBody AgendaRequest request){
         return ResponseEntity.ok().body(agendaService.updatingAgenda(agendaId,request));
     }
+
+    @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasAnyAuthority('PROFESSIONAL','ADMIN', 'MAIN_ADMIN')")
+    public ResponseEntity<Void> delete(@PathVariable long id){
+        agendaService.delete(id);
+        return ResponseEntity.ok().build();
+    }
 }

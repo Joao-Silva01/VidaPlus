@@ -9,6 +9,7 @@ import com.RobDev.VidaPlus.exception.IdNotFoundException;
 import com.RobDev.VidaPlus.mapper.AgendaMapper;
 import com.RobDev.VidaPlus.repositories.AgendaRepository;
 import com.RobDev.VidaPlus.repositories.HealthProfessionalRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class AgendaService {
     @Autowired
     private AgendaMapper agendaMapper;
 
-
+    @Transactional
     public SucessResponse markingAgenda(long professionalId, AgendaRequest request){
         var professional = hpRepository.findById(professionalId)
                 .orElseThrow(() -> new IdNotFoundException("Professional not found to create the task"));
@@ -35,6 +36,7 @@ public class AgendaService {
        return new SucessResponse("Task scheduled successfully");
     }
 
+    @Transactional
     public SucessResponse updatingAgenda(long agendaId, AgendaRequest request){
         var agenda = agendaRepository.findById(agendaId)
                 .orElseThrow(() -> new IdNotFoundException("Task not found for update"));
@@ -43,5 +45,13 @@ public class AgendaService {
 
         agendaRepository.save(agenda);
         return new SucessResponse("Task updated successfully");
+    }
+
+    @Transactional
+    public void delete(long id){
+        var patient = agendaRepository.findById(id)
+                .orElseThrow(() -> new IdNotFoundException("Task not found"));
+
+        agendaRepository.delete(patient);
     }
 }

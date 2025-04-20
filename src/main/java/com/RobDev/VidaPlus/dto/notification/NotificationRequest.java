@@ -1,8 +1,12 @@
 package com.RobDev.VidaPlus.dto.notification;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class NotificationRequest {
 
+    @NotBlank(message = "Title cannot be empty or null")
     private String title;
+    @NotBlank(message = "Message cannot be empty or null")
     private String message;
 
     public NotificationRequest(){

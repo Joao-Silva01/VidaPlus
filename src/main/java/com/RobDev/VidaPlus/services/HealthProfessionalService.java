@@ -11,6 +11,7 @@ import com.RobDev.VidaPlus.dto.healthProfessional.CreateHpRequest;
 import com.RobDev.VidaPlus.dto.healthProfessional.HpResponse;
 import com.RobDev.VidaPlus.dto.healthProfessional.UpdateHpRequest;
 import com.RobDev.VidaPlus.mapper.HealthProfessionalMapper;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -37,6 +38,7 @@ public class HealthProfessionalService {
     }
 
     public HpResponse byId(long id){
+
         HealthProfessional professional = hpRepository.findById(id)
                 .orElseThrow(() -> new IdNotFoundException("Healthcare Professional not found!"));
         return hpMapper.toResponse(professional);
@@ -54,6 +56,7 @@ public class HealthProfessionalService {
         newProfessional.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));
         newProfessional.setSignature(bCryptPasswordEncoder.encode(request.getSignature()));
 
+        hpRepository.save(newProfessional);
         return new SucessResponse("Healthcare professional successfully created");
     }
 
@@ -70,5 +73,13 @@ public class HealthProfessionalService {
 
           return hpMapper.toAllCommitmentsResponse(professional);
 
+    }
+
+    @Transactional
+    public void delete(long id){
+        var patient = hpRepository.findById(id)
+                .orElseThrow(() -> new IdNotFoundException("Health Professional not found"));
+
+        hpRepository.delete(patient);
     }
 }

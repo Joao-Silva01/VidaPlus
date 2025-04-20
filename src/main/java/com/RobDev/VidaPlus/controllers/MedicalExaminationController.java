@@ -33,4 +33,11 @@ public class MedicalExaminationController {
 
         return ResponseEntity.ok().body(medicalExaminationService.examUpdate(consultId,examId,request));
     }
+
+    @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasAnyAuthority('PROFESSIONAL', 'ADMIN', 'MAIN_ADMIN')")
+    public ResponseEntity<Void> delete(@PathVariable long id){
+        medicalExaminationService.delete(id);
+        return ResponseEntity.ok().build();
+    }
 }

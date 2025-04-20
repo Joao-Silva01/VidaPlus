@@ -16,6 +16,7 @@ import com.RobDev.VidaPlus.mapper.MedicalRecordMapper;
 import com.RobDev.VidaPlus.repositories.HealthProfessionalRepository;
 import com.RobDev.VidaPlus.repositories.MedicalRecordRepository;
 import com.RobDev.VidaPlus.repositories.PatientRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

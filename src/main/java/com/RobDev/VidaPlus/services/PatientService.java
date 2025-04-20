@@ -10,6 +10,7 @@ import com.RobDev.VidaPlus.exception.ThisAlreadyExistsException;
 import com.RobDev.VidaPlus.repositories.HospitalAdmissionRepository;
 import com.RobDev.VidaPlus.repositories.PatientRepository;
 import com.RobDev.VidaPlus.mapper.PatientMapper;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,7 @@ public class PatientService {
         return patientMapper.toList(patientRepository.findAll());
     }
 
+    @Transactional
     public SucessResponse createPatient(CreatePatientRequest request) {
 
         if(patientRepository.findByEmail(request.getEmail()).isPresent() || patientRepository.findByDocument(request.getDocument()).isPresent()){
@@ -55,6 +57,7 @@ public class PatientService {
         return new SucessResponse("Patient created successfully");
     }
 
+    @Transactional
     public SucessResponse updatePatient(long id, UpdatePatientRequest request) {
         Patient patient = patientRepository.findById(id)
                 .orElseThrow(() -> new IdNotFoundException("Patient not found for update!"));
@@ -76,5 +79,13 @@ public class PatientService {
                 .orElseThrow(() -> new IdNotFoundException("Patient not found"));
 
         return patientMapper.toPatientNotification(patient);
+    }
+
+    @Transactional
+    public void delete(long id){
+        var patient = patientRepository.findById(id)
+                .orElseThrow(() -> new IdNotFoundException("Patient not found"));
+
+        patientRepository.delete(patient);
     }
 }
